@@ -1,0 +1,27 @@
+{
+  "name": "@siahlah/use-repeatable",
+  "version": "1.0.0",
+  "description": "React hook to manage collection of objects",
+  "main": "./lib/cjs/index.js",
+  "module": "./lib/esm/index.js",
+  "types": "./lib/esm/index.d.ts",
+  "scripts": {
+    "test": "npm run test",
+    "build:cjs": "tsc --module commonjs --outDir lib/cjs",
+    "build:esm": "tsc",
+    "dev": "tsc -w",
+    "build": "npm run build:cjs && npm run build:esm"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  }
+}
