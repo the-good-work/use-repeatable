@@ -8,3 +8,27 @@ You can also assign a callback function for when changes happen to the array of 
 
 - [ ] Simple hook usage example
 - [ ] D&D example
+
+## Example Usage
+
+```tsx
+type Fruit = { color: string; name: string };
+
+// default new item is required
+const fruit: Fruit = { color: "red", name: "apple" };
+
+// optionally initialise with collection of objects
+const initialFruits = [
+  { color: "red", name: "apple" },
+  { color: "orange", name: "orange" },
+];
+
+function App() {
+  const { items, removeItem, addItem, moveItem } = useRepeatable({
+    newItem: fruit,
+    initialState: initialFruits,
+  });
+
+...
+}
+```
