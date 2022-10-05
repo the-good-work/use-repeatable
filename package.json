@@ -1,5 +1,5 @@
 {
-  "name": "@siahlah/use-repeatable",
+  "name": "@thegoodwork/use-repeatable",
   "version": "1.0.0",
   "description": "React hook to manage collection of objects",
   "main": "./lib/cjs/index.js",
@@ -12,7 +12,7 @@
     "dev": "tsc -w",
     "build": "npm run build:cjs && npm run build:esm"
   },
-  "author": "",
+  "author": "Siah / Good Work",
   "license": "ISC",
   "devDependencies": {
     "@types/react": "^18.0.21",
