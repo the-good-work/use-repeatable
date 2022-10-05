@@ -3,7 +3,7 @@ declare function useRepeatable<T>({ initialState, newItem, }: {
     newItem: T;
 }): {
     items: T[];
-    addItem: () => void;
+    addItem: (item?: T | null) => void;
     removeItem: (n?: number) => void;
 };
 export { useRepeatable };
