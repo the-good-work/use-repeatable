@@ -9,5 +9,6 @@ declare function useRepeatable<T>({ initialState, newItem, onChange, }: {
     addItem: (item?: T) => void;
     removeItem: (n?: number) => void;
     moveItem: (from: number, to: number) => void;
+    updateItem: (n: number, item: T) => void;
 };
 export { useRepeatable };

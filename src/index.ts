@@ -110,7 +110,11 @@ function useRepeatable<T>({
     updateItems({ type: "move-item", from, to });
   };
 
-  return { items, addItem, removeItem, moveItem };
+  const updateItem = (n: number, item: T) => {
+    updateItems({ type: "update-item", n, item });
+  };
+
+  return { items, addItem, removeItem, moveItem, updateItem };
 }
 
 export { useRepeatable };
