@@ -1,5 +1,5 @@
 import React from "react";
-import { useRepeatable } from "@siahlah/use-repeatable";
+import { useRepeatable } from "@thegoodwork/use-repeatable";
 import {
   DndContext,
   useSensor,

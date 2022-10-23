@@ -4,6 +4,7 @@ import _ from "lodash";
 type UpdateRepeatableAction<T> =
   | { type: "add-item"; item?: T & { id: number } }
   | { type: "remove-item"; n?: number }
+  | { type: "update-item"; n: number; item: T }
   | { type: "move-item"; from: number; to: number };
 
 const resetIndex = <A>(i: A, n: number) => ({ ...i, id: n + 1 });
@@ -21,6 +22,18 @@ function useRepeatable<T>({
     _state: (T & { id: number })[],
     action: UpdateRepeatableAction<T>
   ) => {
+    if (action.type === "update-item") {
+      if (action.n < 0 || action.n > _state.length - 1) {
+        // invalid index
+        throw new Error("Invalid index");
+      }
+      if (!action.item) {
+        throw new Error("Item must be provided");
+      }
+      const __state = [..._state];
+      __state[action.n] = { ...action.item, id: action.n };
+      return __state;
+    }
     if (action.type === "add-item") {
       if (action.item) {
         return [..._state, { ...action.item, id: 0 }].map<T & { id: number }>(
