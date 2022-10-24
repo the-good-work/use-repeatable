@@ -134,7 +134,7 @@ const RepeatableList = <T extends object>(
           addItem();
         }}
       >
-        Add Item jsdkfsjf
+        Add Item
       </button>
     </div>
   );
