@@ -196,7 +196,9 @@ const SortableCard = <T extends Object>({
       <div style={{ display: "flex", flexGrow: 0, gap: "3px" }}>
         <button
           onClick={() => {
-            removeItem(n);
+            if (window.confirm("Are you sure?")) {
+              removeItem(n);
+            }
           }}
           style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
         >
