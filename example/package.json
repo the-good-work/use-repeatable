@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@dnd-kit/core": "^6.0.5",
-    "@dnd-kit/sortable": "^7.0.1",
+    "@dnd-kit/core": "file:..",
+    "@dnd-kit/sortable": "file:..",
     "@thegoodwork/use-repeatable": "file:..",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",

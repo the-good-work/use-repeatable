@@ -1,13 +1,17 @@
 import { useEffect, useReducer } from "react";
+import { nanoid } from "nanoid";
+import { RepeatableList } from "./repeatable-list";
 import _ from "lodash";
 
 type UpdateRepeatableAction<T> =
-  | { type: "add-item"; item?: T & { id: number } }
+  | { type: "add-item"; item?: T & { id: string }; n?: number }
   | { type: "remove-item"; n?: number }
   | { type: "update-item"; n: number; item: T }
   | { type: "move-item"; from: number; to: number };
 
-const resetIndex = <A>(i: A, n: number) => ({ ...i, id: n + 1 });
+const resetIndex = (a: any) => {
+  return { ...a, id: nanoid() };
+};
 
 function useRepeatable<T>({
   initialState,
@@ -19,46 +23,42 @@ function useRepeatable<T>({
   onChange?: (items: T[]) => void;
 }) {
   const fn = (
-    _state: (T & { id: number })[],
+    _state: (T & { id: string })[],
     action: UpdateRepeatableAction<T>
   ) => {
     if (action.type === "update-item") {
       if (action.n < 0 || action.n > _state.length - 1) {
-        // invalid index
         throw new Error("Invalid index");
       }
       if (!action.item) {
         throw new Error("Item must be provided");
       }
       const __state = [..._state];
-      __state[action.n] = { ...action.item, id: action.n };
+
+      __state[action.n] = { ...action.item, id: __state[action.n].id };
       return __state;
     }
     if (action.type === "add-item") {
-      if (action.item) {
-        return [..._state, { ...action.item, id: 0 }].map<T & { id: number }>(
-          resetIndex
-        );
+      const newId = nanoid();
+      if (action.item !== undefined) {
+        if (action.n && !(action.n < 0 || action.n > _state.length)) {
+          const __state = [..._state];
+          __state.splice(action.n, 0, { ...action.item, id: newId });
+          return __state;
+        }
+        return [..._state, { ...action.item, id: newId }];
       }
-      return [..._state, { ...newItem, id: 0 }].map<T & { id: number }>(
-        resetIndex
-      );
+      return [..._state, { ...newItem, id: newId }];
     }
     if (action.type === "remove-item") {
-      if (action.n && Number(action.n) > -1) {
+      if (action.n !== undefined && Number(action.n) > -1) {
         if (action.n < _state.length) {
-          return _state
-            .filter((_i, n) => n !== action.n)
-            .map<T & { id: number }>(resetIndex);
+          return _state.filter((_i, n) => n !== action.n);
         } else {
-          return _state
-            .filter((_i, n, a) => n < a.length - 1)
-            .map<T & { id: number }>(resetIndex);
+          return _state.filter((_i, n, a) => n < a.length - 1);
         }
       } else {
-        return _state
-          .filter((_i, n, a) => n < a.length - 1)
-          .map<T & { id: number }>(resetIndex);
+        return _state.filter((_i, n, a) => n < a.length - 1);
       }
     }
     if (action.type === "move-item") {
@@ -87,10 +87,10 @@ function useRepeatable<T>({
     onChange(items);
   }, [items]);
 
-  const addItem = (item?: T) => {
+  const addItem = (item?: T, n?: number) => {
     if (item) {
-      const itemWithTempId: T & { id: number } = { ...item, id: 0 };
-      updateItems({ type: "add-item", item: itemWithTempId });
+      const itemWithTempId: T & { id: string } = { ...item, id: "" };
+      updateItems({ type: "add-item", item: itemWithTempId, n });
     } else {
       updateItems({ type: "add-item" });
     }
@@ -117,4 +117,4 @@ function useRepeatable<T>({
   return { items, addItem, removeItem, moveItem, updateItem };
 }
 
-export { useRepeatable };
+export { useRepeatable, RepeatableList };
