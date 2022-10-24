@@ -99,7 +99,7 @@ function useRepeatable<T>({
   const removeItem = (n?: number) => {
     if (n === undefined && items.length > 0) {
       updateItems({ type: "remove-item", n: items.length - 1 });
-    } else if (n && n > -1 && items.length > n) {
+    } else if (n !== undefined && n > -1 && items.length > n) {
       updateItems({ type: "remove-item", n });
     } else {
       // do nothing
