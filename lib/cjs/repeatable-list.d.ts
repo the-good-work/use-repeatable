@@ -16,6 +16,7 @@ interface RepeatableListProps<T> extends ExtendStyleProps {
     onChange?: (items: (T & {
         id: string;
     })[]) => void;
+    showReorderButtons?: boolean;
 }
 declare const RepeatableList: <T extends object>(props: RepeatableListProps<T> & {
     children?: (({ test }: {

@@ -39,6 +39,7 @@ interface RepeatableListProps<T> extends ExtendStyleProps {
   newItem: T;
   initialState?: T[];
   onChange?: (items: (T & { id: string })[]) => void;
+  showReorderButtons?: boolean;
 }
 
 interface SortableCardProps<T> extends ExtendStyleProps {
@@ -51,6 +52,8 @@ interface SortableCardProps<T> extends ExtendStyleProps {
     item: T & { id: string },
     update: (item: T & { id: string }) => void
   ) => React.ReactNode;
+
+  showReorderButtons?: boolean;
 }
 
 const RepeatableList = <T extends object>(
@@ -124,6 +127,7 @@ const RepeatableList = <T extends object>(
               addItemButtonStyles={addItemButtonStyles}
               itemButtonStyles={itemButtonStyles}
               dragHandleStyles={dragHandleStyles}
+              showReorderButtons={props.showReorderButtons}
             />
           ))}
         </SortableContext>
@@ -153,6 +157,9 @@ const SortableCard = <T extends Object>({
   cardStyles,
   itemButtonStyles,
   dragHandleStyles,
+
+  // options
+  showReorderButtons = true,
 }: SortableCardProps<T>) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: item.id });
@@ -206,24 +213,28 @@ const SortableCard = <T extends Object>({
         >
           <Cross1Icon />
         </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            moveItem(n, n - 1);
-          }}
-          style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
-        >
-          <ChevronUpIcon />
-        </button>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            moveItem(n, n + 1);
-          }}
-          style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
-        >
-          <ChevronDownIcon />
-        </button>
+        {showReorderButtons && (
+          <>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                moveItem(n, n - 1);
+              }}
+              style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
+            >
+              <ChevronUpIcon />
+            </button>
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                moveItem(n, n + 1);
+              }}
+              style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
+            >
+              <ChevronDownIcon />
+            </button>
+          </>
+        )}
       </div>
     </div>
   );
