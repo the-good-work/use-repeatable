@@ -130,8 +130,9 @@ const RepeatableList = <T extends object>(
       </DndContext>
       <button
         style={{ ...defaultAddItemButtonStyles, ...addItemButtonStyles }}
-        onClick={() => {
+        onClick={(e) => {
           addItem();
+          e.preventDefault();
         }}
       >
         Add Item
@@ -195,7 +196,8 @@ const SortableCard = <T extends Object>({
       <div style={{ flexGrow: 1 }}>{listItem(item, updateItem)}</div>
       <div style={{ display: "flex", flexGrow: 0, gap: "3px" }}>
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             if (window.confirm("Are you sure?")) {
               removeItem(n);
             }
@@ -205,7 +207,8 @@ const SortableCard = <T extends Object>({
           <Cross1Icon />
         </button>
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             moveItem(n, n - 1);
           }}
           style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
@@ -213,7 +216,8 @@ const SortableCard = <T extends Object>({
           <ChevronUpIcon />
         </button>
         <button
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             moveItem(n, n + 1);
           }}
           style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
