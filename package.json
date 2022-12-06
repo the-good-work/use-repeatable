@@ -1,6 +1,6 @@
 {
   "name": "@thegoodwork/use-repeatable",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "React hook to manage collection of objects",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -34,7 +34,7 @@
     "@radix-ui/react-icons": "^1.1.1",
     "@types/lodash": "^4.14.186",
     "lodash": "^4.17.21",
-    "nanoid": "^4.0.0",
+    "nanoid": "^3.3.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   }
