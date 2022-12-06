@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { FC, MouseEventHandler, ReactNode } from "react";
 import { useRepeatable } from ".";
 import {
   DndContext,
@@ -22,11 +22,18 @@ import {
   ChevronUpIcon,
   ChevronDownIcon,
 } from "@radix-ui/react-icons";
-
-interface ExtendStyleProps {
+interface ExtendComponentProps {
+  CustomAddButton?: FC<{ onClick: MouseEventHandler<HTMLButtonElement> }>;
+  customRemoveButton?: any;
+  customReorderUpButton?: any;
+  customReorderDownButton?: any;
+  customButtons?: any;
+}
+interface ExtendStyleProps extends ExtendComponentProps {
   cardStyles?: React.CSSProperties;
   dragHandleStyles?: React.CSSProperties;
-  itemButtonStyles?: React.CSSProperties;
+  removeItemButtonStyles?: React.CSSProperties;
+  reorderItemButtonStyles?: React.CSSProperties;
   addItemButtonStyles?: React.CSSProperties;
 }
 
@@ -34,26 +41,34 @@ interface ExtendStyleProps {
 interface RepeatableListProps<T> extends ExtendStyleProps {
   listItem: (
     item: T & { id: string },
-    updateItem: (item: T & { id: string }) => void
+    updateItem: (item: T & { id: string }) => void,
+    index: number,
+    items: (T & { id: string })[]
   ) => ReactNode;
   newItem: T;
   initialState?: T[];
   onChange?: (items: (T & { id: string })[]) => void;
   showReorderButtons?: boolean;
+  draggable?: boolean;
 }
 
 interface SortableCardProps<T> extends ExtendStyleProps {
   item: T & { id: string };
+  items: (T & { id: string })[];
   n: number;
   removeItem: (a: number) => void;
   moveItem: (a: number, b: number) => void;
   updateItem: (item: T & { id: string }) => void;
   listItem: (
     item: T & { id: string },
-    update: (item: T & { id: string }) => void
+    update: (item: T & { id: string }) => void,
+    index: number,
+    items: (T & { id: string })[]
   ) => React.ReactNode;
-
   showReorderButtons?: boolean;
+  draggable?: boolean;
+  customReorderUpButton?: any;
+  customReorderDownButton?: any;
 }
 
 const RepeatableList = <T extends object>(
@@ -69,7 +84,13 @@ const RepeatableList = <T extends object>(
     cardStyles,
     dragHandleStyles,
     addItemButtonStyles,
-    itemButtonStyles,
+    removeItemButtonStyles,
+    reorderItemButtonStyles,
+    CustomAddButton,
+    customButtons,
+    customRemoveButton,
+    customReorderDownButton,
+    customReorderUpButton,
   } = props;
 
   const { items, addItem, removeItem, moveItem, updateItem } = useRepeatable({
@@ -114,7 +135,13 @@ const RepeatableList = <T extends object>(
         <SortableContext items={items} strategy={verticalListSortingStrategy}>
           {items.map((item, n) => (
             <SortableCard
+              CustomAddButton={CustomAddButton}
+              customRemoveButton={customRemoveButton}
+              customReorderUpButton={customReorderUpButton}
+              customReorderDownButton={customReorderDownButton}
+              customButtons={customButtons}
               item={item}
+              items={items}
               key={item.id}
               n={n}
               removeItem={removeItem}
@@ -125,28 +152,39 @@ const RepeatableList = <T extends object>(
               listItem={listItem}
               cardStyles={cardStyles}
               addItemButtonStyles={addItemButtonStyles}
-              itemButtonStyles={itemButtonStyles}
+              removeItemButtonStyles={removeItemButtonStyles}
+              reorderItemButtonStyles={reorderItemButtonStyles}
               dragHandleStyles={dragHandleStyles}
               showReorderButtons={props.showReorderButtons}
             />
           ))}
         </SortableContext>
       </DndContext>
-      <button
-        style={{ ...defaultAddItemButtonStyles, ...addItemButtonStyles }}
-        onClick={(e) => {
-          addItem();
-          e.preventDefault();
-        }}
-      >
-        Add Item
-      </button>
+      {CustomAddButton ? (
+        <CustomAddButton
+          onClick={(e) => {
+            addItem();
+            e.preventDefault();
+          }}
+        />
+      ) : (
+        <button
+          style={{ ...defaultAddItemButtonStyles, ...addItemButtonStyles }}
+          onClick={(e) => {
+            addItem();
+            e.preventDefault();
+          }}
+        >
+          Add Item
+        </button>
+      )}
     </div>
   );
 };
 
 const SortableCard = <T extends Object>({
   item,
+  items,
   n,
   removeItem,
   moveItem,
@@ -154,12 +192,34 @@ const SortableCard = <T extends Object>({
   updateItem,
 
   //styles
+  /**Customise the repeatable list item cards with CSS*/
   cardStyles,
-  itemButtonStyles,
+  /**Customise the reorder item buttons with CSS*/
+  reorderItemButtonStyles,
+  /**Customise the "Remove Item" buttons with CSS*/
+  removeItemButtonStyles,
+  /**Customise the drag handle with CSS*/
   dragHandleStyles,
 
+  //components
+  /**Use a custom component for the "Remove Item" button.
+   * Additional functions can be added alongside the default function.*/
+  customRemoveButton,
+  /**Use a custom component for the reorder up button.
+   * Additional functions can be added alongside the default function.*/
+  customReorderUpButton,
+  /**Use a custom component for the reorder down button.
+   * Additional functions can be added alongside the default function.*/
+  customReorderDownButton,
+  /**Define your own custom buttons. The button will be added to the side of the existing buttons
+   */
+  customButtons,
+
   // options
+  /**Enable up and down arrow buttons to reorder items*/
   showReorderButtons = true,
+  /**Enable drag handles to reorder items*/
+  draggable = true,
 }: SortableCardProps<T>) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: item.id });
@@ -172,7 +232,7 @@ const SortableCard = <T extends Object>({
     alignItems: "center",
   };
 
-  const defaultItemButtonStyles: React.CSSProperties = {
+  const defaultRemoveItemButtonStyles: React.CSSProperties = {
     width: "30px",
     height: "30px",
     padding: "5px",
@@ -181,7 +241,22 @@ const SortableCard = <T extends Object>({
     alignItems: "center",
     margin: "0",
   };
-
+  const defaultReorderItemButtonStyles: React.CSSProperties = {
+    width: "30px",
+    height: "30px",
+    padding: "5px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "0",
+  };
+  console.log(
+    customRemoveButton,
+    customReorderDownButton,
+    customReorderUpButton,
+    customButtons,
+    draggable
+  );
   return (
     <div
       ref={setNodeRef}
@@ -200,7 +275,7 @@ const SortableCard = <T extends Object>({
       >
         <DragHandleHorizontalIcon style={{ width: "100%", height: "100%" }} />
       </b>
-      <div style={{ flexGrow: 1 }}>{listItem(item, updateItem)}</div>
+      <div style={{ flexGrow: 1 }}>{listItem(item, updateItem, n, items)}</div>
       <div style={{ display: "flex", flexGrow: 0, gap: "3px" }}>
         <button
           onClick={(e) => {
@@ -209,7 +284,10 @@ const SortableCard = <T extends Object>({
               removeItem(n);
             }
           }}
-          style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
+          style={{
+            ...defaultRemoveItemButtonStyles,
+            ...removeItemButtonStyles,
+          }}
         >
           <Cross1Icon />
         </button>
@@ -220,7 +298,10 @@ const SortableCard = <T extends Object>({
                 e.preventDefault();
                 moveItem(n, n - 1);
               }}
-              style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
+              style={{
+                ...defaultReorderItemButtonStyles,
+                ...reorderItemButtonStyles,
+              }}
             >
               <ChevronUpIcon />
             </button>
@@ -229,7 +310,10 @@ const SortableCard = <T extends Object>({
                 e.preventDefault();
                 moveItem(n, n + 1);
               }}
-              style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
+              style={{
+                ...defaultReorderItemButtonStyles,
+                ...reorderItemButtonStyles,
+              }}
             >
               <ChevronDownIcon />
             </button>
