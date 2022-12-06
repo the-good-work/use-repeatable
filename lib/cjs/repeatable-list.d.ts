@@ -1,21 +1,20 @@
-import React, { FC, MouseEventHandler, ReactNode } from "react";
+import { FC, MouseEventHandler, ReactNode } from "react";
 interface ExtendComponentProps {
     CustomAddButton?: FC<{
         onClick: MouseEventHandler<HTMLButtonElement>;
     }>;
-    customRemoveButton?: any;
-    customReorderUpButton?: any;
-    customReorderDownButton?: any;
-    customButtons?: any;
+    CustomRemoveButton?: FC<{
+        onClick: MouseEventHandler<HTMLButtonElement>;
+    }>;
+    CustomReorderUpButton?: FC<{
+        onClick: MouseEventHandler<HTMLButtonElement>;
+    }>;
+    CustomReorderDownButton?: FC<{
+        onClick: MouseEventHandler<HTMLButtonElement>;
+    }>;
+    CustomCard?: any;
 }
-interface ExtendStyleProps extends ExtendComponentProps {
-    cardStyles?: React.CSSProperties;
-    dragHandleStyles?: React.CSSProperties;
-    removeItemButtonStyles?: React.CSSProperties;
-    reorderItemButtonStyles?: React.CSSProperties;
-    addItemButtonStyles?: React.CSSProperties;
-}
-interface RepeatableListProps<T> extends ExtendStyleProps {
+interface RepeatableListProps<T> extends ExtendComponentProps {
     listItem: (item: T & {
         id: string;
     }, updateItem: (item: T & {

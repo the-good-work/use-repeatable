@@ -24,21 +24,16 @@ import {
 } from "@radix-ui/react-icons";
 interface ExtendComponentProps {
   CustomAddButton?: FC<{ onClick: MouseEventHandler<HTMLButtonElement> }>;
-  customRemoveButton?: any;
-  customReorderUpButton?: any;
-  customReorderDownButton?: any;
-  customButtons?: any;
-}
-interface ExtendStyleProps extends ExtendComponentProps {
-  cardStyles?: React.CSSProperties;
-  dragHandleStyles?: React.CSSProperties;
-  removeItemButtonStyles?: React.CSSProperties;
-  reorderItemButtonStyles?: React.CSSProperties;
-  addItemButtonStyles?: React.CSSProperties;
+  CustomRemoveButton?: FC<{ onClick: MouseEventHandler<HTMLButtonElement> }>;
+  CustomReorderUpButton?: FC<{ onClick: MouseEventHandler<HTMLButtonElement> }>;
+  CustomReorderDownButton?: FC<{
+    onClick: MouseEventHandler<HTMLButtonElement>;
+  }>;
+  CustomCard?: any;
 }
 
 /* exporting interface as such as we want a generic type T in the component props */
-interface RepeatableListProps<T> extends ExtendStyleProps {
+interface RepeatableListProps<T> extends ExtendComponentProps {
   listItem: (
     item: T & { id: string },
     updateItem: (item: T & { id: string }) => void,
@@ -52,7 +47,7 @@ interface RepeatableListProps<T> extends ExtendStyleProps {
   draggable?: boolean;
 }
 
-interface SortableCardProps<T> extends ExtendStyleProps {
+interface SortableCardProps<T> extends ExtendComponentProps {
   item: T & { id: string };
   items: (T & { id: string })[];
   n: number;
@@ -67,8 +62,6 @@ interface SortableCardProps<T> extends ExtendStyleProps {
   ) => React.ReactNode;
   showReorderButtons?: boolean;
   draggable?: boolean;
-  customReorderUpButton?: any;
-  customReorderDownButton?: any;
 }
 
 const RepeatableList = <T extends object>(
@@ -81,16 +74,12 @@ const RepeatableList = <T extends object>(
     listItem,
     onChange,
     newItem,
-    cardStyles,
-    dragHandleStyles,
-    addItemButtonStyles,
-    removeItemButtonStyles,
-    reorderItemButtonStyles,
     CustomAddButton,
-    customButtons,
-    customRemoveButton,
-    customReorderDownButton,
-    customReorderUpButton,
+    CustomRemoveButton,
+    CustomReorderDownButton,
+    CustomReorderUpButton,
+    CustomCard,
+    draggable,
   } = props;
 
   const { items, addItem, removeItem, moveItem, updateItem } = useRepeatable({
@@ -136,10 +125,10 @@ const RepeatableList = <T extends object>(
           {items.map((item, n) => (
             <SortableCard
               CustomAddButton={CustomAddButton}
-              customRemoveButton={customRemoveButton}
-              customReorderUpButton={customReorderUpButton}
-              customReorderDownButton={customReorderDownButton}
-              customButtons={customButtons}
+              CustomRemoveButton={CustomRemoveButton}
+              CustomReorderUpButton={CustomReorderUpButton}
+              CustomReorderDownButton={CustomReorderDownButton}
+              CustomCard={CustomCard}
               item={item}
               items={items}
               key={item.id}
@@ -150,12 +139,8 @@ const RepeatableList = <T extends object>(
               }}
               moveItem={moveItem}
               listItem={listItem}
-              cardStyles={cardStyles}
-              addItemButtonStyles={addItemButtonStyles}
-              removeItemButtonStyles={removeItemButtonStyles}
-              reorderItemButtonStyles={reorderItemButtonStyles}
-              dragHandleStyles={dragHandleStyles}
               showReorderButtons={props.showReorderButtons}
+              draggable={draggable}
             />
           ))}
         </SortableContext>
@@ -169,7 +154,8 @@ const RepeatableList = <T extends object>(
         />
       ) : (
         <button
-          style={{ ...defaultAddItemButtonStyles, ...addItemButtonStyles }}
+          className="repeatable-list--add-item-button"
+          style={{ ...defaultAddItemButtonStyles }}
           onClick={(e) => {
             addItem();
             e.preventDefault();
@@ -191,29 +177,19 @@ const SortableCard = <T extends Object>({
   listItem,
   updateItem,
 
-  //styles
-  /**Customise the repeatable list item cards with CSS*/
-  cardStyles,
-  /**Customise the reorder item buttons with CSS*/
-  reorderItemButtonStyles,
-  /**Customise the "Remove Item" buttons with CSS*/
-  removeItemButtonStyles,
-  /**Customise the drag handle with CSS*/
-  dragHandleStyles,
-
   //components
   /**Use a custom component for the "Remove Item" button.
    * Additional functions can be added alongside the default function.*/
-  customRemoveButton,
+  CustomRemoveButton,
   /**Use a custom component for the reorder up button.
    * Additional functions can be added alongside the default function.*/
-  customReorderUpButton,
+  CustomReorderUpButton,
   /**Use a custom component for the reorder down button.
    * Additional functions can be added alongside the default function.*/
-  customReorderDownButton,
+  CustomReorderDownButton,
   /**Define your own custom buttons. The button will be added to the side of the existing buttons
    */
-  customButtons,
+  CustomCard,
 
   // options
   /**Enable up and down arrow buttons to reorder items*/
@@ -229,7 +205,6 @@ const SortableCard = <T extends Object>({
     transition,
     display: "flex",
     gap: "5px",
-    alignItems: "center",
   };
 
   const defaultRemoveItemButtonStyles: React.CSSProperties = {
@@ -250,78 +225,120 @@ const SortableCard = <T extends Object>({
     alignItems: "center",
     margin: "0",
   };
-  console.log(
-    customRemoveButton,
-    customReorderDownButton,
-    customReorderUpButton,
-    customButtons,
-    draggable
-  );
-  return (
-    <div
-      ref={setNodeRef}
-      style={{ ...defaultCardStyles, ...cardStyles }}
-      {...attributes}
-    >
-      <b
-        style={{
-          cursor: "grab",
-          width: "30px",
-          height: "30px",
-          padding: "5px",
-          ...dragHandleStyles,
-        }}
-        {...listeners}
+
+  if (CustomCard) {
+    return <CustomCard ref={setNodeRef} {...attributes} />;
+  } else {
+    return (
+      <div
+        className="repeatable-list--card"
+        ref={setNodeRef}
+        style={{ ...defaultCardStyles }}
+        {...attributes}
       >
-        <DragHandleHorizontalIcon style={{ width: "100%", height: "100%" }} />
-      </b>
-      <div style={{ flexGrow: 1 }}>{listItem(item, updateItem, n, items)}</div>
-      <div style={{ display: "flex", flexGrow: 0, gap: "3px" }}>
-        <button
-          onClick={(e) => {
-            e.preventDefault();
-            if (window.confirm("Are you sure?")) {
-              removeItem(n);
-            }
-          }}
+        {draggable && (
+          <b
+            style={{
+              cursor: "grab",
+              width: "30px",
+              height: "30px",
+              padding: "5px",
+            }}
+            {...listeners}
+          >
+            <DragHandleHorizontalIcon
+              style={{ width: "100%", height: "100%" }}
+            />
+          </b>
+        )}
+
+        <div className="repeatable-list--list-item" style={{ flexGrow: 1 }}>
+          {listItem(item, updateItem, n, items)}
+        </div>
+        <div
+          className="repeatable-list--control-button-container"
           style={{
-            ...defaultRemoveItemButtonStyles,
-            ...removeItemButtonStyles,
+            display: "flex",
+            flexGrow: 0,
+            gap: "3px",
           }}
         >
-          <Cross1Icon />
-        </button>
-        {showReorderButtons && (
-          <>
+          {CustomRemoveButton ? (
+            <CustomRemoveButton
+              onClick={(e) => {
+                if (window.confirm("Are you sure?")) {
+                  removeItem(n);
+                }
+                e.preventDefault();
+              }}
+            />
+          ) : (
             <button
+              className="repeatable-list--remove-item-button"
               onClick={(e) => {
                 e.preventDefault();
-                moveItem(n, n - 1);
+                if (window.confirm("Are you sure?")) {
+                  removeItem(n);
+                }
               }}
               style={{
-                ...defaultReorderItemButtonStyles,
-                ...reorderItemButtonStyles,
+                ...defaultRemoveItemButtonStyles,
               }}
             >
-              <ChevronUpIcon />
+              <Cross1Icon />
             </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                moveItem(n, n + 1);
-              }}
-              style={{
-                ...defaultReorderItemButtonStyles,
-                ...reorderItemButtonStyles,
-              }}
-            >
-              <ChevronDownIcon />
-            </button>
-          </>
-        )}
+          )}
+
+          {showReorderButtons && (
+            <>
+              {CustomReorderUpButton ? (
+                <CustomReorderUpButton
+                  onClick={(e) => {
+                    e.preventDefault();
+                    moveItem(n, n - 1);
+                  }}
+                />
+              ) : (
+                <button
+                  className="repeatable-list--reorder-up-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    moveItem(n, n - 1);
+                  }}
+                  style={{
+                    ...defaultReorderItemButtonStyles,
+                  }}
+                >
+                  <ChevronUpIcon />
+                </button>
+              )}
+              {CustomReorderDownButton ? (
+                <CustomReorderDownButton
+                  onClick={(e) => {
+                    e.preventDefault();
+                    moveItem(n, n + 1);
+                  }}
+                />
+              ) : (
+                <button
+                  className="repeatable-list--reorder-down-button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    moveItem(n, n + 1);
+                  }}
+                  style={{
+                    ...defaultReorderItemButtonStyles,
+                  }}
+                >
+                  <ChevronDownIcon />
+                </button>
+              )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export { RepeatableList };
