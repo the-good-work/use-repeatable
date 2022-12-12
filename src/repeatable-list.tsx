@@ -1,4 +1,6 @@
-import React, { ReactNode } from "react";
+/** @jsxImportSource @emotion/react */
+import { ReactNode } from "react";
+import { css } from "@emotion/react";
 import { useRepeatable } from ".";
 import {
   DndContext,
@@ -16,45 +18,75 @@ import {
   verticalListSortingStrategy,
   useSortable,
 } from "@dnd-kit/sortable";
+
+import { AddItemButton } from "./components/AddItemButton";
+import { RepeatableListProps, SortableCardProps } from "./types";
+
 import {
-  DragHandleHorizontalIcon,
-  Cross1Icon,
-  ChevronUpIcon,
   ChevronDownIcon,
+  ChevronUpIcon,
+  Cross1Icon,
+  DragHandleHorizontalIcon,
 } from "@radix-ui/react-icons";
 
-interface ExtendStyleProps {
-  cardStyles?: React.CSSProperties;
-  dragHandleStyles?: React.CSSProperties;
-  itemButtonStyles?: React.CSSProperties;
-  addItemButtonStyles?: React.CSSProperties;
-}
+const defaultStyles = css`
+  .repeatable-list__control-button-container {
+    display: flex;
+    flex-grow: 0;
+    gap: 3px;
+  }
+  .repeatable-list__remove-item-button {
+    width: 100px;
+    height: 30px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+  .repeatable-list__reorder-item-button {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
 
-/* exporting interface as such as we want a generic type T in the component props */
-interface RepeatableListProps<T> extends ExtendStyleProps {
-  listItem: (
-    item: T & { id: string },
-    updateItem: (item: T & { id: string }) => void
-  ) => ReactNode;
-  newItem: T;
-  initialState?: T[];
-  onChange?: (items: (T & { id: string })[]) => void;
-  showReorderButtons?: boolean;
-}
+  .repeatable-list__add-item-button {
+    height: 30px;
+    padding: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+  }
 
-interface SortableCardProps<T> extends ExtendStyleProps {
-  item: T & { id: string };
-  n: number;
-  removeItem: (a: number) => void;
-  moveItem: (a: number, b: number) => void;
-  updateItem: (item: T & { id: string }) => void;
-  listItem: (
-    item: T & { id: string },
-    update: (item: T & { id: string }) => void
-  ) => React.ReactNode;
+  .repeatable-list__card {
+    display: flex;
+    gap: 5px;
+  }
 
-  showReorderButtons?: boolean;
-}
+  .repeatable-list__list-item {
+    display: flex;
+    flex-grow: 1;
+  }
+
+  .repeatable-list__drag-handle {
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    &:hover {
+      cursor: grab;
+    }
+  }
+
+  .repeatable-list__drag-handle-icon {
+    width: 100%;
+    height: 100%;
+  }
+`;
 
 const RepeatableList = <T extends object>(
   props: RepeatableListProps<T> & {
@@ -66,10 +98,14 @@ const RepeatableList = <T extends object>(
     listItem,
     onChange,
     newItem,
-    cardStyles,
-    dragHandleStyles,
-    addItemButtonStyles,
-    itemButtonStyles,
+    AddItemComponent,
+    RemoveItemComponent,
+    ReorderItemDownComponent,
+    ReorderItemUpComponent,
+    DragHandleComponent,
+    composeInnerComponents,
+    composeOuterComponents,
+    draggable,
   } = props;
 
   const { items, addItem, removeItem, moveItem, updateItem } = useRepeatable({
@@ -95,149 +131,271 @@ const RepeatableList = <T extends object>(
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  const defaultAddItemButtonStyles: React.CSSProperties = {
-    height: "30px",
-    padding: "5px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "10px auto",
-  };
+  if (composeOuterComponents) {
+    return (
+      <div className="repeatable-list__wrapper" css={defaultStyles}>
+        {composeOuterComponents({
+          repeatable: { items, addItem, removeItem, moveItem, updateItem },
+          AddItemButton: AddItemButton({
+            CustomComponent: AddItemComponent,
+            addItem: addItem,
+          }),
+          InnerComponents: (
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={items}
+                strategy={verticalListSortingStrategy}
+              >
+                {items.map((item, n) => {
+                  return (
+                    <SortableCard
+                      composeInnerComponents={composeInnerComponents}
+                      AddItemComponent={AddItemComponent}
+                      RemoveItemComponent={RemoveItemComponent}
+                      ReorderItemUpComponent={ReorderItemUpComponent}
+                      ReorderItemDownComponent={ReorderItemDownComponent}
+                      DragHandleComponent={DragHandleComponent}
+                      item={item}
+                      items={items}
+                      key={item.id}
+                      n={n}
+                      addItem={addItem}
+                      removeItem={removeItem}
+                      updateItem={(i) => {
+                        updateItem(n, i);
+                      }}
+                      moveItem={moveItem}
+                      listItem={listItem}
+                      showReorderButtons={props.showReorderButtons}
+                      draggable={draggable}
+                      repeatable={{
+                        items,
+                        addItem,
+                        removeItem,
+                        moveItem,
+                        updateItem,
+                      }}
+                    />
+                  );
+                })}
+              </SortableContext>
+            </DndContext>
+          ),
+        })}
+      </div>
+    );
+  } else {
+    return (
+      <div className="repeatable-list__wrapper" css={defaultStyles}>
+        <DndContext
+          sensors={sensors}
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}
+        >
+          <SortableContext items={items} strategy={verticalListSortingStrategy}>
+            {items.map((item, n) => {
+              return (
+                <SortableCard
+                  composeInnerComponents={composeInnerComponents}
+                  AddItemComponent={AddItemComponent}
+                  RemoveItemComponent={RemoveItemComponent}
+                  ReorderItemUpComponent={ReorderItemUpComponent}
+                  ReorderItemDownComponent={ReorderItemDownComponent}
+                  DragHandleComponent={DragHandleComponent}
+                  item={item}
+                  items={items}
+                  key={item.id}
+                  n={n}
+                  addItem={addItem}
+                  removeItem={removeItem}
+                  updateItem={(i) => {
+                    updateItem(n, i);
+                  }}
+                  moveItem={moveItem}
+                  listItem={listItem}
+                  showReorderButtons={props.showReorderButtons}
+                  draggable={draggable}
+                  repeatable={{
+                    items,
+                    addItem,
+                    removeItem,
+                    moveItem,
+                    updateItem,
+                  }}
+                />
+              );
+            })}
+          </SortableContext>
+        </DndContext>
 
-  return (
-    <div>
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
-          {items.map((item, n) => (
-            <SortableCard
-              item={item}
-              key={item.id}
-              n={n}
-              removeItem={removeItem}
-              updateItem={(i) => {
-                updateItem(n, i);
-              }}
-              moveItem={moveItem}
-              listItem={listItem}
-              cardStyles={cardStyles}
-              addItemButtonStyles={addItemButtonStyles}
-              itemButtonStyles={itemButtonStyles}
-              dragHandleStyles={dragHandleStyles}
-              showReorderButtons={props.showReorderButtons}
-            />
-          ))}
-        </SortableContext>
-      </DndContext>
-      <button
-        style={{ ...defaultAddItemButtonStyles, ...addItemButtonStyles }}
-        onClick={(e) => {
-          addItem();
-          e.preventDefault();
-        }}
-      >
-        Add Item
-      </button>
-    </div>
-  );
+        <AddItemButton CustomComponent={AddItemComponent} addItem={addItem} />
+      </div>
+    );
+  }
 };
 
 const SortableCard = <T extends Object>({
   item,
+  items,
   n,
+  addItem,
   removeItem,
   moveItem,
   listItem,
   updateItem,
+  repeatable,
 
-  //styles
-  cardStyles,
-  itemButtonStyles,
-  dragHandleStyles,
+  //components
+  /**Use a custom component for the "Remove Item" button.
+   * Additional functions can be added alongside the default function.*/
+  RemoveItemComponent,
+  /**Use a custom component for the reorder up button.
+   * Additional functions can be added alongside the default function.*/
+  ReorderItemUpComponent,
+  /**Use a custom component for the reorder down button.
+   * Additional functions can be added alongside the default function.*/
+  ReorderItemDownComponent,
+  /**Use a custom component for the drag handle.
+   * Additional functions can be added alongside the default function.*/
+  DragHandleComponent,
+  AddItemComponent,
+  composeInnerComponents,
 
   // options
+  /**Enable up and down arrow buttons to reorder items*/
   showReorderButtons = true,
+  /**Enable drag handles to reorder items*/
+  draggable = true,
 }: SortableCardProps<T>) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: item.id });
 
-  const defaultCardStyles = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-    display: "flex",
-    gap: "5px",
-    alignItems: "center",
+  const DragHandle = () => {
+    if (DragHandleComponent) {
+      return (
+        <b className="repeatable-list__drag-handle" {...listeners}>
+          <DragHandleComponent />
+        </b>
+      );
+    } else {
+      return (
+        <b className="repeatable-list__drag-handle" {...listeners}>
+          <DragHandleHorizontalIcon className="repeatable-list__drag-handle-icon" />
+        </b>
+      );
+    }
   };
 
-  const defaultItemButtonStyles: React.CSSProperties = {
-    width: "30px",
-    height: "30px",
-    padding: "5px",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    margin: "0",
-  };
-
-  return (
-    <div
-      ref={setNodeRef}
-      style={{ ...defaultCardStyles, ...cardStyles }}
-      {...attributes}
-    >
-      <b
-        style={{
-          cursor: "grab",
-          width: "30px",
-          height: "30px",
-          padding: "5px",
-          ...dragHandleStyles,
-        }}
-        {...listeners}
-      >
-        <DragHandleHorizontalIcon style={{ width: "100%", height: "100%" }} />
-      </b>
-      <div style={{ flexGrow: 1 }}>{listItem(item, updateItem)}</div>
-      <div style={{ display: "flex", flexGrow: 0, gap: "3px" }}>
-        <button
+  const RemoveItemButton = () => {
+    if (RemoveItemComponent) {
+      return (
+        <RemoveItemComponent
           onClick={(e) => {
+            removeItem(n);
             e.preventDefault();
-            if (window.confirm("Are you sure?")) {
-              removeItem(n);
-            }
           }}
-          style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
+        />
+      );
+    } else {
+      return (
+        <button
+          className="repeatable-list__remove-item-button"
+          onClick={(e) => {
+            removeItem(n);
+            e.preventDefault();
+          }}
         >
           <Cross1Icon />
         </button>
-        {showReorderButtons && (
-          <>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                moveItem(n, n - 1);
-              }}
-              style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
-            >
-              <ChevronUpIcon />
-            </button>
-            <button
-              onClick={(e) => {
-                e.preventDefault();
-                moveItem(n, n + 1);
-              }}
-              style={{ ...defaultItemButtonStyles, ...itemButtonStyles }}
-            >
-              <ChevronDownIcon />
-            </button>
-          </>
-        )}
+      );
+    }
+  };
+
+  const ReorderItemButton = (direction: "up" | "down") => {
+    if (ReorderItemDownComponent) {
+      return (
+        <ReorderItemDownComponent
+          onClick={(e) => {
+            moveItem(n, n + 1);
+            e.preventDefault();
+          }}
+        />
+      );
+    } else if (ReorderItemUpComponent) {
+      return (
+        <ReorderItemUpComponent
+          onClick={(e) => {
+            moveItem(n, n - 1);
+            e.preventDefault();
+          }}
+        />
+      );
+    } else {
+      return (
+        <button
+          className={`repeatable-reorder-item-${direction}-button`}
+          onClick={(e) => {
+            moveItem(n, direction === "up" ? n - 1 : n + 1);
+            e.preventDefault();
+          }}
+        >
+          {direction === "up" ? <ChevronUpIcon /> : <ChevronDownIcon />}
+        </button>
+      );
+    }
+  };
+
+  if (composeInnerComponents) {
+    return (
+      <div
+        ref={setNodeRef}
+        {...attributes}
+        style={{ transform: CSS.Transform.toString(transform), transition }}
+      >
+        {composeInnerComponents({
+          repeatable: { ...repeatable, index: n, item, items },
+          DragHandle: DragHandle(),
+          ListItem: listItem(item, updateItem, n, items),
+          RemoveItemButton: RemoveItemButton(),
+          ReorderItemDownButton: ReorderItemButton("down"),
+          ReorderItemUpButton: ReorderItemButton("up"),
+          AddItemButton: AddItemButton({
+            CustomComponent: AddItemComponent,
+            addItem: addItem,
+          }),
+        })}
       </div>
-    </div>
-  );
+    );
+  } else {
+    return (
+      <div
+        className={`repeatable-list__card`}
+        ref={setNodeRef}
+        style={{ transform: CSS.Transform.toString(transform), transition }}
+        {...attributes}
+      >
+        {draggable && <DragHandle />}
+
+        <div className="repeatable-list__list-item">
+          {listItem(item, updateItem, n, items)}
+        </div>
+        <div className="repeatable-list__control-button-container">
+          <RemoveItemButton />
+
+          {showReorderButtons && (
+            <>
+              {ReorderItemButton("up")}
+              {ReorderItemButton("down")}
+            </>
+          )}
+        </div>
+      </div>
+    );
+  }
 };
 
 export { RepeatableList };
