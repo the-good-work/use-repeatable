@@ -1,6 +1,10 @@
 {
   "name": "@thegoodwork/use-repeatable",
+<<<<<<< HEAD
   "version": "1.0.11",
+=======
+  "version": "1.0.10",
+>>>>>>> 18aa0e43d0d4ba44f20d8bcb820ff00f6501c11d
   "description": "React hook to manage collection of objects",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
