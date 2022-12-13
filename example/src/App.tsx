@@ -1,5 +1,6 @@
 import React from "react";
 import { useRepeatable } from "@thegoodwork/use-repeatable";
+import { RepeatableList } from "@thegoodwork/use-repeatable/src/modular-repeatable-list";
 import {
   DndContext,
   useSensor,
@@ -117,6 +118,27 @@ function App() {
           Delete
         </button>
       </div>
+
+      <hr />
+
+      <h2>
+        Using <code>&lt;RepeatableList /&gt;</code>
+      </h2>
+
+      <RepeatableList
+        newItem={{ text: "Hello" }}
+        initialState={[]}
+        onChange={(items) => {
+          console.log(items);
+        }}
+        Card={() => <div>Card</div>}
+        Layout={({ Card }) => (
+          <div>
+            Layout
+            <Card />
+          </div>
+        )}
+      />
     </div>
   );
 }
@@ -129,7 +151,7 @@ function SortableCard({
   removeItem,
   moveItem,
 }: {
-  item: Fruit & { id: number };
+  item: Fruit & { id: string };
   n: number;
   removeItem: (a: number) => void;
   moveItem: (a: number, b: number) => void;

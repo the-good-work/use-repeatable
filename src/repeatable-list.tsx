@@ -88,7 +88,7 @@ const defaultStyles = css`
   }
 `;
 
-const RepeatableList = <T extends object>(
+const RepeatableList = <T extends {}>(
   props: RepeatableListProps<T> & {
     children?: ({ test }: { test: string }) => ReactNode;
   }
