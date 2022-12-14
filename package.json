@@ -1,10 +1,6 @@
 {
   "name": "@thegoodwork/use-repeatable",
-<<<<<<< HEAD
-  "version": "1.0.11",
-=======
   "version": "1.0.10",
->>>>>>> 18aa0e43d0d4ba44f20d8bcb820ff00f6501c11d
   "description": "React hook to manage collection of objects",
   "main": "./lib/cjs/index.js",
   "module": "./lib/esm/index.js",
@@ -35,6 +31,7 @@
   "dependencies": {
     "@dnd-kit/core": "^6.0.4",
     "@dnd-kit/sortable": "^7.0.1",
+    "@emotion/react": "^11.10.5",
     "@radix-ui/react-icons": "^1.1.1",
     "@types/lodash": "^4.14.186",
     "lodash": "^4.17.21",

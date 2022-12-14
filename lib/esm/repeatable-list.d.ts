@@ -1,26 +1,9 @@
-import React, { ReactNode } from "react";
-interface ExtendStyleProps {
-    cardStyles?: React.CSSProperties;
-    dragHandleStyles?: React.CSSProperties;
-    itemButtonStyles?: React.CSSProperties;
-    addItemButtonStyles?: React.CSSProperties;
-}
-interface RepeatableListProps<T> extends ExtendStyleProps {
-    listItem: (item: T & {
-        id: string;
-    }, updateItem: (item: T & {
-        id: string;
-    }) => void) => ReactNode;
-    newItem: T;
-    initialState?: T[];
-    onChange?: (items: (T & {
-        id: string;
-    })[]) => void;
-    showReorderButtons?: boolean;
-}
-declare const RepeatableList: <T extends object>(props: RepeatableListProps<T> & {
+/** @jsxImportSource @emotion/react */
+import { ReactNode } from "react";
+import { RepeatableListProps } from "./types";
+declare const RepeatableList: <T extends {}>(props: RepeatableListProps<T> & {
     children?: (({ test }: {
         test: string;
     }) => ReactNode) | undefined;
-}) => JSX.Element;
+}) => import("@emotion/react/jsx-runtime").JSX.Element;
 export { RepeatableList };

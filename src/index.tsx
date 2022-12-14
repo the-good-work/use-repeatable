@@ -1,14 +1,9 @@
 import { useEffect, useReducer } from "react";
 import { nanoid } from "nanoid";
-import { RepeatableList } from "./repeatable-list";
+import { RepeatableList } from "./modular-repeatable-list";
 
 import _ from "lodash";
-
-type UpdateRepeatableAction<T> =
-  | { type: "add-item"; item?: T & { id: string }; n?: number }
-  | { type: "remove-item"; n?: number }
-  | { type: "update-item"; n: number; item: T }
-  | { type: "move-item"; from: number; to: number };
+import { UpdateRepeatableAction } from "./types";
 
 const resetIndex = (a: any) => {
   return { ...a, id: nanoid() };
@@ -21,7 +16,7 @@ function useRepeatable<T>({
 }: {
   initialState?: T[];
   newItem: T;
-  onChange?: (items: T[]) => void;
+  onChange?: (items: (T & { id: string })[]) => void;
 }) {
   const fn = (
     _state: (T & { id: string })[],

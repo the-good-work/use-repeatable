@@ -1,8 +1,10 @@
-import { RepeatableList } from "./repeatable-list";
+import { RepeatableList } from "./modular-repeatable-list";
 declare function useRepeatable<T>({ initialState, newItem, onChange, }: {
     initialState?: T[];
     newItem: T;
-    onChange?: (items: T[]) => void;
+    onChange?: (items: (T & {
+        id: string;
+    })[]) => void;
 }): {
     items: (T & {
         id: string;
