@@ -17,6 +17,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
+import { AddButton } from "./components/AddButton";
 
 function RepeatableList<T>({
   initialState,
@@ -25,11 +26,13 @@ function RepeatableList<T>({
   Card,
   Layout,
 }: RepeatableListProps<T>) {
-  const { items, addItem, removeItem, moveItem } = useRepeatable<T>({
-    initialState: initialState || [],
-    newItem: newItem,
-    onChange: onChange,
-  });
+  const { items, addItem, removeItem, moveItem, updateItem } = useRepeatable<T>(
+    {
+      initialState: initialState || [],
+      newItem: newItem,
+      onChange: onChange,
+    }
+  );
 
   function handleDragEnd(event: DragEndEvent) {
     const { active, over } = event;
@@ -50,7 +53,20 @@ function RepeatableList<T>({
 
   return (
     <Layout
+      items={items}
       addItem={addItem}
+      removeItem={removeItem}
+      moveItem={moveItem}
+      updateItem={updateItem}
+      AddButton={({ onClick, children }) => (
+        <AddButton onClick={onClick} children={children} addItem={addItem} />
+      )}
+      // RemoveButton={RemoveButton}
+      // InsertButton={InsertButton}
+      // MoveUpButton={MoveUpButton}
+      // MoveDownButton={MoveDownButton}
+      // MoveToLastButton={MoveToLastButton}
+      // MoveToTopButton={MoveToTopButton}
       Cards={() => (
         <DndContext
           sensors={sensors}
@@ -64,11 +80,29 @@ function RepeatableList<T>({
                 id={item.id}
                 Card={Card}
                 cardProps={{
+                  // Props
                   item,
                   items,
                   index: n,
-                  removeItem: () => removeItem(n),
+                  removeItem,
                   moveItem,
+                  addItem,
+                  updateItem,
+
+                  // Components
+                  AddButton: ({ onClick, children }) => (
+                    <AddButton
+                      onClick={onClick}
+                      children={children}
+                      addItem={addItem}
+                    />
+                  ),
+                  // RemoveButton,
+                  // InsertButton,
+                  // MoveUpButton,
+                  // MoveDownButton,
+                  // MoveToTopButton,
+                  // MoveToLastButton,
                 }}
               />
             ))}
@@ -82,13 +116,26 @@ function RepeatableList<T>({
 function SortableCard<T>({ id, Card, cardProps }: SortableCardProps<T>) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
+
   return (
     <div
       ref={setNodeRef}
       {...attributes}
       style={{ transform: CSS.Transform.toString(transform), transition }}
     >
-      <Card {...cardProps} dragHandleListeners={listeners} />
+      <Card
+        {...cardProps}
+        DragHandle={({ children }: { children: React.ReactNode }) => (
+          <div
+            style={{ cursor: "grab" }}
+            className="repeatable-list--drag-handle"
+            {...listeners}
+          >
+            {children}
+          </div>
+        )}
+        dragHandleListeners={listeners}
+      />
     </div>
   );
 }
@@ -110,15 +157,61 @@ interface SortableCardProps<T> {
 }
 
 interface CardProps<T> {
+  // Props
   item: T;
   items: T[];
   index: number;
-  removeItem: () => void;
+  removeItem: (n: number) => void;
   moveItem: (from: number, to: number) => void;
+  addItem: (item?: T, n?: number) => void;
+  updateItem: (n: number, item: T) => void;
   dragHandleListeners?: SyntheticListenerMap;
+
+  // Pre-made components
+  DragHandle?: React.FC<{ children?: React.ReactNode }>;
+  AddButton?: React.FC<{ children?: React.ReactNode; onClick?: () => void }>;
+  RemoveButton?: React.FC<{ children?: React.ReactNode; onClick?: () => void }>;
+  MoveUpButton?: React.FC<{ children?: React.ReactNode; onClick?: () => void }>;
+  MoveDownButton?: React.FC<{
+    children?: React.ReactNode;
+    onClick?: () => void;
+  }>;
+  MoveToTopButton?: React.FC<{
+    children?: React.ReactNode;
+    onClick?: () => void;
+  }>;
+  MoveToLastButton?: React.FC<{
+    children?: React.ReactNode;
+    onClick?: () => void;
+  }>;
+  InsertButton?: React.FC<{ children?: React.ReactNode; onClick?: () => void }>;
 }
 
 interface LayoutProps<T> {
+  // Props
+  items: T[];
+  removeItem: () => void;
+  moveItem: (from: number, to: number) => void;
+  addItem: (item?: T, n?: number) => void;
+  updateItem: (n: number, item: T) => void;
+
+  // Components
   Cards: React.FC<{}>;
-  addItem: (item?: T) => void;
+  DragHandle?: React.FC<{ children?: React.ReactNode }>;
+  AddButton?: React.FC<{ children?: React.ReactNode; onClick?: () => void }>;
+  RemoveButton?: React.FC<{ children?: React.ReactNode; onClick?: () => void }>;
+  MoveUpButton?: React.FC<{ children?: React.ReactNode; onClick?: () => void }>;
+  MoveDownButton?: React.FC<{
+    children?: React.ReactNode;
+    onClick?: () => void;
+  }>;
+  MoveToTopButton?: React.FC<{
+    children?: React.ReactNode;
+    onClick?: () => void;
+  }>;
+  MoveToLastButton?: React.FC<{
+    children?: React.ReactNode;
+    onClick?: () => void;
+  }>;
+  InsertButton?: React.FC<{ children?: React.ReactNode; onClick?: () => void }>;
 }

@@ -1,6 +1,4 @@
-/** @jsxImportSource @emotion/react */
-import { ReactNode } from "react";
-import { css } from "@emotion/react";
+import React, { ReactNode } from "react";
 import { useRepeatable } from ".";
 import {
   DndContext,
@@ -22,71 +20,64 @@ import {
 import { AddItemButton } from "./components/AddItemButton";
 import { RepeatableListProps, SortableCardProps } from "./types";
 
-import {
-  ChevronDownIcon,
-  ChevronUpIcon,
-  Cross1Icon,
-  DragHandleHorizontalIcon,
-} from "@radix-ui/react-icons";
+// const defaultStyles = `
+//   .repeatable-list__control-button-container {
+//     display: flex;
+//     flex-grow: 0;
+//     gap: 3px;
+//   }
+//   .repeatable-list__remove-item-button {
+//     width: 100px;
+//     height: 30px;
+//     padding: 5px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     margin: 0;
+//   }
+//   .repeatable-list__reorder-item-button {
+//     width: 30px;
+//     height: 30px;
+//     padding: 5px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     margin: 0;
+//   }
 
-const defaultStyles = css`
-  .repeatable-list__control-button-container {
-    display: flex;
-    flex-grow: 0;
-    gap: 3px;
-  }
-  .repeatable-list__remove-item-button {
-    width: 100px;
-    height: 30px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-  }
-  .repeatable-list__reorder-item-button {
-    width: 30px;
-    height: 30px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-  }
+//   .repeatable-list__add-item-button {
+//     height: 30px;
+//     padding: 5px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     margin: 10px auto;
+//   }
 
-  .repeatable-list__add-item-button {
-    height: 30px;
-    padding: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px auto;
-  }
+//   .repeatable-list__card {
+//     display: flex;
+//     gap: 5px;
+//   }
 
-  .repeatable-list__card {
-    display: flex;
-    gap: 5px;
-  }
+//   .repeatable-list__list-item {
+//     display: flex;
+//     flex-grow: 1;
+//   }
 
-  .repeatable-list__list-item {
-    display: flex;
-    flex-grow: 1;
-  }
+//   .repeatable-list__drag-handle {
+//     width: 30px;
+//     height: 30px;
+//     padding: 5px;
+//     &:hover {
+//       cursor: grab;
+//     }
+//   }
 
-  .repeatable-list__drag-handle {
-    width: 30px;
-    height: 30px;
-    padding: 5px;
-    &:hover {
-      cursor: grab;
-    }
-  }
-
-  .repeatable-list__drag-handle-icon {
-    width: 100%;
-    height: 100%;
-  }
-`;
+//   .repeatable-list__drag-handle-icon {
+//     width: 100%;
+//     height: 100%;
+//   }
+// `;
 
 const RepeatableList = <T extends {}>(
   props: RepeatableListProps<T> & {
@@ -133,7 +124,7 @@ const RepeatableList = <T extends {}>(
 
   if (composeOuterComponents) {
     return (
-      <div className="repeatable-list__wrapper" css={defaultStyles}>
+      <div className="repeatable-list__wrapper">
         {composeOuterComponents({
           repeatable: { items, addItem, removeItem, moveItem, updateItem },
           AddItemButton: AddItemButton({
@@ -190,7 +181,7 @@ const RepeatableList = <T extends {}>(
     );
   } else {
     return (
-      <div className="repeatable-list__wrapper" css={defaultStyles}>
+      <div className="repeatable-list__wrapper">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -284,7 +275,7 @@ const SortableCard = <T extends Object>({
     } else {
       return (
         <b className="repeatable-list__drag-handle" {...listeners}>
-          <DragHandleHorizontalIcon className="repeatable-list__drag-handle-icon" />
+          ≡
         </b>
       );
     }
@@ -309,7 +300,7 @@ const SortableCard = <T extends Object>({
             e.preventDefault();
           }}
         >
-          <Cross1Icon />
+          x
         </button>
       );
     }
@@ -343,7 +334,7 @@ const SortableCard = <T extends Object>({
             e.preventDefault();
           }}
         >
-          {direction === "up" ? <ChevronUpIcon /> : <ChevronDownIcon />}
+          {direction === "up" ? "^" : "v"}
         </button>
       );
     }

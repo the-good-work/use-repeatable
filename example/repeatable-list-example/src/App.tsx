@@ -2,45 +2,170 @@ import { RepeatableList } from "@thegoodwork/use-repeatable";
 
 type Item = {
   name: string;
-  color: string;
+  number: string;
 };
+
+function RepeatedItem({
+  item,
+  updateItem,
+  index,
+}: {
+  item: Item;
+  updateItem: (n: number, item: Item) => void;
+  index: number;
+}) {
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+        <div style={{ display: "flex", gap: "5px" }}>
+          <label>Name:</label>
+          <input
+            value={item.name}
+            onChange={(e) => {
+              updateItem(index, { ...item, name: e.currentTarget.value });
+            }}
+          />
+        </div>
+        <span>Number: {item.number}</span>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{
+        display: "flex",
+        padding: "25px 50px",
+        alignItems: "start",
+        justifyContent: "start",
+        width: "100%",
+        boxSizing: "border-box",
+      }}
+    >
       <RepeatableList<Item>
         onChange={() => null}
-        newItem={{ name: "Test", color: "Blue" }}
+        newItem={{ name: "Test", number: "Blue" }}
         initialState={[]}
-        Card={({ item, removeItem, dragHandleListeners }) => (
-          <div>
-            <button {...dragHandleListeners}>HAHA</button>
-            {item.name}
-            Color: <input type="text" value={item.color} />
-            <button>Test</button>
-            <button onClick={() => removeItem()}>Delete this</button>
+        Card={({
+          item,
+          items,
+          index,
+          removeItem,
+          updateItem,
+          moveItem,
+          addItem,
+          dragHandleListeners,
+          DragHandle,
+          AddButton,
+        }) => (
+          <div
+            style={{
+              borderRadius: "10px",
+              border: "1px solid black",
+              padding: "25px",
+              boxSizing: "border-box",
+              marginBottom: "10px",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                width: "100%",
+                alignItems: "start",
+                justifyContent: "space-between",
+                marginBottom: "10px",
+              }}
+            >
+              <h3 style={{ margin: 0 }}>
+                Item {index + 1} / {items.length} {item.name}
+              </h3>
+              <div
+                style={{ display: "flex", gap: "5px", alignItems: "center" }}
+              >
+                <span
+                  {...dragHandleListeners}
+                  style={{
+                    padding: "5px",
+                    boxSizing: "border-box",
+                    border: "1px solid black",
+                    cursor: "grab",
+                  }}
+                >
+                  ≡
+                </span>
+                <DragHandle>≡</DragHandle>
+                <AddButton>ADD</AddButton>
+              </div>
+            </div>
+
+            <div
+              style={{
+                display: "flex",
+                gap: "5px",
+                alignItems: "start",
+                justifyContent: "space-between",
+              }}
+            >
+              <RepeatedItem updateItem={updateItem} item={item} index={index} />
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "5px",
+                  justifyContent: "start",
+                  alignItems: "start",
+                }}
+              >
+                <button onClick={() => removeItem(index)}>Remove Item</button>
+                <button onClick={() => moveItem(index, index - 1)}>
+                  Move Item Up
+                </button>
+                <button onClick={() => moveItem(index, index + 1)}>
+                  Move Item Down
+                </button>
+                <button
+                  onClick={() =>
+                    addItem({ name: "Inserted", number: "Inserted" }, index + 1)
+                  }
+                >
+                  Insert Item Below
+                </button>
+              </div>
+            </div>
           </div>
         )}
-        Layout={({ Cards, addItem }) => (
+        Layout={({ Cards, addItem, AddButton }) => (
           <div>
-            <h1>hello</h1>
+            <h1>Example Repeatable List</h1>
             <Cards />
-            <button onClick={() => addItem()}>Add item</button>
 
-            <form onSubmit={(e) => e.preventDefault()}>
-              <input type="text" id="animal" />
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              style={{ marginTop: "25px" }}
+            >
+              <input type="text" id="animal" placeholder="Add a name" />
               <button
                 onClick={() =>
                   addItem({
                     name:
                       (document.querySelector("#animal") as HTMLInputElement)
-                        ?.value || "Haha",
-                    color: (Math.random() * 5).toFixed(3),
+                        ?.value || "Placeholder",
+                    number: (Math.random() * 5).toFixed(3),
                   })
                 }
               >
-                Add item
+                Add Item
               </button>
+              <AddButton
+                onClick={() => {
+                  console.log("ASDF");
+                }}
+              >
+                ADDDDD
+              </AddButton>
             </form>
           </div>
         )}

@@ -15,11 +15,79 @@ interface CardProps<T> {
     item: T;
     items: T[];
     index: number;
-    removeItem: () => void;
+    removeItem: (n: number) => void;
     moveItem: (from: number, to: number) => void;
+    addItem: (item?: T, n?: number) => void;
+    updateItem: (n: number, item: T) => void;
     dragHandleListeners?: SyntheticListenerMap;
+    DragHandle?: React.FC<{
+        children?: React.ReactNode;
+    }>;
+    AddButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    RemoveButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    MoveUpButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    MoveDownButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    MoveToTopButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    MoveToLastButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    InsertButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
 }
 interface LayoutProps<T> {
+    items: T[];
+    removeItem: () => void;
+    moveItem: (from: number, to: number) => void;
+    addItem: (item?: T, n?: number) => void;
+    updateItem: (n: number, item: T) => void;
     Cards: React.FC<{}>;
-    addItem: (item?: T) => void;
+    DragHandle?: React.FC<{
+        children?: React.ReactNode;
+    }>;
+    AddButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    RemoveButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    MoveUpButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    MoveDownButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    MoveToTopButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    MoveToLastButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
+    InsertButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+    }>;
 }
