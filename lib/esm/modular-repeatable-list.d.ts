@@ -1,17 +1,25 @@
 import React from "react";
-declare function RepeatableList<T>({ initialState, newItem, onChange, Card, Layout, }: ModularRepeatableListProps<T>): JSX.Element;
+import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
+declare function RepeatableList<T>({ initialState, newItem, onChange, Card, Layout, }: RepeatableListProps<T>): JSX.Element;
 export { RepeatableList };
-interface ModularRepeatableListProps<T> {
+interface RepeatableListProps<T> {
     initialState: T[];
     newItem: T;
     onChange?: (items: (T & {
         id: string;
     })[]) => void;
-    Card: React.FC<{
-        item: T;
-    }>;
-    Layout: React.FC<{
-        Cards: React.FC<{}>;
-        addItem: () => void;
-    }>;
+    Card: React.FC<CardProps<T>>;
+    Layout: React.FC<LayoutProps<T>>;
+}
+interface CardProps<T> {
+    item: T;
+    items: T[];
+    index: number;
+    removeItem: () => void;
+    moveItem: (from: number, to: number) => void;
+    dragHandleListeners?: SyntheticListenerMap;
+}
+interface LayoutProps<T> {
+    Cards: React.FC<{}>;
+    addItem: (item?: T) => void;
 }
