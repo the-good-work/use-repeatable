@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from "react";
 import { nanoid } from "nanoid";
-import { RepeatableList } from "./repeatable-list";
+import { RepeatableList } from "./modular-repeatable-list";
 
 import _ from "lodash";
 import { UpdateRepeatableAction } from "./types";
@@ -16,7 +16,7 @@ function useRepeatable<T>({
 }: {
   initialState?: T[];
   newItem: T;
-  onChange?: (items: T[]) => void;
+  onChange?: (items: (T & { id: string })[]) => void;
 }) {
   const fn = (
     _state: (T & { id: string })[],
