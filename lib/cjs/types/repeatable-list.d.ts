@@ -1,7 +1,6 @@
-import React from "react";
+/// <reference types="react" />
 import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
-declare function RepeatableList<T>({ initialState, newItem, onChange, Card, Layout, }: RepeatableListProps<T>): JSX.Element;
-export { RepeatableList };
+import { AddItem, MoveItem, RemoveAll, RemoveItem, UpdateItem } from "./use-repeatable";
 interface RepeatableListProps<T> {
     initialState: T[];
     newItem: T;
@@ -11,6 +10,11 @@ interface RepeatableListProps<T> {
     Card: React.FC<CardProps<T>>;
     Layout: React.FC<LayoutProps<T>>;
 }
+interface SortableCardProps<T> {
+    id: string;
+    Card: React.FC<CardProps<T>>;
+    cardProps: Omit<CardProps<T>, "dragHandleListeners">;
+}
 interface CardProps<T> {
     item: T & {
         id: string;
@@ -19,11 +23,11 @@ interface CardProps<T> {
         id: string;
     })[];
     index: number;
-    removeItem: (n: number) => void;
-    moveItem: (from: number, to: number) => void;
-    addItem: (item?: T, n?: number) => void;
-    updateItem: (n: number, item: T) => void;
-    removeAll: () => void;
+    removeItem: RemoveItem;
+    moveItem: MoveItem;
+    addItem: AddItem<T>;
+    updateItem: UpdateItem<T>;
+    removeAll: RemoveAll;
     dragHandleListeners?: SyntheticListenerMap;
     DragHandle?: React.FC<{
         children?: React.ReactNode;
@@ -52,11 +56,11 @@ interface LayoutProps<T> {
     items: (T & {
         id: string;
     })[];
-    removeItem: () => void;
-    moveItem: (from: number, to: number) => void;
-    addItem: (item?: T, n?: number) => void;
-    updateItem: (n: number, item: T) => void;
-    removeAll: () => void;
+    removeItem: RemoveItem;
+    moveItem: MoveItem;
+    addItem: AddItem<T>;
+    updateItem: UpdateItem<T>;
+    removeAll: RemoveAll;
     Cards: React.FC<{}>;
     AddButton?: React.FC<{
         children?: React.ReactNode;
@@ -71,3 +75,4 @@ interface LayoutProps<T> {
         className?: string;
     }>;
 }
+export { RepeatableListProps, SortableCardProps, CardProps, LayoutProps };

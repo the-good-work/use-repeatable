@@ -1,16 +1,14 @@
 import React from "react";
 
-export function RemoveButton({
+export function ClearButton({
   onClick,
   children,
-  removeItem,
-  index,
+  removeAll,
   className,
 }: {
   onClick?: () => void;
   children: React.ReactNode;
-  removeItem: (n: number) => void;
-  index: number;
+  removeAll: () => void;
   className?: string;
 }) {
   return (
@@ -19,9 +17,9 @@ export function RemoveButton({
         if (onClick) {
           onClick();
         }
-        removeItem(index);
+        removeAll();
       }}
-      className={`${className} repeatable-list__remove-item-button`}
+      className={`${className} repeatable-list__clear-all-button`}
     >
       {children}
     </button>

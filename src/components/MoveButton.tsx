@@ -36,7 +36,7 @@ export function MoveButton({
           moveItem(index, length - 1);
         }
       }}
-      className={`${className} repeatable-move-item-${direction}-button`}
+      className={`${className} repeatable-list__move-item-${direction}-button`}
     >
       {children}
     </button>

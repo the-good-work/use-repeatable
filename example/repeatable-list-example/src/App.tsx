@@ -10,8 +10,8 @@ function RepeatedItem({
   updateItem,
   index,
 }: {
-  item: Item;
-  updateItem: (n: number, item: Item) => void;
+  item: Item & { id: string };
+  updateItem: (index: number, item: Item) => void;
   index: number;
 }) {
   return (
@@ -20,13 +20,16 @@ function RepeatedItem({
         <div style={{ display: "flex", gap: "5px" }}>
           <label>Name:</label>
           <input
+            key={item.id}
             value={item.name}
             onChange={(e) => {
+              console.log(item.id);
               updateItem(index, { ...item, name: e.currentTarget.value });
             }}
           />
         </div>
         <span>Number: {item.number}</span>
+        <span>id: {item.id}</span>
       </div>
     </div>
   );
@@ -57,6 +60,7 @@ function App() {
           updateItem,
           moveItem,
           addItem,
+          removeAll,
           dragHandleListeners,
           DragHandle,
           AddButton,
@@ -121,7 +125,12 @@ function App() {
                 justifyContent: "space-between",
               }}
             >
-              <RepeatedItem updateItem={updateItem} item={item} index={index} />
+              <RepeatedItem
+                key={item.id}
+                updateItem={updateItem}
+                item={item}
+                index={index}
+              />
               <div
                 style={{
                   display: "flex",
@@ -145,11 +154,18 @@ function App() {
                 >
                   Insert Item Below
                 </button>
+                <button
+                  onClick={() => {
+                    removeAll();
+                  }}
+                >
+                  Clear all
+                </button>
               </div>
             </div>
           </div>
         )}
-        Layout={({ Cards, addItem, AddButton }) => (
+        Layout={({ Cards, addItem, AddButton, ClearButton }) => (
           <div>
             <h1>Example Repeatable List</h1>
             <Cards />
@@ -178,6 +194,7 @@ function App() {
               >
                 ADDDDD
               </AddButton>
+              <ClearButton>Remove All</ClearButton>
             </form>
           </div>
         )}
