@@ -26,30 +26,18 @@ interface CardProps<T> {
     AddButton?: React.FC<{
         children?: React.ReactNode;
         onClick?: () => void;
+        index?: number;
+        newItem?: T;
     }>;
     RemoveButton?: React.FC<{
         children?: React.ReactNode;
         onClick?: () => void;
+        index?: number;
     }>;
-    MoveUpButton?: React.FC<{
+    MoveButton?: React.FC<{
         children?: React.ReactNode;
         onClick?: () => void;
-    }>;
-    MoveDownButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-    }>;
-    MoveToTopButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-    }>;
-    MoveToLastButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-    }>;
-    InsertButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
+        direction: "up" | "down" | "top" | "bottom";
     }>;
 }
 interface LayoutProps<T> {
@@ -59,35 +47,10 @@ interface LayoutProps<T> {
     addItem: (item?: T, n?: number) => void;
     updateItem: (n: number, item: T) => void;
     Cards: React.FC<{}>;
-    DragHandle?: React.FC<{
-        children?: React.ReactNode;
-    }>;
     AddButton?: React.FC<{
         children?: React.ReactNode;
         onClick?: () => void;
-    }>;
-    RemoveButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-    }>;
-    MoveUpButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-    }>;
-    MoveDownButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-    }>;
-    MoveToTopButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-    }>;
-    MoveToLastButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-    }>;
-    InsertButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
+        index?: number;
+        newItem?: T;
     }>;
 }

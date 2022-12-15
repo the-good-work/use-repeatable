@@ -47,7 +47,7 @@ function App() {
     >
       <RepeatableList<Item>
         onChange={() => null}
-        newItem={{ name: "Test", number: "Blue" }}
+        newItem={{ name: "Test", number: "0" }}
         initialState={[]}
         Card={({
           item,
@@ -60,6 +60,8 @@ function App() {
           dragHandleListeners,
           DragHandle,
           AddButton,
+          RemoveButton,
+          MoveButton,
         }) => (
           <div
             style={{
@@ -97,7 +99,17 @@ function App() {
                   ≡
                 </span>
                 <DragHandle>≡</DragHandle>
-                <AddButton>ADD</AddButton>
+                <AddButton
+                  newItem={{ name: "1234", number: "11111" }}
+                  index={index + 1}
+                >
+                  ADD
+                </AddButton>
+                <RemoveButton index={items.length - 1}>REMOVE</RemoveButton>
+                <MoveButton direction="up">up</MoveButton>
+                <MoveButton direction="down">down</MoveButton>
+                <MoveButton direction="top">top</MoveButton>
+                <MoveButton direction="bottom">bottom</MoveButton>
               </div>
             </div>
 
