@@ -1,75 +1,12 @@
-import React from "react";
-import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
+/// <reference types="react" />
+import { RepeatableListProps } from "./types";
+/**
+ * A modular react component with built-in actions and functions that returns a repeatable list of items
+ * @param initialState - Define the initial state of the repeatable list
+ * @param newItem - Define the value of a newly added item in the repeatable list
+ * @param onChange - Function to update the repeatable list
+ * @param Card - Arrange the layout of the sub-components within the component
+ * @param Layout - Arrange the layout of the components within the `RepeatableList`
+ */
 declare function RepeatableList<T>({ initialState, newItem, onChange, Card, Layout, }: RepeatableListProps<T>): JSX.Element;
 export { RepeatableList };
-interface RepeatableListProps<T> {
-    initialState: (T & {
-        id: string;
-    })[];
-    newItem: T;
-    onChange?: (items: (T & {
-        id: string;
-    })[]) => void;
-    Card: React.FC<CardProps<T>>;
-    Layout: React.FC<LayoutProps<T>>;
-}
-interface CardProps<T> {
-    item: T & {
-        id: string;
-    };
-    items: (T & {
-        id: string;
-    })[];
-    index: number;
-    removeItem: (index: number) => void;
-    moveItem: (from: number, to: number) => void;
-    addItem: (item?: T, index?: number) => void;
-    updateItem: (index: number, item: T) => void;
-    removeAll: () => void;
-    dragHandleListeners?: SyntheticListenerMap;
-    DragHandle?: React.FC<{
-        children?: React.ReactNode;
-    }>;
-    AddButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-        index?: number;
-        newItem?: T;
-        className?: string;
-    }>;
-    RemoveButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-        index?: number;
-        className?: string;
-    }>;
-    MoveButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-        direction: "up" | "down" | "top" | "bottom";
-        className?: string;
-    }>;
-}
-interface LayoutProps<T> {
-    items: (T & {
-        id: string;
-    })[];
-    removeItem: (index: number) => void;
-    moveItem: (from: number, to: number) => void;
-    addItem: (item?: T, index?: number) => void;
-    updateItem: (index: number, item: T) => void;
-    removeAll: () => void;
-    Cards: React.FC<{}>;
-    AddButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-        index?: number;
-        newItem?: T;
-        className?: string;
-    }>;
-    ClearButton?: React.FC<{
-        children?: React.ReactNode;
-        onClick?: () => void;
-        className?: string;
-    }>;
-}

@@ -16,12 +16,20 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
 import { AddButton } from "./components/AddButton";
 import { RemoveButton } from "./components/RemoveButton";
 import { MoveButton } from "./components/MoveButton";
 import { ClearButton } from "./components/ClearButton";
+import { RepeatableListProps, SortableCardProps } from "./types";
 
+/**
+ * A modular react component with built-in actions and functions that returns a repeatable list of items
+ * @param initialState - Define the initial state of the repeatable list
+ * @param newItem - Define the value of a newly added item in the repeatable list
+ * @param onChange - Function to update the repeatable list
+ * @param Card - Arrange the layout of the sub-components within the component
+ * @param Layout - Arrange the layout of the components within the `RepeatableList`
+ */
 function RepeatableList<T>({
   initialState,
   newItem,
@@ -54,117 +62,108 @@ function RepeatableList<T>({
   );
 
   return (
-    <div className="repeatable-list__wrapper">
-      <Layout
-        items={items}
-        addItem={addItem}
-        removeItem={removeItem}
-        moveItem={moveItem}
-        updateItem={updateItem}
-        removeAll={removeAll}
-        AddButton={({ onClick, children, index, newItem, className }) => (
-          <AddButton
-            onClick={onClick}
-            children={children}
-            addItem={addItem}
-            index={index}
-            newItem={newItem}
-            length={items.length}
-            className={className}
-          />
-        )}
-        ClearButton={({ onClick, children, className }) => (
-          <ClearButton
-            onClick={onClick}
-            children={children}
-            className={className}
-            removeAll={removeAll}
-          />
-        )}
-        Cards={() => (
-          <div className="repeatable-list__cards">
-            <DndContext
-              sensors={sensors}
-              collisionDetection={closestCenter}
-              onDragEnd={handleDragEnd}
+    <Layout
+      items={items}
+      addItem={addItem}
+      removeItem={removeItem}
+      moveItem={moveItem}
+      updateItem={updateItem}
+      removeAll={removeAll}
+      AddButton={({ onClick, children, index, newItem, className }) => (
+        <AddButton
+          onClick={onClick}
+          children={children}
+          addItem={addItem}
+          index={index || items.length - 1}
+          newItem={newItem}
+          className={className}
+        />
+      )}
+      ClearButton={({ onClick, children, className }) => (
+        <ClearButton
+          onClick={onClick}
+          children={children}
+          className={className}
+          removeAll={removeAll}
+        />
+      )}
+      Cards={() => (
+        <div className="repeatable-list__cards">
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
+          >
+            <SortableContext
+              items={items}
+              strategy={verticalListSortingStrategy}
             >
-              <SortableContext
-                items={items}
-                strategy={verticalListSortingStrategy}
-              >
-                {items.map((item, n) => (
-                  <SortableCard
-                    key={item.id}
-                    id={item.id}
-                    Card={Card}
-                    cardProps={{
-                      // Props
-                      item,
-                      items,
-                      index: n,
-                      removeItem,
-                      moveItem,
-                      addItem,
-                      updateItem,
-                      removeAll,
+              {items.map((item, n) => (
+                <SortableCard
+                  key={item.id}
+                  id={item.id}
+                  Card={Card}
+                  cardProps={{
+                    // Props
+                    item,
+                    items,
+                    index: n,
+                    removeItem,
+                    moveItem,
+                    addItem,
+                    updateItem,
+                    removeAll,
 
-                      // Components
-                      AddButton: ({
-                        onClick,
-                        children,
-                        index,
-                        newItem,
-                        className,
-                      }) => (
-                        <AddButton
-                          onClick={onClick}
-                          children={children}
-                          addItem={addItem}
-                          index={index}
-                          newItem={newItem}
-                          length={items.length}
-                          className={className}
-                        />
-                      ),
-                      RemoveButton: ({
-                        onClick,
-                        children,
-                        index,
-                        className,
-                      }) => (
-                        <RemoveButton
-                          onClick={onClick}
-                          children={children}
-                          removeItem={removeItem}
-                          index={index || n}
-                          className={className}
-                        />
-                      ),
-                      MoveButton: ({
-                        onClick,
-                        children,
-                        direction,
-                        className,
-                      }) => (
-                        <MoveButton
-                          direction={direction}
-                          onClick={onClick}
-                          children={children}
-                          moveItem={moveItem}
-                          index={n}
-                          length={items.length}
-                          className={className}
-                        />
-                      ),
-                    }}
-                  />
-                ))}
-              </SortableContext>
-            </DndContext>
-          </div>
-        )}
-      />
-    </div>
+                    // Components
+                    AddButton: ({
+                      onClick,
+                      children,
+                      index,
+                      newItem,
+                      className,
+                    }) => (
+                      <AddButton
+                        onClick={onClick}
+                        children={children}
+                        addItem={addItem}
+                        index={index || items.length - 1}
+                        newItem={newItem || item}
+                        className={className}
+                      />
+                    ),
+                    RemoveButton: ({ onClick, children, index, className }) => (
+                      <RemoveButton
+                        onClick={onClick}
+                        children={children}
+                        removeItem={removeItem}
+                        index={index || n}
+                        className={className}
+                      />
+                    ),
+                    MoveButton: ({
+                      onClick,
+                      children,
+                      direction,
+                      className,
+                    }) => (
+                      <MoveButton
+                        direction={direction}
+                        onClick={onClick}
+                        children={children}
+                        moveItem={moveItem}
+                        index={n}
+                        length={items.length}
+                        className={className}
+                      />
+                    ),
+                  }}
+                />
+              ))}
+            </SortableContext>
+          </DndContext>
+        </div>
+      )}
+    />
   );
 }
 
@@ -181,10 +180,16 @@ function SortableCard<T>({ id, Card, cardProps }: SortableCardProps<T>) {
     >
       <Card
         {...cardProps}
-        DragHandle={({ children }: { children: React.ReactNode }) => (
+        DragHandle={({
+          children,
+          className,
+        }: {
+          children: React.ReactNode;
+          className: string;
+        }) => (
           <div
             style={{ cursor: "grab" }}
-            className="repeatable-list__drag-handle"
+            className={`${className} repeatable-list__drag-handle`}
             {...listeners}
           >
             {children}
@@ -197,77 +202,3 @@ function SortableCard<T>({ id, Card, cardProps }: SortableCardProps<T>) {
 }
 
 export { RepeatableList };
-
-interface RepeatableListProps<T> {
-  initialState: (T & { id: string })[];
-  newItem: T;
-  onChange?: (items: (T & { id: string })[]) => void;
-  Card: React.FC<CardProps<T>>;
-  Layout: React.FC<LayoutProps<T>>;
-}
-
-interface SortableCardProps<T> {
-  id: string;
-  Card: React.FC<CardProps<T>>;
-  cardProps: Omit<CardProps<T>, "dragHandleListeners">;
-}
-
-interface CardProps<T> {
-  // Props
-  item: T & { id: string };
-  items: (T & { id: string })[];
-  index: number;
-  removeItem: (index: number) => void;
-  moveItem: (from: number, to: number) => void;
-  addItem: (item?: T, index?: number) => void;
-  updateItem: (index: number, item: T) => void;
-  removeAll: () => void;
-  dragHandleListeners?: SyntheticListenerMap;
-
-  // Pre-made components
-  DragHandle?: React.FC<{ children?: React.ReactNode }>;
-  AddButton?: React.FC<{
-    children?: React.ReactNode;
-    onClick?: () => void;
-    index?: number;
-    newItem?: T;
-    className?: string;
-  }>;
-  RemoveButton?: React.FC<{
-    children?: React.ReactNode;
-    onClick?: () => void;
-    index?: number;
-    className?: string;
-  }>;
-  MoveButton?: React.FC<{
-    children?: React.ReactNode;
-    onClick?: () => void;
-    direction: "up" | "down" | "top" | "bottom";
-    className?: string;
-  }>;
-}
-
-interface LayoutProps<T> {
-  // Props
-  items: (T & { id: string })[];
-  removeItem: (index: number) => void;
-  moveItem: (from: number, to: number) => void;
-  addItem: (item?: T, index?: number) => void;
-  updateItem: (index: number, item: T) => void;
-  removeAll: () => void;
-
-  // Components
-  Cards: React.FC<{}>;
-  AddButton?: React.FC<{
-    children?: React.ReactNode;
-    onClick?: () => void;
-    index?: number;
-    newItem?: T;
-    className?: string;
-  }>;
-  ClearButton?: React.FC<{
-    children?: React.ReactNode;
-    onClick?: () => void;
-    className?: string;
-  }>;
-}

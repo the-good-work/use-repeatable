@@ -6,15 +6,13 @@ export function AddButton<T>({
   addItem,
   index,
   newItem,
-  length,
   className,
 }: {
   onClick?: () => void;
   children?: React.ReactNode;
   addItem: (item?: T, n?: number) => void;
-  index?: number;
-  newItem?: T;
-  length: number;
+  index: number;
+  newItem: T;
   className?: string;
 }) {
   return (
@@ -23,11 +21,8 @@ export function AddButton<T>({
         if (onClick) {
           onClick();
         }
-        if (newItem) {
-          addItem(newItem, index || length - 1);
-        } else {
-          addItem();
-        }
+
+        addItem(newItem, index);
       }}
       className={`${className} repeatable-list__add-item-button`}
     >

@@ -1,5 +1,5 @@
 /**
- * Adds item `item` into the list at position `index`
+ * Add `item` into the list at position `index`
  * @param item - Value of item to be added
  * @param index - The index number which the new item will be added to
  */
@@ -29,7 +29,7 @@ type UpdateItem<T> = (index: number, item: T & {
 type RemoveAll = () => void;
 interface RepeatableReturnProps<T> {
     /**
-     * Adds item `item` into the list at position `index`
+     * Add `item` into the list at position `index`
      * @param item - Value of item to be added
      * @param index - The index number which the new item will be added to
      */
