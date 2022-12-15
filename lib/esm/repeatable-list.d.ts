@@ -1,9 +1,12 @@
-/** @jsxImportSource @emotion/react */
-import { ReactNode } from "react";
+/// <reference types="react" />
 import { RepeatableListProps } from "./types";
-declare const RepeatableList: <T extends {}>(props: RepeatableListProps<T> & {
-    children?: (({ test }: {
-        test: string;
-    }) => ReactNode) | undefined;
-}) => import("@emotion/react/jsx-runtime").JSX.Element;
+/**
+ * A modular react component with built-in actions and functions that returns a repeatable list of items
+ * @param initialState - Define the initial state of the repeatable list
+ * @param newItem - Define the value of a newly added item in the repeatable list
+ * @param onChange - Function to update the repeatable list
+ * @param Card - Arrange the layout of the sub-components within the component
+ * @param Layout - Arrange the layout of the components within the `RepeatableList`
+ */
+declare function RepeatableList<T>({ initialState, newItem, onChange, Card, Layout, }: RepeatableListProps<T>): JSX.Element;
 export { RepeatableList };

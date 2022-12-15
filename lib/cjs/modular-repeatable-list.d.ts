@@ -12,14 +12,62 @@ interface RepeatableListProps<T> {
     Layout: React.FC<LayoutProps<T>>;
 }
 interface CardProps<T> {
-    item: T;
-    items: T[];
+    item: T & {
+        id: string;
+    };
+    items: (T & {
+        id: string;
+    })[];
     index: number;
-    removeItem: () => void;
+    removeItem: (n: number) => void;
     moveItem: (from: number, to: number) => void;
+    addItem: (item?: T, n?: number) => void;
+    updateItem: (n: number, item: T) => void;
+    removeAll: () => void;
     dragHandleListeners?: SyntheticListenerMap;
+    DragHandle?: React.FC<{
+        children?: React.ReactNode;
+    }>;
+    AddButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+        index?: number;
+        newItem?: T;
+        className?: string;
+    }>;
+    RemoveButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+        index?: number;
+        className?: string;
+    }>;
+    MoveButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+        direction: "up" | "down" | "top" | "bottom";
+        className?: string;
+    }>;
 }
 interface LayoutProps<T> {
+    items: (T & {
+        id: string;
+    })[];
+    removeItem: () => void;
+    moveItem: (from: number, to: number) => void;
+    addItem: (item?: T, n?: number) => void;
+    updateItem: (n: number, item: T) => void;
+    removeAll: () => void;
     Cards: React.FC<{}>;
-    addItem: (item?: T) => void;
+    AddButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+        index?: number;
+        newItem?: T;
+        className?: string;
+    }>;
+    ClearButton?: React.FC<{
+        children?: React.ReactNode;
+        onClick?: () => void;
+        className?: string;
+    }>;
 }
