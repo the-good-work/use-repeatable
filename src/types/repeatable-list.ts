@@ -186,7 +186,7 @@ interface LayoutProps<T> {
    */
   removeAll: () => void;
   /**
-   * An array of repeatable items
+   * An array of repeatable items with ids
    */
   items: (T & { id: string })[];
 
