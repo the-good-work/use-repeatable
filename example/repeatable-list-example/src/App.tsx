@@ -1,4 +1,4 @@
-import { RepeatableList } from "@thegoodwork/use-repeatable";
+import { RepeatableList, useRepeatable } from "@thegoodwork/use-repeatable";
 
 type Item = {
   name: string;
@@ -36,6 +36,11 @@ function RepeatedItem({
 }
 
 function App() {
+  const { addItem, items, removeAll, removeItem, updateItem, moveItem } =
+    useRepeatable({
+      newItem: "hello",
+    });
+  console.log(addItem);
   return (
     <div
       className="App"

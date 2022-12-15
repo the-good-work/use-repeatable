@@ -3,7 +3,9 @@ import { SyntheticListenerMap } from "@dnd-kit/core/dist/hooks/utilities";
 declare function RepeatableList<T>({ initialState, newItem, onChange, Card, Layout, }: RepeatableListProps<T>): JSX.Element;
 export { RepeatableList };
 interface RepeatableListProps<T> {
-    initialState: T[];
+    initialState: (T & {
+        id: string;
+    })[];
     newItem: T;
     onChange?: (items: (T & {
         id: string;
@@ -19,10 +21,10 @@ interface CardProps<T> {
         id: string;
     })[];
     index: number;
-    removeItem: (n: number) => void;
+    removeItem: (index: number) => void;
     moveItem: (from: number, to: number) => void;
-    addItem: (item?: T, n?: number) => void;
-    updateItem: (n: number, item: T) => void;
+    addItem: (item?: T, index?: number) => void;
+    updateItem: (index: number, item: T) => void;
     removeAll: () => void;
     dragHandleListeners?: SyntheticListenerMap;
     DragHandle?: React.FC<{
@@ -52,10 +54,10 @@ interface LayoutProps<T> {
     items: (T & {
         id: string;
     })[];
-    removeItem: () => void;
+    removeItem: (index: number) => void;
     moveItem: (from: number, to: number) => void;
-    addItem: (item?: T, n?: number) => void;
-    updateItem: (n: number, item: T) => void;
+    addItem: (item?: T, index?: number) => void;
+    updateItem: (index: number, item: T) => void;
     removeAll: () => void;
     Cards: React.FC<{}>;
     AddButton?: React.FC<{

@@ -1,12 +1,18 @@
 import { useEffect, useReducer } from "react";
 import { nanoid } from "nanoid";
 import _ from "lodash";
-import { UpdateRepeatableAction } from "./types";
+import { UpdateRepeatableAction, RepeatableReturnProps } from "./types";
 
 const resetIndex = (a: any) => {
   return { ...a, id: nanoid() };
 };
 
+/**
+ * A hook with built-in actions that can mutate a list of repeatable items
+ * @param newItem - Define the value of a newly added item in the repeatable list
+ * @param initialState - Define the initial state of the repeatable list
+ * @param onChange - Function to update the repeatable list
+ */
 function useRepeatable<T>({
   initialState,
   newItem,
@@ -21,7 +27,7 @@ function useRepeatable<T>({
     action: UpdateRepeatableAction<T>
   ) => {
     if (action.type === "update-item") {
-      if (action.n < 0 || action.n > _state.length - 1) {
+      if (action.index < 0 || action.index > _state.length - 1) {
         throw new Error("Invalid index");
       }
       if (!action.item) {
@@ -29,15 +35,18 @@ function useRepeatable<T>({
       }
       const __state = [..._state];
 
-      __state[action.n] = { ...action.item, id: __state[action.n].id };
+      __state[action.index] = { ...action.item, id: __state[action.index].id };
       return __state;
     }
     if (action.type === "add-item") {
       const newId = nanoid();
       if (action.item !== undefined) {
-        if (action.n && !(action.n < 0 || action.n > _state.length)) {
+        if (
+          action.index &&
+          !(action.index < 0 || action.index > _state.length)
+        ) {
           const __state = [..._state];
-          __state.splice(action.n, 0, { ...action.item, id: newId });
+          __state.splice(action.index, 0, { ...action.item, id: newId });
           return __state;
         }
         return [..._state, { ...action.item, id: newId }];
@@ -45,9 +54,9 @@ function useRepeatable<T>({
       return [..._state, { ...newItem, id: newId }];
     }
     if (action.type === "remove-item") {
-      if (action.n !== undefined && Number(action.n) > -1) {
-        if (action.n < _state.length) {
-          return _state.filter((_i, n) => n !== action.n);
+      if (action.index !== undefined && Number(action.index) > -1) {
+        if (action.index < _state.length) {
+          return _state.filter((_i, n) => n !== action.index);
         } else {
           return _state.filter((_i, n, a) => n < a.length - 1);
         }
@@ -84,20 +93,20 @@ function useRepeatable<T>({
     onChange(items);
   }, [items]);
 
-  const addItem = (item?: T, n?: number) => {
+  const addItem = (item?: T, index?: number) => {
     if (item) {
       const itemWithTempId: T & { id: string } = { ...item, id: "" };
-      updateItems({ type: "add-item", item: itemWithTempId, n });
+      updateItems({ type: "add-item", item: itemWithTempId, index });
     } else {
       updateItems({ type: "add-item" });
     }
   };
 
-  const removeItem = (n?: number) => {
-    if (n === undefined && items.length > 0) {
-      updateItems({ type: "remove-item", n: items.length - 1 });
-    } else if (n !== undefined && n > -1 && items.length > n) {
-      updateItems({ type: "remove-item", n });
+  const removeItem = (index?: number) => {
+    if (index === undefined && items.length > 0) {
+      updateItems({ type: "remove-item", index: items.length - 1 });
+    } else if (index !== undefined && index > -1 && items.length > index) {
+      updateItems({ type: "remove-item", index });
     } else {
       // do nothing
     }
@@ -107,15 +116,24 @@ function useRepeatable<T>({
     updateItems({ type: "move-item", from, to });
   };
 
-  const updateItem = (n: number, item: T) => {
-    updateItems({ type: "update-item", n, item });
+  const updateItem = (index: number, item: T) => {
+    updateItems({ type: "update-item", index, item });
   };
 
   const removeAll = () => {
     updateItems({ type: "remove-all" });
   };
 
-  return { items, addItem, removeItem, moveItem, updateItem, removeAll };
+  const repeatable: RepeatableReturnProps<T> = {
+    items,
+    addItem,
+    removeItem,
+    moveItem,
+    updateItem,
+    removeAll,
+  };
+
+  return repeatable;
 }
 
 export { useRepeatable };

@@ -5,6 +5,7 @@ import {
   UpdateItem,
   RemoveAll,
   UpdateRepeatableAction,
+  RepeatableReturnProps,
 } from "./use-repeatable";
 
 import {
@@ -21,6 +22,7 @@ export type {
   UpdateItem,
   RemoveAll,
   UpdateRepeatableAction,
+  RepeatableReturnProps,
   RepeatableListProps,
   SortableCardProps,
   CardProps,
