@@ -26,8 +26,8 @@ import { RepeatableListProps, SortableCardProps } from "./types";
  * A modular react component with built-in actions and functions that returns a repeatable list of items
  * @param initialState - Define the initial state of the repeatable list
  * @param newItem - Define the value of a newly added item in the repeatable list
- * @param onChange - Function to update the repeatable list
- * @param Card - Arrange the layout of the sub-components within the component
+ * @param onChange - Called with updated items whenever list is updated
+ * @param Card - Layout of an individual card
  * @param Layout - Arrange the layout of the components within the `RepeatableList`
  */
 function RepeatableList<T>({
@@ -61,113 +61,133 @@ function RepeatableList<T>({
     useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
   );
 
-  return (
-    <Layout
-      items={items}
-      addItem={addItem}
-      removeItem={removeItem}
-      moveItem={moveItem}
-      updateItem={updateItem}
-      removeAll={removeAll}
-      AddButton={({ onClick, children, index, newItem, className }) => (
-        <AddButton
-          onClick={onClick}
-          children={children}
-          addItem={addItem}
-          index={index || items.length - 1}
-          newItem={newItem}
-          className={className}
-        />
-      )}
-      ClearButton={({ onClick, children, className }) => (
+  return Layout({
+    items,
+    addItem,
+    removeItem,
+    moveItem,
+    updateItem,
+    removeAll,
+    AddButton: ({ index, onClick }) => (
+      <div onClick={onClick}>Hello {index}</div>
+    ),
+    ClearButton: ({ children, onClick, className }) => (
+      <div>
         <ClearButton
-          onClick={onClick}
+          removeAll={removeAll}
           children={children}
           className={className}
-          removeAll={removeAll}
+          onClick={onClick}
         />
-      )}
-      Cards={() => (
-        <div className="repeatable-list__cards">
-          <DndContext
-            sensors={sensors}
-            collisionDetection={closestCenter}
-            onDragEnd={handleDragEnd}
-          >
-            <SortableContext
-              items={items}
-              strategy={verticalListSortingStrategy}
-            >
-              {items.map((item, n) => (
-                <SortableCard
-                  key={item.id}
-                  id={item.id}
-                  Card={Card}
-                  cardProps={{
-                    // Props
-                    item,
-                    items,
-                    index: n,
-                    removeItem,
-                    moveItem,
-                    addItem,
-                    updateItem,
-                    removeAll,
+      </div>
+    ),
+    Cards: Cards({
+      sensors,
+      closestCenter,
+      handleDragEnd,
+      items,
+      verticalListSortingStrategy,
+      Card: Card,
 
-                    // Components
-                    AddButton: ({
-                      onClick,
-                      children,
-                      index,
-                      newItem,
-                      className,
-                    }) => (
-                      <AddButton
-                        onClick={onClick}
-                        children={children}
-                        addItem={addItem}
-                        index={index || items.length - 1}
-                        newItem={newItem || item}
-                        className={className}
-                      />
-                    ),
-                    RemoveButton: ({ onClick, children, index, className }) => (
-                      <RemoveButton
-                        onClick={onClick}
-                        children={children}
-                        removeItem={removeItem}
-                        index={index || n}
-                        className={className}
-                      />
-                    ),
-                    MoveButton: ({
-                      onClick,
-                      children,
-                      direction,
-                      className,
-                    }) => (
-                      <MoveButton
-                        direction={direction}
-                        onClick={onClick}
-                        children={children}
-                        moveItem={moveItem}
-                        index={n}
-                        length={items.length}
-                        className={className}
-                      />
-                    ),
-                  }}
-                />
-              ))}
-            </SortableContext>
-          </DndContext>
-        </div>
-      )}
-    />
+      removeItem,
+      moveItem,
+      addItem,
+      updateItem,
+      removeAll,
+    }),
+  });
+}
+
+function Cards({
+  sensors,
+  closestCenter,
+  handleDragEnd,
+  items,
+  verticalListSortingStrategy,
+  Card,
+
+  removeItem,
+  moveItem,
+  addItem,
+  updateItem,
+  removeAll,
+}: any) {
+  return (
+    <div className="repeatable-list__cards">
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext items={items} strategy={verticalListSortingStrategy}>
+          {items.map((item: any, n: number) => (
+            <SortableCard
+              key={item.id}
+              id={item.id}
+              Card={Card}
+              cardProps={{
+                // Props
+                item,
+                items,
+                index: n,
+                removeItem,
+                moveItem,
+                addItem,
+                updateItem,
+                removeAll,
+
+                // Components
+                AddButton: ({
+                  onClick,
+                  children,
+                  index,
+                  newItem,
+                  className,
+                }) => (
+                  <AddButton
+                    onClick={onClick}
+                    children={children}
+                    addItem={addItem}
+                    index={index || items.length - 1}
+                    newItem={newItem || item}
+                    className={className}
+                  />
+                ),
+                RemoveButton: ({ onClick, children, index, className }) => (
+                  <RemoveButton
+                    onClick={onClick}
+                    children={children}
+                    removeItem={removeItem}
+                    index={index || n}
+                    className={className}
+                  />
+                ),
+
+                MoveButton: ({ onClick, children, direction, className }) => (
+                  <MoveButton
+                    direction={direction}
+                    onClick={onClick}
+                    children={children}
+                    moveItem={moveItem}
+                    index={n}
+                    length={items.length}
+                    className={className}
+                  />
+                ),
+              }}
+            />
+          ))}
+        </SortableContext>
+      </DndContext>
+    </div>
   );
 }
 
-function SortableCard<T>({ id, Card, cardProps }: SortableCardProps<T>) {
+const SortableCard = function <T>({
+  id,
+  Card,
+  cardProps,
+}: SortableCardProps<T>) {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: id });
 
@@ -178,9 +198,9 @@ function SortableCard<T>({ id, Card, cardProps }: SortableCardProps<T>) {
       {...attributes}
       style={{ transform: CSS.Transform.toString(transform), transition }}
     >
-      <Card
-        {...cardProps}
-        DragHandle={({
+      {Card({
+        ...cardProps,
+        DragHandle: ({
           children,
           className,
         }: {
@@ -194,11 +214,11 @@ function SortableCard<T>({ id, Card, cardProps }: SortableCardProps<T>) {
           >
             {children}
           </div>
-        )}
-        dragHandleListeners={listeners}
-      />
+        ),
+        dragHandleListeners: listeners,
+      })}
     </div>
   );
-}
+};
 
 export { RepeatableList };

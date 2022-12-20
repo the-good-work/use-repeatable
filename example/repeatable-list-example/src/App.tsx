@@ -1,13 +1,15 @@
 import { RepeatableList } from "@thegoodwork/use-repeatable";
+import { CardProps, LayoutProps } from "../../../lib/esm/types";
 
 type Item = {
   name: string;
+  age: number;
   number: string;
 };
 
-const newItem: Item = { name: "John Doe", number: "0" };
+const newItem: Item = { name: "John Doe", number: "0", age: 48 };
 
-function RepeatedItem({
+const ItemCard = function ({
   item,
   updateItem,
   index,
@@ -22,10 +24,9 @@ function RepeatedItem({
         <div style={{ display: "flex", gap: "5px" }}>
           <label>Name:</label>
           <input
-            key={item.id}
+            key={`input_${item.id}`}
             value={item.name}
             onChange={(e) => {
-              console.log(item.id);
               updateItem(index, { ...item, name: e.currentTarget.value });
             }}
           />
@@ -35,7 +36,7 @@ function RepeatedItem({
       </div>
     </div>
   );
-}
+};
 
 function App() {
   return (
@@ -53,101 +54,20 @@ function App() {
     >
       <RepeatableList<Item>
         onChange={() => null}
-        newItem={{ name: "Test", number: "0" }}
+        newItem={{ name: "Test", number: Math.random().toFixed(2), age: 32 }}
         initialState={[]}
-        Card={({
-          item,
-          items,
-          index,
-          updateItem,
-          DragHandle,
-          AddButton,
-          RemoveButton,
-          MoveButton,
-        }) => (
-          <div
-            style={{
-              borderRadius: "10px",
-              border: "1px solid black",
-              padding: "25px",
-              boxSizing: "border-box",
-              marginBottom: "10px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                width: "100%",
-                alignItems: "start",
-                justifyContent: "start",
-                marginBottom: "10px",
-                gap: "5px",
-              }}
-            >
-              <DragHandle>≡</DragHandle>
-              <div
-                style={{
-                  display: "flex",
-                  gap: "5px",
-                  alignItems: "start",
-                  flexDirection: "column",
-                }}
-              >
-                <h3 style={{ margin: 0 }}>
-                  Item {index + 1} / {items.length} {item.name}
-                </h3>
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "5px",
-                    alignItems: "start",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <RepeatedItem
-                    key={item.id}
-                    updateItem={updateItem}
-                    item={item}
-                    index={index}
-                  />
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "5px",
-                  alignItems: "start",
-                }}
-              >
-                <AddButton newItem={newItem} index={index + 1}>
-                  Insert Item Below
-                </AddButton>
-                <AddButton newItem={item} index={index + 1}>
-                  Duplicate Item
-                </AddButton>
-                <RemoveButton>Remove Item</RemoveButton>
-                <MoveButton direction="up">Move Up</MoveButton>
-                <MoveButton direction="down">Move Down</MoveButton>
-                <MoveButton direction="top">Move to Top</MoveButton>
-                <MoveButton direction="bottom">Move to Bottom</MoveButton>
-              </div>
-            </div>
-          </div>
-        )}
-        Layout={({ Cards, AddButton, ClearButton }) => (
+        Card={MyCard}
+        Layout={({ Cards, addItem, ClearButton }) => (
           <div>
             <h1>With Preset Buttons</h1>
-            <Cards />
-            <AddButton
+            {Cards}
+            <button
               onClick={() => {
-                console.log(
-                  "Additional actions can be added using onClick prop"
-                );
+                addItem();
               }}
             >
-              Add Item
-            </AddButton>
+              Test
+            </button>
             <ClearButton>Remove All</ClearButton>
           </div>
         )}
@@ -155,7 +75,7 @@ function App() {
 
       <RepeatableList<Item>
         onChange={() => null}
-        newItem={{ name: "Test", number: "0" }}
+        newItem={{ name: "Test", number: "0", age: 45 }}
         initialState={[]}
         Card={({
           item,
@@ -210,7 +130,7 @@ function App() {
                 justifyContent: "space-between",
               }}
             >
-              <RepeatedItem
+              <ItemCard
                 key={item.id}
                 updateItem={updateItem}
                 item={item}
@@ -239,7 +159,10 @@ function App() {
 
                 <button
                   onClick={() =>
-                    addItem({ name: "Inserted", number: "Inserted" }, index + 1)
+                    addItem(
+                      { name: "Inserted", number: "Inserted", age: 38 },
+                      index + 1
+                    )
                   }
                 >
                   Insert Item Below
@@ -251,42 +174,123 @@ function App() {
             </div>
           </div>
         )}
-        Layout={({ Cards, addItem, removeAll }) => (
-          <div>
-            <h1>With Customised Buttons</h1>
-            <Cards />
-
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              style={{ marginTop: "25px" }}
-            >
-              <input type="text" id="names" placeholder="Add a name" />
-              <button
-                onClick={() =>
-                  addItem({
-                    name:
-                      (document.querySelector("#names") as HTMLInputElement)
-                        ?.value || "John Doe",
-                    number: (Math.random() * 5).toFixed(3),
-                  })
-                }
-              >
-                Add Item With Text
-              </button>
-
-              <button
-                onClick={() => {
-                  removeAll();
-                }}
-              >
-                Remove All
-              </button>
-            </form>
-          </div>
-        )}
+        Layout={MyLayout}
       />
     </div>
   );
 }
 
 export default App;
+
+const MyCard = ({
+  item,
+  items,
+  index,
+  updateItem,
+  DragHandle,
+  AddButton,
+  RemoveButton,
+  MoveButton,
+}: CardProps<Item>) => (
+  <div
+    style={{
+      borderRadius: "10px",
+      border: "1px solid black",
+      padding: "25px",
+      boxSizing: "border-box",
+      marginBottom: "10px",
+    }}
+  >
+    <div
+      style={{
+        display: "flex",
+        width: "100%",
+        alignItems: "start",
+        justifyContent: "start",
+        marginBottom: "10px",
+        gap: "5px",
+      }}
+    >
+      <DragHandle>≡</DragHandle>
+      <div
+        style={{
+          display: "flex",
+          gap: "5px",
+          alignItems: "start",
+          flexDirection: "column",
+        }}
+      >
+        <h3 style={{ margin: 0 }}>
+          Item {index + 1} / {items.length} {item.name}
+        </h3>
+        <div
+          style={{
+            display: "flex",
+            gap: "5px",
+            alignItems: "start",
+            justifyContent: "space-between",
+          }}
+        >
+          <ItemCard
+            key={item.id}
+            updateItem={updateItem}
+            item={item}
+            index={index}
+          />
+        </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "5px",
+          alignItems: "start",
+        }}
+      >
+        <AddButton newItem={newItem} index={index + 1}>
+          Insert Item Below
+        </AddButton>
+        <AddButton newItem={item} index={index + 1}>
+          Duplicate Item
+        </AddButton>
+        <RemoveButton>Remove Item</RemoveButton>
+        <MoveButton direction="up">Move Up</MoveButton>
+        <MoveButton direction="down">Move Down</MoveButton>
+        <MoveButton direction="top">Move to Top</MoveButton>
+        <MoveButton direction="bottom">Move to Bottom</MoveButton>
+      </div>
+    </div>
+  </div>
+);
+
+const MyLayout = ({ Cards, addItem, removeAll }: LayoutProps<Item>) => (
+  <div>
+    <h1>With Customised Buttons</h1>
+    {Cards}
+
+    <form onSubmit={(e) => e.preventDefault()} style={{ marginTop: "25px" }}>
+      <input type="text" id="names" placeholder="Add a name" />
+      <button
+        onClick={() =>
+          addItem({
+            name:
+              (document.querySelector("#names") as HTMLInputElement)?.value ||
+              "John Doe",
+            number: (Math.random() * 5).toFixed(3),
+            age: 32,
+          })
+        }
+      >
+        Add Item With Text
+      </button>
+
+      <button
+        onClick={() => {
+          removeAll();
+        }}
+      >
+        Remove All
+      </button>
+    </form>
+  </div>
+);

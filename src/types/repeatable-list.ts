@@ -194,7 +194,7 @@ interface LayoutProps<T> {
   /**
    * Renders a list of `Card` component
    */
-  Cards: React.FC<{}>;
+  Cards: React.ReactElement | React.ReactElement[];
   /**
    * A pre-made "add item" button
    * @param children - Children to be rendered on the button
