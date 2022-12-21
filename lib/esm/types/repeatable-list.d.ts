@@ -4,7 +4,7 @@ interface RepeatableListProps<T> {
     /**
      * Define the initial state of the repeatable list
      */
-    initialState: T[];
+    initialState?: T[];
     /**
      * Define the value of a newly added item in the repeatable list
      */
