@@ -5,6 +5,7 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import styles from "./index.module.css";
+import { CopyBlock, dracula, atomOneLight } from "react-code-blocks";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -87,7 +88,14 @@ export default function Home(): JSX.Element {
         <section className={styles.npmSection}>
           <div className={styles.brickBackground}>
             <div className={styles.npmContainer}>
-              <h6>npm install @thegoodwork/use-repeatable</h6>
+              <CopyBlock
+                theme={atomOneLight}
+                showLineNumbers={true}
+                text={`npm install @thegoodwork/use-repeatable
+npm run start`}
+                language={`bash`}
+                codeBlock
+              />
             </div>
           </div>
         </section>
