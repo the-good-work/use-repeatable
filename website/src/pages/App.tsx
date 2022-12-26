@@ -1,7 +1,5 @@
 import React from "react";
-import clsx from "clsx";
 import peterDragon from "@site/static/img/peter-dragon-black.svg";
-import styles from "./App.module.css";
 
 export default function App() {
   return (

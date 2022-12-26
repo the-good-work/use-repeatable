@@ -33,8 +33,33 @@ export default function Home(): JSX.Element {
       title={`useRepeater ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
-      {/* <HomepageHeader /> */}
       <main>
+        <section className={styles.splash}>
+          <div className={styles.clouds}>
+            <div className={styles.textColumn}>
+              <div className={styles.splashLayout}>
+                <div className={styles.splashText}>
+                  <h1>
+                    One <span className={styles.orangeh1}>hook</span> to{" "}
+                    <span className={styles.orangeh1}>repeat</span> them all
+                  </h1>
+                  <h2>
+                    A plug-and-play React library to create repeatable fields
+                    effortlessly.
+                  </h2>
+                </div>
+
+                <div className={styles.mascot}>
+                  <img
+                    src="img/peter-dragon-black.svg"
+                    alt="Peter the dragon, mascot of useRepeatable"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className={styles.splashSection}>
           <div className={styles.cloudBackground}>
             <div className={styles.headerContainer}>

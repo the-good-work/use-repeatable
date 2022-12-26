@@ -8,6 +8,7 @@
   src: local("Input"), url("./fonts/InputMono-Regular.ttf") format("truetype");
 } */
 
+@import url("https://use.typekit.net/axn6ftm.css");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap");
 
 main {
@@ -17,7 +18,7 @@ main {
 }
 
 h1 {
-  font-family: Hobeaux, sans-serif;
+  font-family: hobeaux, sans-serif;
   margin: 0;
   font-weight: 700;
   font-size: 65px;
@@ -40,7 +41,7 @@ p {
 }
 
 h6 {
-  font-family: InputMono-Regular, monospace;
+  font-family: "input-mono-narrow", monospace;
   margin: 0;
   font-size: 16px;
   font-weight: 400;
@@ -237,3 +238,82 @@ h6 {
 @media screen and (max-width: 1024px)
 @media screen and (max-width: 1200)
 */
+
+/**  new styles */
+
+.splash {
+  border: 1px solid pink;
+}
+
+.splashText {
+  width: 100%;
+  padding: 3em 0;
+}
+
+.splashText {
+  width: 40%;
+}
+
+.splashText h1 {
+  margin: 0 0 0.3em 0;
+}
+
+@media screen and (max-width: 660px) {
+  .splashText {
+    width: 100%;
+    position: relative;
+    order: 2;
+  }
+}
+
+.textColumn {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+  border: 1px solid orange;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.splashLayout {
+  position: relative;
+  border: 2px solid green;
+  display: block;
+}
+
+@media screen and (max-width: 660px) {
+  .splashLayout {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.mascot {
+  width: 55%;
+  position: absolute;
+  bottom: -10%;
+  right: 0;
+}
+
+@media screen and (max-width: 660px) {
+  .mascot {
+    width: 100%;
+    max-width: 250px;
+    margin: 0 auto;
+    position: relative;
+    order: 1;
+  }
+}
+
+@media screen and (min-width: 1060px) {
+  .textColumn {
+    padding: 0;
+  }
+}
+
+.clouds {
+  background-image: url("/img/clouds.svg");
+  background-repeat: no-repeat;
+  background-position: center 10%;
+  background-size: 100%;
+}
