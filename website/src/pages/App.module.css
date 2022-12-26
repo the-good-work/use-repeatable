@@ -1,0 +1,17 @@
+/* @font-face {
+  font-family: "Hobeaux";
+  src: local("Hobeaux"), url("./fonts/Hobeaux.ttf") format("truetype");
+  src: local("Hobeaux"), url("./fonts/Hobeaux Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Input";
+  src: local("Input"), url("./fonts/InputMono-Regular.ttf") format("truetype");
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap");
+
+body {
+  font-family: Rubik;
+  font-weight: 400;
+}

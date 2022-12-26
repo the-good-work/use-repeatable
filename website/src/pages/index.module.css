@@ -3,21 +3,237 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
+/* @font-face {
+  font-family: "Input";
+  src: local("Input"), url("./fonts/InputMono-Regular.ttf") format("truetype");
+} */
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap");
+
+main {
+  font-family: Rubik, sans-serif;
+  font-weight: 400;
+  font-size: 21px;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
+h1 {
+  font-family: Hobeaux, sans-serif;
+  margin: 0;
+  font-weight: 700;
+  font-size: 65px;
+  line-height: 1em;
+}
+
+@media screen and (max-width: 480px) {
+  h1 {
+    font-size: 50px;
   }
 }
 
-.buttons {
+p {
+  font-size: 21px;
+  line-height: 1.5em;
+}
+
+.orangeh1 {
+  color: #ff450b;
+}
+
+h6 {
+  font-family: InputMono-Regular, monospace;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.splashSection {
   display: flex;
-  align-items: center;
+  width: 100%;
+  margin: auto;
+  position: relative;
+}
+
+.cloudBackground {
+  background-image: url("/img/clouds.svg");
+  background-repeat: no-repeat;
+  background-position: center -50px;
+  background-size: 100%;
+  display: flex;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width: 480px) {
+  .cloudBackground {
+    background-position: -200px -5px;
+    background-size: 150%;
+  }
+}
+
+.headerContainer {
+  width: 100%;
+  display: flex;
+  margin-top: 9%;
   justify-content: center;
 }
+
+@media screen and (max-width: 480px) {
+  .headerContainer {
+    flex-direction: column;
+    padding: 50px 20px 50px 20px;
+  }
+}
+
+.headings {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+  row-gap: 20px;
+}
+
+@media screen and (max-width: 480px) {
+  .headings {
+    width: 100%;
+  }
+}
+
+.dragonContainer {
+  display: flex;
+}
+
+@media screen and (max-width: 480px) {
+  .dragonContainer {
+    width: 100px;
+    position: 20px 200px;
+  }
+}
+
+.npmSection {
+  display: flex;
+  margin: auto;
+  width: 100%;
+}
+
+.brickBackground {
+  background-image: url("/img/brick-wall.svg");
+  background-repeat: no-repeat;
+  background-position: center 0px;
+  background-size: 3000px;
+  display: flex;
+  margin: auto;
+  width: 100%;
+  min-height: 500px;
+}
+
+.npmContainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+  display: flex;
+  margin: auto;
+  width: 480px;
+  height: 5%;
+  justify-content: center;
+}
+
+/* 
+@media screen and (max-width: 1200px) {
+  .background {
+    background-position: 0px -50px, center 400px;
+    background-size: 100%, 185%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .background {
+    background-position: -220px -10px, center 400px;
+    background-size: 150%, 185%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .background {
+    background-position: -220px -10px, center 400px;
+    background-size: 150%, 185%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .background {
+    background-position: -315px -16px, center 300px;
+    background-size: 200%, 350%;
+  }
+}
+
+.section {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  padding: 160px 0px 100px 100px;
+}
+
+@media screen and (max-width: 1200px) {
+  .section {
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .section {
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .section {
+    flex-direction: column;
+    margin: auto;
+    padding: 130px 40px 100px 40px;
+    row-gap: 70px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .section {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 130px 40px 100px 40px;
+    row-gap: 70px;
+  }
+}
+
+.headercontainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: 100px;
+}
+
+.headings {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+}
+
+
+.npmcontainer {
+  background-color: white;
+  padding: 20px;
+  border-radius: 15px;
+}
+
+.dragoncontainer {
+  display: flex;
+  justify-content: center;
+}
+
+.dragonimage {
+  width: 520px;
+} */
+
+/*  
+@media screen and (max-width: 480px)
+@media screen and (max-width: 768px)
+@media screen and (max-width: 1024px)
+@media screen and (max-width: 1200)
+*/
