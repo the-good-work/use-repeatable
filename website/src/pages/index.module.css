@@ -3,11 +3,6 @@
  * and scoped locally.
  */
 
-/* @font-face {
-  font-family: "Input";
-  src: local("Input"), url("./fonts/InputMono-Regular.ttf") format("truetype");
-} */
-
 @import url("https://use.typekit.net/axn6ftm.css");
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap");
 
@@ -15,6 +10,11 @@ main {
   font-family: Rubik, sans-serif;
   font-weight: 400;
   font-size: 21px;
+  min-width: 320px;
+}
+
+.splash {
+  height: 100%;
 }
 
 h1 {
@@ -25,9 +25,71 @@ h1 {
   line-height: 1em;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 320px) {
   h1 {
-    font-size: 50px;
+    font-size: 40px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  h1 {
+    font-size: 55px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  h1 {
+    font-size: 60px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  h1 {
+    font-size: 65px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  h1 {
+    font-size: 65px;
+  }
+}
+
+h2 {
+  font-family: Rubik, sans-serif;
+  margin: 0;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.5em;
+}
+
+@media screen and (min-width: 320px) {
+  h2 {
+    font-size: 16px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  h2 {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  h2 {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  h2 {
+    font-size: 21px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  h2 {
+    font-size: 21px;
   }
 }
 
@@ -48,272 +110,509 @@ h6 {
   text-align: center;
 }
 
-.splashSection {
-  display: flex;
+.textColumn {
   width: 100%;
-  margin: auto;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+@media screen and (min-width: 320px) {
+  .textColumn {
+    padding: 0;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .textColumn {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .textColumn {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+}
+
+.splashLayout {
   position: relative;
 }
 
-.cloudBackground {
-  background-image: url("/img/clouds.svg");
-  background-repeat: no-repeat;
-  background-position: center -50px;
-  background-size: 100%;
-  display: flex;
-  margin: auto;
-  width: 100%;
-  height: 100%;
-}
-
-@media screen and (max-width: 480px) {
-  .cloudBackground {
-    background-position: -200px -5px;
-    background-size: 150%;
+@media screen and (min-width: 320px) {
+  .splashLayout {
+    margin: 5em 0 0 0;
   }
 }
 
-.headerContainer {
-  width: 100%;
-  display: flex;
-  margin-top: 9%;
-  justify-content: center;
-}
-
-@media screen and (max-width: 480px) {
-  .headerContainer {
-    flex-direction: column;
-    padding: 50px 20px 50px 20px;
+@media screen and (min-width: 480px) {
+  .splashLayout {
+    margin: 10em 1em 0 1em;
   }
 }
 
-.headings {
-  display: flex;
-  flex-direction: column;
-  width: 30%;
-  row-gap: 20px;
+@media screen and (min-width: 768px) {
+  .splashLayout {
+    margin: 8em 0 0 0;
+    padding: 0 2em;
+  }
 }
 
-@media screen and (max-width: 480px) {
-  .headings {
+@media screen and (min-width: 1024px) {
+  .splashLayout {
+    margin: 0 auto;
+    padding: 0 1em;
     width: 100%;
   }
 }
 
-.dragonContainer {
-  display: flex;
-}
-
-@media screen and (max-width: 480px) {
-  .dragonContainer {
-    width: 100px;
-    position: 20px 200px;
+@media screen and (min-width: 1200px) {
+  .splashLayout {
+    margin: 0 auto;
+    padding: inherit;
+    width: 100%;
   }
-}
-
-.npmSection {
-  display: flex;
-  margin: auto;
-  width: 100%;
-}
-
-.brickBackground {
-  background-image: url("/img/brick-wall.svg");
-  background-repeat: no-repeat;
-  background-position: center 0px;
-  background-size: 3000px;
-  display: flex;
-  margin: auto;
-  width: 100%;
-  min-height: 500px;
-}
-
-.npmContainer {
-  background-color: white;
-  padding: 20px;
-  border-radius: 15px;
-  display: flex;
-  margin: auto;
-  width: 480px;
-  height: 5%;
-  justify-content: center;
-}
-
-/* 
-@media screen and (max-width: 1200px) {
-  .background {
-    background-position: 0px -50px, center 400px;
-    background-size: 100%, 185%;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .background {
-    background-position: -220px -10px, center 400px;
-    background-size: 150%, 185%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .background {
-    background-position: -220px -10px, center 400px;
-    background-size: 150%, 185%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .background {
-    background-position: -315px -16px, center 300px;
-    background-size: 200%, 350%;
-  }
-}
-
-.section {
-  display: flex;
-  flex-direction: row;
-  margin: auto;
-  padding: 160px 0px 100px 100px;
-}
-
-@media screen and (max-width: 1200px) {
-  .section {
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .section {
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .section {
-    flex-direction: column;
-    margin: auto;
-    padding: 130px 40px 100px 40px;
-    row-gap: 70px;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .section {
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    padding: 130px 40px 100px 40px;
-    row-gap: 70px;
-  }
-}
-
-.headercontainer {
-  display: flex;
-  flex-direction: column;
-  row-gap: 100px;
-}
-
-.headings {
-  display: flex;
-  flex-direction: column;
-  row-gap: 15px;
-}
-
-
-.npmcontainer {
-  background-color: white;
-  padding: 20px;
-  border-radius: 15px;
-}
-
-.dragoncontainer {
-  display: flex;
-  justify-content: center;
-}
-
-.dragonimage {
-  width: 520px;
-} */
-
-/*  
-@media screen and (max-width: 480px)
-@media screen and (max-width: 768px)
-@media screen and (max-width: 1024px)
-@media screen and (max-width: 1200)
-*/
-
-/**  new styles */
-
-.splash {
-  border: 1px solid pink;
-}
-
-.splashText {
-  width: 100%;
-  padding: 3em 0;
-}
-
-.splashText {
-  width: 40%;
 }
 
 .splashText h1 {
   margin: 0 0 0.3em 0;
 }
 
-@media screen and (max-width: 660px) {
+.splashText {
+  width: 45%;
+  padding: 6em 0 3em 0;
+}
+
+@media screen and (min-width: 320px) {
   .splashText {
     width: 100%;
-    position: relative;
-    order: 2;
+    padding: 0 1em 0 1em;
+    text-align: center;
   }
 }
 
-.textColumn {
-  width: 100%;
-  max-width: 980px;
-  margin: 0 auto;
-  border: 1px solid orange;
-  padding: 0 40px;
-  box-sizing: border-box;
+@media screen and (min-width: 1024px) {
+  .splashText {
+    width: 50%;
+    padding: 6em 0 3em 0;
+    text-align: left;
+  }
 }
 
-.splashLayout {
-  position: relative;
-  border: 2px solid green;
-  display: block;
-}
-
-@media screen and (max-width: 660px) {
-  .splashLayout {
-    display: flex;
-    flex-direction: column;
+@media screen and (min-width: 1200px) {
+  .splashText {
+    width: 50%;
+    padding: 6em 0 3em 0;
+    text-align: left;
   }
 }
 
 .mascot {
-  width: 55%;
+  width: 95%;
   position: absolute;
-  bottom: -10%;
-  right: 0;
+  bottom: -40%;
+  right: -40%;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (min-width: 320px) {
   .mascot {
-    width: 100%;
-    max-width: 250px;
-    margin: 0 auto;
-    position: relative;
-    order: 1;
+    margin: auto;
+    width: 20%;
+    bottom: 105%;
+    right: 40%;
   }
 }
 
-@media screen and (min-width: 1060px) {
-  .textColumn {
-    padding: 0;
+@media screen and (min-width: 480px) {
+  .mascot {
+    margin: auto;
+    width: 20%;
+    bottom: 150%;
+    right: 40%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mascot {
+    width: 15%;
+    bottom: 115%;
+    right: 42%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .mascot {
+    width: 500px;
+    position: absolute;
+    bottom: -40%;
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .mascot {
+    width: 900px;
+    position: absolute;
+    bottom: -40%;
+    right: -40%;
   }
 }
 
 .clouds {
   background-image: url("/img/clouds.svg");
   background-repeat: no-repeat;
-  background-position: center 10%;
+  background-position: 20% center 20% center;
   background-size: 100%;
 }
+
+.npmSection {
+  display: flex;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (min-width: 320px) {
+  .npmSection {
+    display: flex;
+    margin: auto;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .npmSection {
+    background-position: 20% center 20% center;
+    display: flex;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.brickBackground {
+  background-image: url("/img/brick-wall.svg");
+  background-repeat: no-repeat;
+  background-position: center -20px;
+  background-size: 185%;
+  display: flex;
+  margin: auto;
+  width: 100%;
+  min-height: 500px;
+  height: 1000px;
+}
+
+@media screen and (min-width: 320px) {
+  .brickBackground {
+    background-position: center 25px;
+    background-size: 300%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .brickBackground {
+    background-position: center -20px;
+    background-size: 185%;
+    display: flex;
+    margin: auto;
+    width: 100%;
+    min-height: 500px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .brickBackground {
+    background-position: center -20px;
+    background-size: 185%;
+    display: flex;
+    margin: auto;
+    width: 100%;
+    min-height: 500px;
+  }
+}
+
+.npmContainer {
+  margin: auto;
+  font-family: "input-mono-narrow", monospace;
+  font-size: 18px;
+  width: 30%;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 320px) {
+  .npmContainer {
+    position: absolute;
+    padding: 4em 1em 0 1em;
+    font-size: 14px;
+    bottom: 18em;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .npmContainer {
+    padding: 4em 1em 0 1em;
+    font-size: 14px;
+    bottom: 10em;
+    width: 80%;
+    position: relative;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .npmContainer {
+    margin: auto;
+    position: relative;
+    font-family: "input-mono-narrow", monospace;
+    font-size: 18px;
+    width: 500px;
+    max-width: 100%;
+    bottom: 6em;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .npmContainer {
+    margin: auto;
+    position: relative;
+    font-family: "input-mono-narrow", monospace;
+    font-size: 18px;
+    width: 600px;
+    max-width: 100%;
+    bottom: 2em;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .npmContainer {
+    margin: auto;
+    position: relative;
+    font-family: "input-mono-narrow", monospace;
+    font-size: 18px;
+    width: 600px;
+    max-width: 100%;
+    bottom: 2em;
+  }
+}
+
+/* /////////////////////////// Usage Section /////////////////////////// */
+
+.usage {
+  position: relative;
+}
+
+.meadowTop {
+  background-image: url("/img/meadow-top.svg");
+  background-repeat: no-repeat;
+  background-position: 0 0;
+  background-size: 100% auto;
+  background-origin: border-box;
+  position: relative;
+}
+
+.meadowBottom {
+  background-image: url("/img/meadow-bottom.svg");
+  background-repeat: repeat-y;
+  background-position: 0 8em;
+  background-size: 100% auto;
+  background-origin: content-box;
+  margin: 5em 0 0 0;
+}
+
+/* separating bg image to top and bottom, not sure if should nest them or siblings */
+
+/* .meadow {
+  background-image: url("/img/meadow.svg");
+  background-repeat: repeat-y;
+  background-position: 0 5em;
+  background-size: 100% auto;
+} */
+
+/* .meadow {
+  background-image: url("/img/meadow-top.svg"), url("/img/meadow-bottom.svg");
+  background-repeat: no-repeat, no-repeat;
+  background-position: 0em 0em, 0em 5em;
+  background-size: 100% auto;
+} */
+
+h3 {
+  font-family: hobeaux, sans-serif;
+  margin: 0;
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1em;
+  color: white;
+}
+
+.usageLayout {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8em 0 8em 0;
+  row-gap: 5em;
+  min-width: 320px;
+}
+
+.copyBlockContainer {
+  margin: auto;
+  position: relative;
+  max-width: 90%;
+}
+
+@media screen and (max-width: 320px) {
+  .copyBlockContainer {
+    margin: auto 1em;
+    width: 90%;
+  }
+}
+
+.stag {
+  position: absolute;
+  z-index: 1;
+}
+
+@media screen and (min-width: 1025px) {
+  .stag {
+    width: 160px;
+    right: -95px;
+    top: 150px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .stag {
+    width: 160px;
+    right: -95px;
+    top: 150px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .stag {
+    display: none;
+  }
+}
+
+.copyBlock {
+  margin: 1em 0 0 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .copyBlock {
+    width: 600px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .copyBlock {
+    width: 600px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .copyBlock {
+    width: 450px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .copyBlock {
+    width: 400px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .copyBlock {
+    width: 280px;
+  }
+}
+
+/* @media screen and (max-width: 320px) {
+  .copyBlock {
+    margin: 1em auto;
+    background: red;
+    width: 280px;
+  }
+} */
+
+@media screen and (max-width: 320px) {
+  .copyBlockCode {
+    width: 50%;
+  }
+}
+
+/* /////////////////////////// Features Section /////////////////////////// */
+
+.ocean {
+  background-image: url("/img/ocean.svg");
+  background-repeat: repeat-y;
+  background-position: 0 5em;
+  background-size: 100% auto;
+}
+
+.featuresLayout {
+  margin: auto;
+  padding: 10em 10em 8em 10em;
+  row-gap: 2em;
+  min-width: 320px;
+  max-width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.jelly {
+  position: absolute;
+  right: 18%;
+  bottom: -390%;
+  width: 150px;
+}
+
+.gridContainer {
+  margin: auto;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.featureCard {
+  background-color: #3f9dd2;
+  border-radius: 20px;
+  padding: 40px 40px;
+  width: 400px;
+  justify-content: center;
+  row-gap: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.featureCard h4 {
+  font-family: hobeaux, sans-serif;
+  font-weight: 300;
+  font-size: 24px;
+  color: white;
+  margin: 0;
+}
+
+.featureCard p {
+  font-family: Rubik, sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.3em;
+  color: white;
+  margin: 0;
+}
+
+/* 480px, 768px, 1024px, 1200px */
+
+/* font-family: "input-mono-narrow", monospace;
+font-size: 16px;
+font-weight: 400; */

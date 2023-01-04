@@ -3,9 +3,17 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
 import styles from "./index.module.css";
-import { CopyBlock, dracula, atomOneLight } from "react-code-blocks";
+import { featuresData } from "./featuresData.js";
+
+import {
+  CopyBlock,
+  CodeBlock,
+  dracula,
+  atomOneLight,
+  a11yLight,
+  a11yDark,
+} from "react-code-blocks";
 
 function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
@@ -61,34 +69,11 @@ export default function Home(): JSX.Element {
           </div>
         </section>
 
-        <section className={styles.splashSection}>
-          <div className={styles.cloudBackground}>
-            <div className={styles.headerContainer}>
-              <div className={styles.headings}>
-                <h1>
-                  One <span className={styles.orangeh1}>hook</span> to{" "}
-                  <span className={styles.orangeh1}>repeat</span> them all
-                </h1>
-                <p>
-                  Create repeatable fields effortlessly.
-                  <br />A plug-and-play React hook/component.
-                </p>
-              </div>
-
-              <div className={styles.dragonContainer}>
-                <img
-                  src="img/peter-dragon-black.svg"
-                  alt="null"
-                  className={styles.dragonImage}
-                />
-              </div>
-            </div>
-          </div>
-        </section>
         <section className={styles.npmSection}>
           <div className={styles.brickBackground}>
             <div className={styles.npmContainer}>
               <CopyBlock
+                className={styles.npmcodeBlock}
                 theme={atomOneLight}
                 showLineNumbers={true}
                 text={`npm install @thegoodwork/use-repeatable
@@ -99,39 +84,126 @@ npm run start`}
             </div>
           </div>
         </section>
+        <section className={styles.usage}>
+          <div className={styles.meadowTop}>
+            <div className={styles.meadowBottom}>
+              <div className={styles.usageLayout}>
+                <div className={styles.copyBlockContainer}>
+                  <h3>Using The Hook</h3>
+                  <img src="/img/stag.svg" className={styles.stag} />
+                  <div className={styles.copyBlock}>
+                    <CodeBlock
+                      className={styles.copyBlockCode}
+                      theme={a11yLight}
+                      showLineNumbers={true}
+                      customStyle={{
+                        fontFamily: "input-mono-narrow, monospace",
+                        height: "auto",
+                        overflow: "scroll",
+                        borderRadius: "20px",
+                        fontSize: "14px",
+                        padding: "0",
+                        borderWidth: 0,
+                        margin: 0,
+                        boxShadow: "none",
+                      }}
+                      text={`import {useRepeatable} from 'use-repeatable'
+
+type Fruit = { color: string; name: string }; 
+                
+// default new item is required 
+const fruit: Fruit = { color: "red", name: "apple" }; 
+                
+// optionally initialise with collection of objects
+const initialFruits = [ 
+      { color: "red", name: "apple" }, 
+      { color: "orange", name: "orange" }, 
+  ];
+                
+function App() {
+const { items, removeItem, addItem, moveItem } = useRepeatable({
+      newItem: fruit,
+      initialState: initialFruits, 
+    }); 
+... 
+}`}
+                      language={`bash`}
+                      codeBlock
+                    />
+                  </div>
+                </div>
+
+                <div className={styles.copyBlockContainer}>
+                  <h3>Using The Component</h3>
+                  <div className={styles.copyBlock}>
+                    <CodeBlock
+                      language={`bash`}
+                      codeBlock
+                      theme={a11yLight}
+                      showLineNumbers={true}
+                      customStyle={{
+                        fontFamily: "input-mono-narrow, monospace",
+                        height: "auto",
+                        overflow: "scroll",
+                        borderRadius: "20px",
+                        fontSize: "14px",
+                        padding: "0",
+                        borderWidth: 0,
+                      }}
+                      text={`import {useRepeatable} from 'use-repeatable'
+
+type Fruit = { color: string; name: string }; 
+                    
+// default new item is required 
+const fruit: Fruit = { color: "red", name: "apple" }; 
+                    
+// optionally initialise with collection of objects
+const initialFruits = [ 
+    { color: "red", name: "apple" }, 
+    { color: "orange", name: "orange" }, 
+  ];
+                    
+function App() {
+return <RepeatableList 
+    onChange={() => null}
+    newItem={fruit}
+    initialState={initialFruits}
+  ... />
+  }`}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.features}>
+          <div className={styles.ocean}>
+            <div className={styles.featuresLayout}>
+              <h3>Features</h3>
+              <img src="/img/jelly.svg" className={styles.jelly} />
+
+              <div className={styles.gridContainer}>
+                {featuresData.map((featuresData) => {
+                  return <FeatureCard data={featuresData} />;
+                })}
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
     </Layout>
   );
 }
 
-// className={clsx("col col--10", styles.section)
-
-{
-  /* <div className={styles.background}>
-          <section className={clsx("col col--8", styles.section)}>
-            <div className={clsx("col col--6", styles.headercontainer)}>
-              <div className={styles.headings}>
-                <h1>
-                  One <span className={styles.orangeh1}>hook</span> to{" "}
-                  <span className={styles.orangeh1}>repeat</span> them all
-                </h1>
-                <p>
-                  Create repeatable fields effortlessly. A plug-and-play React
-                  hook/component.
-                </p>
-              </div>
-              <div className={styles.npmcontainer}>
-                <h6>npm install @thegoodwork/use-repeatable</h6>
-              </div>
-            </div>
-
-            <div className={clsx("col col--7", styles.dragoncontainer)}>
-              <img
-                src="img/peter-dragon-black.svg"
-                alt="null"
-                className={styles.dragonimage}
-              />
-            </div>
-          </section>
-        </div> */
+function FeatureCard({ data }) {
+  return (
+    <div className={styles.featureCard}>
+      <h4>{data.header}</h4>
+      <p>{data.info}</p>
+    </div>
+  );
 }
+
+// className={clsx("col col--10", styles.section)
