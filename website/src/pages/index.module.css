@@ -300,83 +300,23 @@ h6 {
 
 .brickBackground {
   background-image: url("/img/brick-wall.svg");
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: center -20px;
-  background-size: 185%;
+  background-position: center top;
   display: flex;
-  margin: auto;
+  margin: 0;
+  padding: 150px 40px 120px 40px;
   width: 100%;
-  min-height: 500px;
-  height: 1000px;
-}
-
-@media screen and (min-width: 320px) {
-  .brickBackground {
-    background-position: center 25px;
-    background-size: 300%;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .brickBackground {
-    background-position: center -20px;
-    background-size: 185%;
-    display: flex;
-    margin: auto;
-    width: 100%;
-    min-height: 500px;
-  }
-}
-
-@media screen and (min-width: 1200px) {
-  .brickBackground {
-    background-position: center -20px;
-    background-size: 185%;
-    display: flex;
-    margin: auto;
-    width: 100%;
-    min-height: 500px;
-  }
+  height: auto;
+  box-sizing: border-box;
 }
 
 .npmContainer {
-  margin: auto;
+  margin: 0 auto;
   font-family: "input-mono-narrow", monospace;
   font-size: 18px;
-  width: 30%;
-  max-width: 100%;
-}
-
-@media screen and (min-width: 320px) {
-  .npmContainer {
-    position: absolute;
-    padding: 4em 1em 0 1em;
-    font-size: 14px;
-    bottom: 18em;
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 480px) {
-  .npmContainer {
-    padding: 4em 1em 0 1em;
-    font-size: 14px;
-    bottom: 10em;
-    width: 80%;
-    position: relative;
-  }
-}
-
-@media screen and (min-width: 768px) {
-  .npmContainer {
-    margin: auto;
-    position: relative;
-    font-family: "input-mono-narrow", monospace;
-    font-size: 18px;
-    width: 500px;
-    max-width: 100%;
-    bottom: 6em;
-  }
+  width: 100%;
+  max-width: 600px;
 }
 
 @media screen and (min-width: 1024px) {
@@ -410,24 +350,24 @@ h6 {
 }
 
 .meadowTop {
-  background-image: url("/img/meadow-top.svg");
-  background-repeat: no-repeat;
-  background-position: 0 0;
-  background-size: 100% auto;
-  background-origin: border-box;
-  position: relative;
+  position: absolute;
+  bottom: calc(100% - 3px);
+  left: 0;
+}
+
+.meadowTop img {
+  width: 100%;
+  display: block;
 }
 
 .meadowBottom {
   background-image: url("/img/meadow-bottom.svg");
   background-repeat: repeat-y;
-  background-position: 0 8em;
-  background-size: 100% auto;
+  background-position: center top;
+  background-size: 100%;
   background-origin: content-box;
-  margin: 5em 0 0 0;
+  margin: 0;
 }
-
-/* separating bg image to top and bottom, not sure if should nest them or siblings */
 
 /* .meadow {
   background-image: url("/img/meadow.svg");
@@ -478,6 +418,12 @@ h3 {
 .stag {
   position: absolute;
   z-index: 1;
+  transform: rotate(0deg);
+  transition: transform ease 0.5s;
+}
+
+.stag:hover {
+  transform: rotate(-15deg);
 }
 
 @media screen and (min-width: 1025px) {

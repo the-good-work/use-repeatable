@@ -73,6 +73,8 @@ export default function Home(): JSX.Element {
           <div className={styles.brickBackground}>
             <div className={styles.npmContainer}>
               <CopyBlock
+                customStyle={{}}
+                codeContainerStyle={{ border: 0 }}
                 className={styles.npmcodeBlock}
                 theme={atomOneLight}
                 showLineNumbers={true}
@@ -84,30 +86,33 @@ npm run start`}
             </div>
           </div>
         </section>
+
         <section className={styles.usage}>
           <div className={styles.meadowTop}>
-            <div className={styles.meadowBottom}>
-              <div className={styles.usageLayout}>
-                <div className={styles.copyBlockContainer}>
-                  <h3>Using The Hook</h3>
-                  <img src="/img/stag.svg" className={styles.stag} />
-                  <div className={styles.copyBlock}>
-                    <CodeBlock
-                      className={styles.copyBlockCode}
-                      theme={a11yLight}
-                      showLineNumbers={true}
-                      customStyle={{
-                        fontFamily: "input-mono-narrow, monospace",
-                        height: "auto",
-                        overflow: "scroll",
-                        borderRadius: "20px",
-                        fontSize: "14px",
-                        padding: "0",
-                        borderWidth: 0,
-                        margin: 0,
-                        boxShadow: "none",
-                      }}
-                      text={`import {useRepeatable} from 'use-repeatable'
+            <img src="/img/meadow-top.png" alt="Grass illustration" />
+          </div>
+          <div className={styles.meadowBottom}>
+            <div className={styles.usageLayout}>
+              <div className={styles.copyBlockContainer}>
+                <h3>Using The Hook</h3>
+                <img src="/img/stag.svg" className={styles.stag} />
+                <div className={styles.copyBlock}>
+                  <CodeBlock
+                    className={styles.copyBlockCode}
+                    theme={a11yLight}
+                    showLineNumbers={true}
+                    customStyle={{
+                      fontFamily: "input-mono-narrow, monospace",
+                      height: "auto",
+                      overflow: "scroll",
+                      borderRadius: "20px",
+                      fontSize: "14px",
+                      padding: "0",
+                      borderWidth: 0,
+                      margin: 0,
+                      boxShadow: "none",
+                    }}
+                    text={`import {useRepeatable} from 'use-repeatable'
 
 type Fruit = { color: string; name: string }; 
                 
@@ -127,30 +132,30 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
     }); 
 ... 
 }`}
-                      language={`bash`}
-                      codeBlock
-                    />
-                  </div>
+                    language={`bash`}
+                    codeBlock
+                  />
                 </div>
+              </div>
 
-                <div className={styles.copyBlockContainer}>
-                  <h3>Using The Component</h3>
-                  <div className={styles.copyBlock}>
-                    <CodeBlock
-                      language={`bash`}
-                      codeBlock
-                      theme={a11yLight}
-                      showLineNumbers={true}
-                      customStyle={{
-                        fontFamily: "input-mono-narrow, monospace",
-                        height: "auto",
-                        overflow: "scroll",
-                        borderRadius: "20px",
-                        fontSize: "14px",
-                        padding: "0",
-                        borderWidth: 0,
-                      }}
-                      text={`import {useRepeatable} from 'use-repeatable'
+              <div className={styles.copyBlockContainer}>
+                <h3>Using The Component</h3>
+                <div className={styles.copyBlock}>
+                  <CodeBlock
+                    language={`bash`}
+                    codeBlock
+                    theme={a11yLight}
+                    showLineNumbers={true}
+                    customStyle={{
+                      fontFamily: "input-mono-narrow, monospace",
+                      height: "auto",
+                      overflow: "scroll",
+                      borderRadius: "20px",
+                      fontSize: "14px",
+                      padding: "0",
+                      borderWidth: 0,
+                    }}
+                    text={`import {useRepeatable} from 'use-repeatable'
 
 type Fruit = { color: string; name: string }; 
                     
@@ -170,8 +175,7 @@ return <RepeatableList
     initialState={initialFruits}
   ... />
   }`}
-                    />
-                  </div>
+                  />
                 </div>
               </div>
             </div>
