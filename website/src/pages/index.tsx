@@ -52,10 +52,10 @@ export default function Home(): JSX.Element {
                     One <span className={styles.orangeh1}>hook</span> to{" "}
                     <span className={styles.orangeh1}>repeat</span> them all
                   </h1>
-                  <h2>
+                  <h3>
                     A plug-and-play React library to create repeatable fields
                     effortlessly.
-                  </h2>
+                  </h3>
                 </div>
 
                 <div className={styles.mascot}>
@@ -74,8 +74,13 @@ export default function Home(): JSX.Element {
             <div className={styles.npmContainer}>
               <CopyBlock
                 customStyle={{}}
-                codeContainerStyle={{ border: 0 }}
-                className={styles.npmcodeBlock}
+                codeContainerStyle={{
+                  border: 0,
+                  padding: "20px",
+                  background: "none",
+                  borderRadius: "20px",
+                }}
+                className={styles.npmCodeBlock}
                 theme={atomOneLight}
                 showLineNumbers={true}
                 text={`npm install @thegoodwork/use-repeatable
@@ -93,26 +98,33 @@ npm run start`}
           </div>
           <div className={styles.meadowBottom}>
             <div className={styles.usageLayout}>
-              <div className={styles.copyBlockContainer}>
-                <h3>Using The Hook</h3>
+              <div className={styles.codeBlockContainer}>
                 <img src="/img/stag.svg" className={styles.stag} />
-                <div className={styles.copyBlock}>
-                  <CodeBlock
-                    className={styles.copyBlockCode}
-                    theme={a11yLight}
-                    showLineNumbers={true}
-                    customStyle={{
-                      fontFamily: "input-mono-narrow, monospace",
-                      height: "auto",
-                      overflow: "scroll",
-                      borderRadius: "20px",
-                      fontSize: "14px",
-                      padding: "0",
-                      borderWidth: 0,
-                      margin: 0,
-                      boxShadow: "none",
-                    }}
-                    text={`import {useRepeatable} from 'use-repeatable'
+                <div className={styles.codeBlockBase}>
+                  <h4>Using The Hook</h4>
+
+                  <div className={styles.codeBlock}>
+                    <CodeBlock
+                      className={styles.codeBlockCode}
+                      theme={a11yLight}
+                      showLineNumbers={true}
+                      codeContainerStyle={{
+                        border: 0,
+                        padding: "30px",
+                        background: "none",
+                      }}
+                      customStyle={{
+                        fontFamily: "input-mono-narrow, monospace",
+                        height: "auto",
+                        overflow: "scroll",
+                        borderRadius: "20px",
+                        fontSize: "14px",
+                        padding: "0",
+                        borderWidth: 0,
+                        margin: 0,
+                        boxShadow: "none",
+                      }}
+                      text={`import {useRepeatable} from 'use-repeatable'
 
 type Fruit = { color: string; name: string }; 
                 
@@ -132,30 +144,38 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
     }); 
 ... 
 }`}
-                    language={`bash`}
-                    codeBlock
-                  />
+                      language={`bash`}
+                      codeBlock
+                    />
+                  </div>
                 </div>
               </div>
 
-              <div className={styles.copyBlockContainer}>
-                <h3>Using The Component</h3>
-                <div className={styles.copyBlock}>
-                  <CodeBlock
-                    language={`bash`}
-                    codeBlock
-                    theme={a11yLight}
-                    showLineNumbers={true}
-                    customStyle={{
-                      fontFamily: "input-mono-narrow, monospace",
-                      height: "auto",
-                      overflow: "scroll",
-                      borderRadius: "20px",
-                      fontSize: "14px",
-                      padding: "0",
-                      borderWidth: 0,
-                    }}
-                    text={`import {useRepeatable} from 'use-repeatable'
+              <div className={styles.codeBlockContainer}>
+                <div className={styles.codeBlockBase}>
+                  <h4>Using The Component</h4>
+
+                  <div className={styles.codeBlock}>
+                    <CodeBlock
+                      language={`bash`}
+                      codeBlock
+                      theme={a11yLight}
+                      showLineNumbers={true}
+                      codeContainerStyle={{
+                        border: 0,
+                        padding: "30px",
+                        background: "none",
+                      }}
+                      customStyle={{
+                        fontFamily: "input-mono-narrow, monospace",
+                        height: "auto",
+                        overflow: "scroll",
+                        borderRadius: "20px",
+                        fontSize: "14px",
+                        padding: "0",
+                        borderWidth: 0,
+                      }}
+                      text={`import {useRepeatable} from 'use-repeatable'
 
 type Fruit = { color: string; name: string }; 
                     
@@ -175,7 +195,8 @@ return <RepeatableList
     initialState={initialFruits}
   ... />
   }`}
-                  />
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -183,15 +204,40 @@ return <RepeatableList
         </section>
 
         <section className={styles.features}>
-          <div className={styles.ocean}>
+          <div className={styles.oceanTop}>
+            <img src="./img/ocean-top.png" alt="Waves illustration" />
+          </div>
+          <div className={styles.oceanBottom}>
             <div className={styles.featuresLayout}>
-              <h3>Features</h3>
-              <img src="/img/jelly.svg" className={styles.jelly} />
+              <div className={styles.featuresContainer}>
+                <h4>Features</h4>
+                <img src="/img/jelly.svg" className={styles.jelly} />
 
-              <div className={styles.gridContainer}>
-                {featuresData.map((featuresData) => {
-                  return <FeatureCard data={featuresData} />;
-                })}
+                <div className={styles.gridContainer}>
+                  {featuresData.map((featuresData) => {
+                    return <FeatureCard data={featuresData} />;
+                  })}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className={styles.learnMore}>
+          <div className={styles.brickTop}>
+            <img src="./img/brick-top.png" alt="brick wall" />
+          </div>
+          <div className={styles.brickBottom}>
+            <div className={styles.learnMoreLayout}>
+              <div className={styles.learnMoreText}>
+                <h2>Adventure Awaits!</h2>
+                <p>
+                  There is so much more to learn about useRepeatable, read our
+                  documentation or visit our repository to discover more!
+                </p>
+              </div>
+              <div className={styles.wingedCreature}>
+                <img src="./img/adventure.svg" alt="winged creature" />
               </div>
             </div>
           </div>
@@ -203,9 +249,11 @@ return <RepeatableList
 
 function FeatureCard({ data }) {
   return (
-    <div className={styles.featureCard}>
-      <h4>{data.header}</h4>
-      <p>{data.info}</p>
+    <div className={styles.featureCardBackground}>
+      <div className={styles.featureCardContent}>
+        <h5>{data.header}</h5>
+        <p>{data.info}</p>
+      </div>
     </div>
   );
 }
