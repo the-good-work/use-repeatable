@@ -62,6 +62,7 @@ export default function Home(): JSX.Element {
                   <img
                     src="img/peter-dragon-black.svg"
                     alt="Peter the dragon, mascot of useRepeatable"
+                    className={styles.peter}
                   />
                 </div>
               </div>
@@ -72,7 +73,7 @@ export default function Home(): JSX.Element {
         <section className={styles.npm}>
           <div className={styles.brickBackground}>
             <div className={styles.container}>
-              {/* <div className={styles.npmSection}>
+              <div className={styles.npmSection}>
                 <CopyBlock
                   customStyle={{}}
                   codeContainerStyle={{
@@ -88,7 +89,7 @@ npm run start`}
                   language={`bash`}
                   codeBlock
                 />
-              </div> */}
+              </div>
 
               <section className={styles.demo}>
                 <div className={styles.demoLayout}>
@@ -116,7 +117,6 @@ npm run start`}
                         <p>Test It Out!</p>
                       </div>
                     </div>
-
                     <div className={styles.demoWindow}>
                       <img
                         src="./img/demo-area.svg"

@@ -15,10 +15,6 @@ main {
 
 /* /////////////////////////// Splash Section /////////////////////////// */
 
-.splash {
-  height: 100%;
-}
-
 h1 {
   font-family: hobeaux, sans-serif;
   margin: 0;
@@ -72,7 +68,6 @@ h6 {
   width: 100%;
   max-width: 1080px;
   margin: 0 auto;
-  padding: 0 2em;
   box-sizing: border-box;
 }
 
@@ -83,8 +78,8 @@ h6 {
 }
 
 .splashLayout {
-  position: relative;
   display: flex;
+  overflow: hidden;
 }
 
 @media screen and (max-width: 768px) {
@@ -121,11 +116,10 @@ h6 {
 }
 
 .mascot {
-  width: 600px;
   position: absolute;
-  margin: auto;
-  left: 45%;
+  right: 0%;
   top: 35%;
+  width: 600px;
 }
 
 @media screen and (max-width: 1024px) {
@@ -182,6 +176,7 @@ h6 {
   width: 100%;
   height: auto;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .container {
@@ -224,8 +219,13 @@ h6 {
 .demo {
   margin: auto;
 }
+
 .demoLayout {
   position: relative;
+}
+
+.trialElements {
+  width: 100%;
 }
 
 .fireball {
@@ -237,10 +237,9 @@ h6 {
 
 .sword {
   position: absolute;
-  left: 85%;
+  right: -25%;
   bottom: 10%;
   width: 40%;
-  overflow-x: hidden;
 }
 
 .shield {
@@ -251,7 +250,7 @@ h6 {
 }
 
 .demoArea {
-  margin: 10em 0 10em 0;
+  margin: 5em 0 10em 0;
   width: 100%;
 }
 
@@ -332,6 +331,7 @@ h4 {
   padding: 4em 0 10em 0;
   row-gap: 5em;
   min-width: 320px;
+  overflow: hidden;
 }
 
 .codeBlockContainer {
@@ -402,6 +402,7 @@ h4 {
 
 .featuresLayout {
   display: flex;
+  overflow: hidden;
 }
 
 .featuresContainer {
