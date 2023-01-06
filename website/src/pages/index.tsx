@@ -69,25 +69,64 @@ export default function Home(): JSX.Element {
           </div>
         </section>
 
-        <section className={styles.npmSection}>
+        <section className={styles.npm}>
           <div className={styles.brickBackground}>
-            <div className={styles.npmContainer}>
-              <CopyBlock
-                customStyle={{}}
-                codeContainerStyle={{
-                  border: 0,
-                  padding: "20px",
-                  background: "none",
-                  borderRadius: "20px",
-                }}
-                className={styles.npmCodeBlock}
-                theme={atomOneLight}
-                showLineNumbers={true}
-                text={`npm install @thegoodwork/use-repeatable
+            <div className={styles.container}>
+              {/* <div className={styles.npmSection}>
+                <CopyBlock
+                  customStyle={{}}
+                  codeContainerStyle={{
+                    border: 0,
+                    padding: "20px",
+                    background: "none",
+                  }}
+                  className={styles.npmCodeBlock}
+                  theme={atomOneLight}
+                  showLineNumbers={true}
+                  text={`npm install @thegoodwork/use-repeatable
 npm run start`}
-                language={`bash`}
-                codeBlock
-              />
+                  language={`bash`}
+                  codeBlock
+                />
+              </div> */}
+
+              <section className={styles.demo}>
+                <div className={styles.demoLayout}>
+                  <div className={styles.trialElements}>
+                    <img
+                      src="./img/fireball.svg"
+                      alt="Fireball"
+                      className={styles.fireball}
+                    />
+                    <img
+                      src="./img/sword.svg"
+                      alt="Sword"
+                      className={styles.sword}
+                    />
+                    <img
+                      src="./img/shield.svg"
+                      alt="Shield"
+                      className={styles.shield}
+                    />
+                  </div>
+                  <div className={styles.demoArea}>
+                    <div className={styles.trialsOfTheRepeater}>
+                      <div className={styles.demoHeading}>
+                        <h4>Trial of The Repeater</h4>
+                        <p>Test It Out!</p>
+                      </div>
+                    </div>
+
+                    <div className={styles.demoWindow}>
+                      <img
+                        src="./img/demo-area.svg"
+                        alt="demo area"
+                        className={styles.demoBackground}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </section>
             </div>
           </div>
         </section>
@@ -142,6 +181,7 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
       newItem: fruit,
       initialState: initialFruits, 
     }); 
+
 ... 
 }`}
                       language={`bash`}
@@ -186,14 +226,14 @@ const fruit: Fruit = { color: "red", name: "apple" };
 const initialFruits = [ 
     { color: "red", name: "apple" }, 
     { color: "orange", name: "orange" }, 
-  ];
+];
                     
 function App() {
 return <RepeatableList 
     onChange={() => null}
     newItem={fruit}
     initialState={initialFruits}
-  ... />
+    ... />
   }`}
                     />
                   </div>
