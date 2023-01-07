@@ -11,6 +11,7 @@ main {
   font-weight: 400;
   font-size: 21px;
   min-width: 320px;
+  overflow: hidden;
 }
 
 /* /////////////////////////// Splash Section /////////////////////////// */
@@ -79,12 +80,19 @@ h6 {
 
 .splashLayout {
   display: flex;
-  overflow: hidden;
+  position: relative;
+  margin: auto 2em;
 }
-
 @media screen and (max-width: 768px) {
   .splashLayout {
     flex-direction: column;
+    margin: auto 2em;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .splashLayout {
+    margin: auto 1em;
   }
 }
 
@@ -117,35 +125,27 @@ h6 {
 
 .mascot {
   position: absolute;
-  right: 0%;
+  right: -35%;
   top: 35%;
-  width: 600px;
+  width: 90%;
+  /* width: 550px; */
 }
 
 @media screen and (max-width: 1024px) {
   .mascot {
-    width: 450px;
-    left: 50%;
-    bottom: -30%;
+    max-width: 45%;
+    right: 0%;
+    top: 32%;
   }
 }
 
 @media screen and (max-width: 768px) {
   .mascot {
-    width: 120px;
+    max-width: 100px;
     top: 8%;
     left: 0;
     right: 0;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .mascot {
-    width: 100px;
-    top: 8%;
-    left: 0;
-    right: 0;
-    padding: 0;
+    margin: auto;
   }
 }
 
@@ -183,11 +183,11 @@ h6 {
   margin: auto;
 }
 
-/* @media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   .container {
-    max-width: 500px;
+    max-width: 100%;
   }
-} */
+}
 
 .npmSection {
   position: relative;
@@ -195,12 +195,14 @@ h6 {
   margin: 0 auto;
   font-family: "input-mono-narrow", monospace;
   font-size: 18px;
-  padding: 10em 0 0em 0;
+  padding: 10em 0 0 0;
+  left: 0;
+  right: 0;
 }
 
 @media screen and (max-width: 1024px) {
   .npmSection {
-    padding: 5em 0 8em 0;
+    padding: 6em 0 8em 0;
   }
 }
 
@@ -525,16 +527,27 @@ h2 {
   max-width: 900px;
   width: 100%;
   margin: auto;
-  padding: 4em 1em;
-  column-gap: 50px;
+  padding: 4em 0;
+  column-gap: 30px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1024px) {
   .learnMoreLayout {
     flex-direction: column;
     align-items: center;
     row-gap: 20px;
     text-align: center;
+    padding: 3em 5em;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .learnMoreLayout {
+    padding: 3em 2em;
+  }
+}
+@media screen and (max-width: 660px) {
+  .learnMoreLayout {
     padding: 3em 1em;
   }
 }
@@ -548,7 +561,7 @@ h2 {
   justify-content: center;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1024px) {
   .wingedCreature {
     width: 280px;
   }
