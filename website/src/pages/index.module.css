@@ -14,6 +14,10 @@ main {
   overflow: hidden;
 }
 
+[data-theme="dark"] main {
+  background: #09262c;
+}
+
 /* /////////////////////////// Splash Section /////////////////////////// */
 
 h1 {
@@ -22,6 +26,10 @@ h1 {
   font-weight: 700;
   font-size: 65px;
   line-height: 1em;
+}
+
+[data-theme="dark"] h1 {
+  color: #dbd7ca;
 }
 
 @media screen and (max-width: 480px) {
@@ -53,8 +61,12 @@ p {
   line-height: 1.5em;
 }
 
-.orangeh1 {
+.coloredh1 {
   color: #ff450b;
+}
+
+[data-theme="dark"] .coloredh1 {
+  color: #ea000d;
 }
 
 h6 {
@@ -83,6 +95,7 @@ h6 {
   position: relative;
   margin: auto 2em;
 }
+
 @media screen and (max-width: 768px) {
   .splashLayout {
     flex-direction: column;
@@ -123,12 +136,31 @@ h6 {
   }
 }
 
+/* [data-theme="dark"] .mascot {
+  content: url("/img/peter-dragon-darkmode.svg");
+  position: absolute;
+  right: 0%;
+  top: 35%;
+  width: 50%;
+} */
+
 .mascot {
   position: absolute;
-  right: -35%;
+  right: 0%;
   top: 35%;
-  width: 90%;
-  /* width: 550px; */
+  width: 50%;
+}
+
+.mascotDarkMode {
+  position: absolute;
+  right: 0%;
+  top: 35%;
+  width: 50%;
+  display: none;
+}
+
+[data-theme="dark"] .mascotDarkMode {
+  display: block;
 }
 
 @media screen and (max-width: 1024px) {
@@ -149,11 +181,33 @@ h6 {
   }
 }
 
+@media screen and (max-width: 768px) {
+  .mascotDarkMode {
+    max-width: 100px;
+    top: 8%;
+    left: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+[data-theme="dark"] .mascot {
+  display: none;
+}
+
 .clouds {
   background-image: url("/img/clouds.svg");
   background-repeat: no-repeat;
   background-position: 20% center 20% center;
   background-size: 100%;
+}
+
+[data-theme="dark"] .cloudsDarkMode {
+  background-image: url("/img/darkmode/clouds-dm.svg");
+  background-repeat: no-repeat;
+  background-position: 20% center 20% center;
+  background-size: 100%;
+  display: block;
 }
 
 /* /////////////////////////// npm Section /////////////////////////// */
@@ -167,6 +221,20 @@ h6 {
 
 .brickBackground {
   background-image: url("/img/brick-wall.svg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  display: flex;
+  margin: 0;
+  padding: 0 1em;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .brickBackgroundDarkMode {
+  background-image: url("/img/darkmode/brick-wall-dm.svg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center top;
@@ -237,11 +305,53 @@ h6 {
   width: 36%;
 }
 
+.fireballDarkMode {
+  position: absolute;
+  left: -15%;
+  top: 0%;
+  width: 36%;
+  display: none;
+}
+
+[data-theme="dark"] .fireballDarkMode {
+  display: block;
+}
+
 .sword {
   position: absolute;
   right: -25%;
   bottom: 10%;
   width: 40%;
+  transform: rotate(0deg);
+  transition: transform ease 0.1s;
+}
+
+.sword:hover {
+  transform: rotate(5deg);
+  bottom: 15%;
+}
+
+.swordDarkMode {
+  position: absolute;
+  right: -25%;
+  bottom: 10%;
+  width: 40%;
+  transform: rotate(0deg);
+  transition: transform ease 0.1s;
+  display: none;
+}
+
+[data-theme="dark"] .sword {
+  display: none;
+}
+
+[data-theme="dark"] .swordDarkMode {
+  display: block;
+}
+
+[data-theme="dark"] .swordDarkMode:hover {
+  transform: rotate(5deg);
+  bottom: 15%;
 }
 
 .shield {
@@ -249,6 +359,18 @@ h6 {
   left: -35%;
   top: 60%;
   width: 30%;
+}
+
+.shieldDarkMode {
+  position: absolute;
+  left: -35%;
+  top: 60%;
+  width: 30%;
+  display: none;
+}
+
+[data-theme="dark"] .shieldDarkMode {
+  display: block;
 }
 
 .demoArea {
@@ -288,6 +410,21 @@ h6 {
 
 .demoWindow {
   top: 8%;
+  display: block;
+}
+
+[data-theme="dark"] .demoWindowDarkMode {
+  top: 8%;
+  display: block;
+  width: inherit;
+}
+
+.demoWindowDarkMode {
+  display: none;
+}
+
+[data-theme="dark"] .demoWindow {
+  display: none;
 }
 
 /* /////////////////////////// Usage Section /////////////////////////// */
@@ -307,6 +444,26 @@ h6 {
   display: block;
 }
 
+.meadowTopDarkMode {
+  position: absolute;
+  bottom: calc(100% - 3px);
+  left: 0;
+  display: none;
+}
+
+[data-theme="dark"] .meadowTop {
+  display: none;
+}
+
+[data-theme="dark"] .meadowTopDarkMode {
+  display: block;
+}
+
+[data-theme="dark"] .meadowTopDarkMode img {
+  width: 100%;
+  display: block;
+}
+
 .meadowBottom {
   background-image: url("/img/meadow-bottom.svg");
   background-repeat: repeat-y;
@@ -314,6 +471,17 @@ h6 {
   background-size: 100%;
   background-origin: content-box;
   margin: 0;
+  display: block;
+}
+
+[data-theme="dark"] .meadowBottomDarkMode {
+  background-image: url("/img/darkmode/meadow-bottom-dm.svg");
+  background-repeat: repeat-y;
+  background-position: center top;
+  background-size: 100%;
+  background-origin: content-box;
+  margin: 0;
+  display: block;
 }
 
 h4 {
@@ -367,14 +535,33 @@ h4 {
   right: -15%;
 }
 
+.stag:hover {
+  transform: rotate(-20deg);
+}
+
 @media screen and (max-width: 768px) {
   .stag {
     display: none;
   }
 }
 
-.stag:hover {
-  transform: rotate(-20deg);
+.stagDarkMode {
+  position: absolute;
+  z-index: 1;
+  transform: rotate(0deg);
+  transition: transform ease 0.5s;
+  width: 180px;
+  top: 18%;
+  right: -15%;
+  display: none;
+}
+
+[data-theme="dark"] .stag {
+  display: none;
+}
+
+[data-theme="dark"] .stagDarkMode {
+  display: block;
 }
 
 /* /////////////////////////// Features Section /////////////////////////// */
@@ -385,7 +572,7 @@ h4 {
 
 .oceanTop {
   position: absolute;
-  bottom: calc(100% - 3px);
+  bottom: calc(100% - 5px);
   left: 0;
   width: 100%;
 }
@@ -395,11 +582,41 @@ h4 {
   display: block;
 }
 
+.oceanTopDarkMode {
+  display: none;
+}
+
+[data-theme="dark"] .oceanTop {
+  display: none;
+}
+
+[data-theme="dark"] .oceanTopDarkMode {
+  position: absolute;
+  bottom: calc(100% - 5px);
+  left: 0;
+  width: 100%;
+  display: block;
+}
+
+[data-theme="dark"] .oceanTopDarkMode img {
+  width: 100%;
+  display: block;
+}
+
 .oceanBottom {
   background-image: url("/img/ocean-bottom.svg");
   background-repeat: repeat-y;
   background-position: 0 5em;
   background-size: 100% auto;
+  display: block;
+}
+
+[data-theme="dark"] .oceanBottomDarkMode {
+  background-image: url("/img/darkmode/ocean-bottom-dm.svg");
+  background-repeat: repeat-y;
+  background-position: 0 5em;
+  background-size: 100% auto;
+  display: block;
 }
 
 .featuresLayout {
@@ -447,6 +664,37 @@ h4 {
   }
 }
 
+.jellyDarkMode {
+  display: none;
+}
+
+[data-theme="dark"] .jelly {
+  display: none;
+}
+
+[data-theme="dark"] .jellyDarkMode {
+  position: absolute;
+  right: -8%;
+  top: 25%;
+  width: 150px;
+  transform: rotate(0deg);
+  transition: transform ease 1s;
+  transition: top ease 1.5s;
+  display: block;
+}
+
+[data-theme="dark"] .jellyDarkMode:hover {
+  transform: rotate(10deg);
+  top: 27%;
+  display: block;
+}
+
+@media screen and (max-width: 768px) {
+  .jellyDarkMode {
+    display: none;
+  }
+}
+
 .featureCardBackground {
   display: flex;
   background-color: #3f9dd2;
@@ -455,6 +703,10 @@ h4 {
   width: calc(50% - 0.5em);
   height: 200px;
   align-items: center;
+}
+
+[data-theme="dark"] .featureCardBackground {
+  background-color: #12353a;
 }
 
 @media screen and (max-width: 600px) {
@@ -502,7 +754,26 @@ h4 {
   left: 0;
 }
 
+.brickTopDarkMode {
+  display: none;
+}
+
+[data-theme="dark"] .brickTop {
+  display: none;
+}
+
+[data-theme="dark"] .brickTopDarkMode {
+  position: absolute;
+  bottom: calc(100% - 10px);
+  left: 0;
+  display: block;
+}
+
 .brickTop img {
+  display: block;
+}
+
+.brickTopDarkMode img {
   display: block;
 }
 
@@ -511,6 +782,15 @@ h4 {
   background-repeat: repeat-y;
   background-position: 0 5em;
   background-size: 100% auto;
+  display: block;
+}
+
+[data-theme="dark"] .brickBottomDarkMode {
+  background-image: url("/img/darkmode/brick-bottom-dm.svg");
+  background-repeat: repeat-y;
+  background-position: 0 5em;
+  background-size: 100% auto;
+  display: block;
 }
 
 h2 {
@@ -561,15 +841,39 @@ h2 {
   justify-content: center;
 }
 
+[data-theme="dark"] .wingedCreature {
+  display: none;
+}
+
+.wingedCreatureDarkMode {
+  display: none;
+}
+
+[data-theme="dark"] .wingedCreatureDarkMode {
+  justify-content: center;
+  display: flex;
+}
+
+.wingedCreature img {
+  width: 700px;
+  z-index: 1;
+}
+
+.wingedCreatureDarkMode img {
+  width: 700px;
+  z-index: 1;
+}
+
 @media screen and (max-width: 1024px) {
   .wingedCreature {
     width: 280px;
   }
 }
 
-.wingedCreature img {
-  width: 700px;
-  z-index: 1;
+@media screen and (max-width: 1024px) {
+  .wingedCreatureDarkMode {
+    width: 280px;
+  }
 }
 
 .learnMoreText {
@@ -580,26 +884,6 @@ h2 {
 
 /* 480px, 600px, 768px, 1024px, 1200px */
 
-/* .wingedCreature {
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  transition: top ease 5s;
-  right: 10em;
+.navbar-logo {
+  width: 20%;
 }
-
-.wingedCreature:hover {
-  top: 20%;
-}
-
-.wingedCreature img {
-  width: 300px;
-  z-index: 1;
-}
-
-.learnMoreText {
-  display: flex;
-  flex-direction: column;
-  row-gap: 1em;
-  position: relative;
-} */

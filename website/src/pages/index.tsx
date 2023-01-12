@@ -5,35 +5,37 @@ import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import styles from "./index.module.css";
 import { featuresData } from "../components/featuresData.js";
+import "animate.css";
+import { useState } from "react";
 
 import {
   CopyBlock,
   CodeBlock,
-  dracula,
   atomOneLight,
   a11yLight,
   a11yDark,
 } from "react-code-blocks";
+import { docusaurusVersion } from "@generated/site-metadata";
 
-function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro"
-          >
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
+// function HomepageHeader() {
+//   const { siteConfig } = useDocusaurusContext();
+//   return (
+//     <header className={clsx("hero hero--primary", styles.heroBanner)}>
+//       <div className="container">
+//         <h1 className="hero__title">{siteConfig.title}</h1>
+//         <p className="hero__subtitle">{siteConfig.tagline}</p>
+//         <div className={styles.buttons}>
+//           <Link
+//             className="button button--secondary button--lg"
+//             to="/docs/intro"
+//           >
+//             Docusaurus Tutorial - 5min ⏱️
+//           </Link>
+//         </div>
+//       </div>
+//     </header>
+//   );
+// }
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
@@ -44,13 +46,13 @@ export default function Home(): JSX.Element {
     >
       <main>
         <section className={styles.splash}>
-          <div className={styles.clouds}>
+          <div className={` ${styles.clouds} ${styles.cloudsDarkMode}`}>
             <div className={styles.textColumn}>
               <div className={styles.splashLayout}>
                 <div className={styles.splashText}>
                   <h1>
-                    One <span className={styles.orangeh1}>hook</span> to{" "}
-                    <span className={styles.orangeh1}>repeat</span> them all
+                    One <span className={styles.coloredh1}>hook</span> to{" "}
+                    <span className={styles.coloredh1}>repeat</span> them all
                   </h1>
                   <h3>
                     A plug-and-play React library to create repeatable fields
@@ -59,10 +61,12 @@ export default function Home(): JSX.Element {
                 </div>
 
                 <div className={styles.mascot}>
+                  <img src="/img/peter-dragon.svg" alt="Peter the Dragon" />
+                </div>
+                <div className={styles.mascotDarkMode}>
                   <img
-                    src="img/peter-dragon-black.svg"
-                    alt="Peter the dragon, mascot of useRepeatable"
-                    className={styles.peter}
+                    src="/img/darkmode/peter-dragon-dm.svg"
+                    alt="Peter the Dragon"
                   />
                 </div>
               </div>
@@ -71,7 +75,9 @@ export default function Home(): JSX.Element {
         </section>
 
         <section className={styles.npm}>
-          <div className={styles.brickBackground}>
+          <div
+            className={`${styles.brickBackground} ${styles.brickBackgroundDarkMode}`}
+          >
             <div className={styles.container}>
               <div className={styles.npmSection}>
                 <CopyBlock
@@ -100,28 +106,43 @@ npm run start`}
                       className={styles.fireball}
                     />
                     <img
+                      src="./img/darkmode/fireball-dm.svg"
+                      alt="Fireball"
+                      className={styles.fireballDarkMode}
+                    />
+                    <img
                       src="./img/sword.svg"
                       alt="Sword"
                       className={styles.sword}
+                    />
+                    <img
+                      src="./img/darkmode/sword-dm.svg"
+                      alt="Sword"
+                      className={styles.swordDarkMode}
                     />
                     <img
                       src="./img/shield.svg"
                       alt="Shield"
                       className={styles.shield}
                     />
+                    <img
+                      src="./img/darkmode/shield-dm.svg"
+                      alt="Shield"
+                      className={styles.shieldDarkMode}
+                    />
                   </div>
                   <div className={styles.demoArea}>
-                    <div className={styles.trialsOfTheRepeater}>
-                      <div className={styles.demoHeading}>
-                        <h4>Trial of The Repeater</h4>
-                        <p>Test It Out!</p>
-                      </div>
+                    <div className={styles.demoHeading}>
+                      <h4>Trial of The Repeater</h4>
+                      <p>Test It Out!</p>
                     </div>
                     <div className={styles.demoWindow}>
+                      <img src="./img/demo-area.svg" alt="demo area" />
+                    </div>
+                    <div className={styles.demoWindowDarkMode}>
                       <img
-                        src="./img/demo-area.svg"
+                        src="./img/darkmode/demo-area-dm.svg"
                         alt="demo area"
-                        className={styles.demoBackground}
                       />
                     </div>
                   </div>
@@ -135,10 +156,23 @@ npm run start`}
           <div className={styles.meadowTop}>
             <img src="/img/meadow-top.png" alt="Grass illustration" />
           </div>
-          <div className={styles.meadowBottom}>
+          <div className={styles.meadowTopDarkMode}>
+            <img
+              src="/img/darkmode/meadow-top-dm.png"
+              alt="Grass illustration"
+            />
+          </div>
+          <div
+            className={`${styles.meadowBottom} ${styles.meadowBottomDarkMode}`}
+          >
             <div className={styles.usageLayout}>
               <div className={styles.codeBlockContainer}>
                 <img src="/img/stag.svg" className={styles.stag} />
+                <img
+                  src="/img/darkmode/stag-dm.svg"
+                  className={styles.stagDarkMode}
+                />
+
                 <div className={styles.codeBlockBase}>
                   <h4>Using The Hook</h4>
 
@@ -247,11 +281,23 @@ return <RepeatableList
           <div className={styles.oceanTop}>
             <img src="./img/ocean-top.png" alt="Waves illustration" />
           </div>
-          <div className={styles.oceanBottom}>
+          <div className={styles.oceanTopDarkMode}>
+            <img
+              src="./img/darkmode/ocean-top-dm.png"
+              alt="Waves illustration"
+            />
+          </div>
+          <div
+            className={`${styles.oceanBottom} ${styles.oceanBottomDarkMode}`}
+          >
             <div className={styles.featuresLayout}>
               <div className={styles.featuresContainer}>
                 <h4>Features</h4>
                 <img src="/img/jelly.svg" className={styles.jelly} />
+                <img
+                  src="/img/darkmode/jelly-dm.svg"
+                  className={styles.jellyDarkMode}
+                />
 
                 <div className={styles.gridContainer}>
                   {featuresData.map((featuresData) => {
@@ -267,7 +313,12 @@ return <RepeatableList
           <div className={styles.brickTop}>
             <img src="./img/brick-top.png" alt="brick wall" />
           </div>
-          <div className={styles.brickBottom}>
+          <div className={styles.brickTopDarkMode}>
+            <img src="./img/darkmode/brick-top-dm.png" alt="brick wall" />
+          </div>
+          <div
+            className={`${styles.brickBottom} ${styles.brickBottomDarkMode}`}
+          >
             <div className={styles.learnMoreLayout}>
               <div className={styles.learnMoreText}>
                 <h2>Adventure Awaits!</h2>
@@ -277,7 +328,11 @@ return <RepeatableList
                 </p>
               </div>
               <div className={styles.wingedCreature}>
-                <img src="./img/adventure.svg" alt="winged creature" />
+                <img src="./img/winged.svg" alt="winged creature" />
+              </div>
+
+              <div className={styles.wingedCreatureDarkMode}>
+                <img src="./img/darkmode/winged-dm.svg" alt="winged creature" />
               </div>
             </div>
           </div>
