@@ -378,6 +378,20 @@ h6 {
   width: 650px;
 }
 
+@media screen and (max-width: 1024px) {
+  .demoArea {
+    margin: 0 0 10em 0;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .demoArea {
+    margin: 0 0 10em 0;
+    width: 100%;
+  }
+}
+
 .demoHeading {
   margin: 10.6em 0 0 0;
   position: absolute;
@@ -386,9 +400,16 @@ h6 {
   right: 0;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 1024px) {
   .demoHeading {
-    margin: 7.5em 0 0 0;
+    margin: 8.5em 0 0 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .demoHeading {
+    padding-top: 7.5em;
+    margin: auto;
   }
 }
 
@@ -411,13 +432,13 @@ h6 {
 .demoWindow {
   top: 8%;
   display: block;
-  width: 100%;
+  min-width: 100%;
 }
 
 [data-theme="dark"] .demoWindowDarkMode {
   top: 8%;
   display: block;
-  width: 100%;
+  min-width: 100%;
 }
 
 .demoWindowDarkMode {
