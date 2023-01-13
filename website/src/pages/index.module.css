@@ -264,12 +264,34 @@ h6 {
   font-family: "input-mono-narrow", monospace;
   font-size: 18px;
   padding: 10em 0 0 0;
-  left: 0;
-  right: 0;
+}
+
+.npmSectionDarkMode {
+  display: none;
+}
+
+[data-theme="dark"] .npmSection {
+  display: none;
+}
+
+[data-theme="dark"] .npmSectionDarkMode {
+  position: relative;
+  z-index: 1;
+  margin: 0 auto;
+  font-family: "input-mono-narrow", monospace;
+  font-size: 18px;
+  padding: 10em 0 0 0;
+  display: block;
 }
 
 @media screen and (max-width: 1024px) {
   .npmSection {
+    padding: 6em 0 8em 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  [data-theme="dark"] .npmSectionDarkMode {
     padding: 6em 0 8em 0;
   }
 }
@@ -280,9 +302,16 @@ h6 {
   }
 }
 
-.npmCodeBlock {
-  border-radius: 50px;
+@media screen and (max-width: 768px) {
+  [data-theme="dark"] .npmSectionDarkMode {
+    padding: 3em 0 4em 0;
+  }
 }
+
+/* .npmCodeBlock {
+  border-radius: 50px;
+  background: "none";
+} */
 
 /* /////////////////////////// Demo Section /////////////////////////// */
 
@@ -300,16 +329,16 @@ h6 {
 
 .fireball {
   position: absolute;
-  left: -15%;
-  top: 0%;
-  width: 36%;
+  left: -20%;
+  top: -2%;
+  width: 40%;
 }
 
 .fireballDarkMode {
   position: absolute;
-  left: -15%;
-  top: 0%;
-  width: 36%;
+  left: -20%;
+  top: -2%;
+  width: 40%;
   display: none;
 }
 
@@ -319,9 +348,9 @@ h6 {
 
 .sword {
   position: absolute;
-  right: -25%;
+  right: -30%;
   bottom: 10%;
-  width: 40%;
+  width: 43%;
   transform: rotate(0deg);
   transition: transform ease 0.1s;
 }
@@ -333,9 +362,9 @@ h6 {
 
 .swordDarkMode {
   position: absolute;
-  right: -25%;
+  right: -30%;
   bottom: 10%;
-  width: 40%;
+  width: 43%;
   transform: rotate(0deg);
   transition: transform ease 0.1s;
   display: none;
@@ -358,14 +387,14 @@ h6 {
   position: absolute;
   left: -35%;
   top: 60%;
-  width: 30%;
+  width: 33%;
 }
 
 .shieldDarkMode {
   position: absolute;
   left: -35%;
   top: 60%;
-  width: 30%;
+  width: 33%;
   display: none;
 }
 
@@ -547,6 +576,23 @@ h4 {
   width: 100%;
 }
 
+.codeBlockDarkMode {
+  display: none;
+}
+
+[data-theme="dark"] .codeBlock {
+  display: none;
+}
+
+[data-theme="dark"] .codeBlockDarkMode {
+  margin: 1em 0 0 0;
+  padding: 0;
+  border-radius: 20px;
+  max-width: 650px;
+  width: 100%;
+  display: block;
+}
+
 .stag {
   position: absolute;
   z-index: 1;
@@ -567,6 +613,10 @@ h4 {
   }
 }
 
+[data-theme="dark"] .stag {
+  display: none;
+}
+
 .stagDarkMode {
   position: absolute;
   z-index: 1;
@@ -578,12 +628,18 @@ h4 {
   display: none;
 }
 
-[data-theme="dark"] .stag {
-  display: none;
-}
-
 [data-theme="dark"] .stagDarkMode {
   display: block;
+}
+
+[data-theme="dark"] .stagDarkMode:hover {
+  transform: rotate(-20deg);
+}
+
+@media screen and (max-width: 768px) {
+  [data-theme="dark"] .stagDarkMode {
+    display: none;
+  }
 }
 
 /* /////////////////////////// Features Section /////////////////////////// */
@@ -712,7 +768,7 @@ h4 {
 }
 
 @media screen and (max-width: 768px) {
-  .jellyDarkMode {
+  [data-theme="dark"] .jellyDarkMode {
     display: none;
   }
 }

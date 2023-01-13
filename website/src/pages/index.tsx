@@ -81,14 +81,39 @@ export default function Home(): JSX.Element {
             <div className={styles.container}>
               <div className={styles.npmSection}>
                 <CopyBlock
-                  customStyle={{}}
+                  customStyle={{
+                    borderRadius: "15px",
+                    background: "white",
+                    padding: "20px",
+                    border: 0,
+                  }}
                   codeContainerStyle={{
                     border: 0,
-                    padding: "20px",
                     background: "none",
                   }}
                   className={styles.npmCodeBlock}
-                  theme={atomOneLight}
+                  theme={a11yLight}
+                  showLineNumbers={true}
+                  text={`npm install @thegoodwork/use-repeatable
+npm run start`}
+                  language={`bash`}
+                  codeBlock
+                />
+              </div>
+              <div className={styles.npmSectionDarkMode}>
+                <CopyBlock
+                  customStyle={{
+                    borderRadius: "15px",
+                    background: "rgb(43, 43, 43)",
+                    padding: "20px",
+                    border: 0,
+                  }}
+                  codeContainerStyle={{
+                    border: 0,
+                    background: "none",
+                  }}
+                  className={styles.npmCodeBlock}
+                  theme={a11yDark}
                   showLineNumbers={true}
                   text={`npm install @thegoodwork/use-repeatable
 npm run start`}
@@ -196,6 +221,54 @@ npm run start`}
                         borderWidth: 0,
                         margin: 0,
                         boxShadow: "none",
+                        background: "white",
+                      }}
+                      text={`import {useRepeatable} from 'use-repeatable'
+
+type Fruit = { color: string; name: string }; 
+                
+// default new item is required 
+const fruit: Fruit = { color: "red", name: "apple" }; 
+                
+// optionally initialise with collection of objects
+const initialFruits = [ 
+      { color: "red", name: "apple" }, 
+      { color: "orange", name: "orange" }, 
+  ];
+                
+function App() {
+const { items, removeItem, addItem, moveItem } = useRepeatable({
+      newItem: fruit,
+      initialState: initialFruits, 
+    }); 
+
+... 
+}`}
+                      language={`bash`}
+                      codeBlock
+                    />
+                  </div>
+
+                  <div className={styles.codeBlockDarkMode}>
+                    <CodeBlock
+                      className={styles.codeBlockCode}
+                      theme={a11yDark}
+                      showLineNumbers={true}
+                      codeContainerStyle={{
+                        border: 0,
+                        padding: "30px",
+                        background: "none",
+                      }}
+                      customStyle={{
+                        fontFamily: "input-mono-narrow, monospace",
+                        height: "auto",
+                        overflow: "scroll",
+                        borderRadius: "20px",
+                        fontSize: "14px",
+                        padding: "0",
+                        borderWidth: 0,
+                        margin: 0,
+                        boxShadow: "none",
                       }}
                       text={`import {useRepeatable} from 'use-repeatable'
 
@@ -234,6 +307,49 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
                       language={`bash`}
                       codeBlock
                       theme={a11yLight}
+                      showLineNumbers={true}
+                      codeContainerStyle={{
+                        border: 0,
+                        padding: "30px",
+                        background: "none",
+                      }}
+                      customStyle={{
+                        fontFamily: "input-mono-narrow, monospace",
+                        height: "auto",
+                        overflow: "scroll",
+                        borderRadius: "20px",
+                        fontSize: "14px",
+                        padding: "0",
+                        borderWidth: 0,
+                      }}
+                      text={`import {useRepeatable} from 'use-repeatable'
+
+type Fruit = { color: string; name: string }; 
+                    
+// default new item is required 
+const fruit: Fruit = { color: "red", name: "apple" }; 
+                    
+// optionally initialise with collection of objects
+const initialFruits = [ 
+    { color: "red", name: "apple" }, 
+    { color: "orange", name: "orange" }, 
+];
+                    
+function App() {
+return <RepeatableList 
+    onChange={() => null}
+    newItem={fruit}
+    initialState={initialFruits}
+    ... />
+  }`}
+                    />
+                  </div>
+
+                  <div className={styles.codeBlockDarkMode}>
+                    <CodeBlock
+                      language={`bash`}
+                      codeBlock
+                      theme={a11yDark}
                       showLineNumbers={true}
                       codeContainerStyle={{
                         border: 0,
