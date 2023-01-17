@@ -179,11 +179,11 @@ npm run start`}
 
         <section className={styles.usage}>
           <div className={styles.meadowTop}>
-            <img src="/img/meadow-top.png" alt="Grass illustration" />
+            <img src="/img/meadow-top2.svg" alt="Grass illustration" />
           </div>
           <div className={styles.meadowTopDarkMode}>
             <img
-              src="/img/darkmode/meadow-top-dm.png"
+              src="/img/darkmode/meadow-top-dm2.svg"
               alt="Grass illustration"
             />
           </div>
@@ -395,11 +395,11 @@ return <RepeatableList
 
         <section className={styles.features}>
           <div className={styles.oceanTop}>
-            <img src="./img/ocean-top.png" alt="Waves illustration" />
+            <img src="./img/ocean-top.svg" alt="Waves illustration" />
           </div>
           <div className={styles.oceanTopDarkMode}>
             <img
-              src="./img/darkmode/ocean-top-dm.png"
+              src="./img/darkmode/ocean-top-dm2.svg"
               alt="Waves illustration"
             />
           </div>

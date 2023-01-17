@@ -103,15 +103,21 @@ h6 {
   }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 600px) {
   .splashLayout {
     margin: auto 1em;
   }
 }
 
+@media screen and (max-width: 480px) {
+  .splashLayout {
+    margin: auto 0em;
+  }
+}
+
 .splashText {
   width: 45%;
-  padding: 7em 0 3em 0;
+  padding: 6em 0 3em 0;
 }
 
 @media screen and (max-width: 1024px) {
@@ -149,6 +155,11 @@ h6 {
   right: 0%;
   top: 35%;
   width: 50%;
+  transition: top ease 0.8s;
+}
+
+.mascot:hover {
+  top: 25%;
 }
 
 .mascotDarkMode {
@@ -298,7 +309,7 @@ h6 {
 
 @media screen and (max-width: 768px) {
   .npmSection {
-    padding: 3em 0 4em 0;
+    padding: 4em 0 4em 0;
   }
 }
 
@@ -403,7 +414,7 @@ h6 {
 }
 
 .demoArea {
-  margin: 5em 0 10em 0;
+  margin: 5em 0 7em 0;
   width: 650px;
 }
 
@@ -431,14 +442,51 @@ h6 {
 
 @media screen and (max-width: 1024px) {
   .demoHeading {
-    margin: 8.5em 0 0 0;
+    margin: 11em 0 0 0;
   }
 }
 
 @media screen and (max-width: 768px) {
   .demoHeading {
-    padding-top: 7.5em;
+    padding-top: 35%;
     margin: auto;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .demoHeading h4 {
+    font-size: 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .demoHeading {
+    padding-top: 35%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .demoHeading h4 {
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .demoHeading p {
+    font-size: 18px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .demoHeading h4 {
+    font-size: 20px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .demoHeading p {
+    font-size: 14px;
   }
 }
 
@@ -488,6 +536,7 @@ h6 {
   position: absolute;
   bottom: calc(100% - 3px);
   left: 0;
+  width: 100%;
 }
 
 .meadowTop img {
@@ -500,6 +549,7 @@ h6 {
   bottom: calc(100% - 3px);
   left: 0;
   display: none;
+  width: 100%;
 }
 
 [data-theme="dark"] .meadowTop {
@@ -516,7 +566,7 @@ h6 {
 }
 
 .meadowBottom {
-  background-image: url("/img/meadow-bottom.svg");
+  background-image: url("/img/meadow-bottom2.svg");
   background-repeat: repeat-y;
   background-position: center top;
   background-size: 100%;
@@ -526,7 +576,7 @@ h6 {
 }
 
 [data-theme="dark"] .meadowBottomDarkMode {
-  background-image: url("/img/darkmode/meadow-bottom-dm.svg");
+  background-image: url("/img/darkmode/meadow-bottom-dm2.svg");
   background-repeat: repeat-y;
   background-position: center top;
   background-size: 100%;
@@ -549,7 +599,7 @@ h4 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 4em 0 10em 0;
+  padding: 4em 0 8em 0;
   row-gap: 5em;
   min-width: 320px;
   overflow: hidden;
@@ -650,7 +700,7 @@ h4 {
 
 .oceanTop {
   position: absolute;
-  bottom: calc(100% - 5px);
+  bottom: calc(100% - 3px);
   left: 0;
   width: 100%;
 }
@@ -670,7 +720,7 @@ h4 {
 
 [data-theme="dark"] .oceanTopDarkMode {
   position: absolute;
-  bottom: calc(100% - 5px);
+  bottom: calc(100% - 3px);
   left: 0;
   width: 100%;
   display: block;
@@ -690,7 +740,7 @@ h4 {
 }
 
 [data-theme="dark"] .oceanBottomDarkMode {
-  background-image: url("/img/darkmode/ocean-bottom-dm.svg");
+  background-image: url("/img/darkmode/ocean-bottom-dm2.svg");
   background-repeat: repeat-y;
   background-position: 0 5em;
   background-size: 100% auto;
