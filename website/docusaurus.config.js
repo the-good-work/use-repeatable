@@ -6,18 +6,18 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: "My Site",
-  tagline: "Dinosaurs are cool",
-  url: "https://your-docusaurus-test-site.com",
+  title: "useRepeatable",
+  tagline: "React hook and component for easy repeating elements",
+  url: "https://userepeatable.goodwork.sg",
   baseUrl: "/",
-  onBrokenLinks: "throw",
+  onBrokenLinks: "warn",
   onBrokenMarkdownLinks: "warn",
   favicon: "img/favicon.ico",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: "facebook", // Usually your GitHub org/user name.
-  projectName: "docusaurus", // Usually your repo name.
+  organizationName: "the-good-work", // Usually your GitHub org/user name.
+  projectName: "use-repeatable", // Usually your repo name.
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
@@ -37,14 +37,7 @@ const config = {
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
-        },
-        blog: {
-          showReadingTime: true,
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl:
-            "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/",
+            "https://github.com/the-good-work/use-repeatable/tree/master/website",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -69,10 +62,8 @@ const config = {
 
         items: [
           {
-            // type: "doc",
-            // docId: "intro",
             position: "left",
-            label: "Documentation",
+            label: "npm",
             href: "https://www.npmjs.com/package/@thegoodwork/use-repeatable",
           },
           { to: "/example", label: "Examples", position: "left" },
@@ -90,14 +81,6 @@ const config = {
         respectPrefersColorScheme: true,
       },
 
-      announcementBar: {
-        id: "construction",
-        content: "site is under construction :-))",
-        backgroundColor: "#fafbfc",
-        textColor: "#091E42",
-        isCloseable: true,
-      },
-
       footer: {
         style: "dark",
         links: [
@@ -105,29 +88,11 @@ const config = {
             title: "Docs",
             items: [
               {
-                label: "Documentation",
-                // to: "/docs/intro",
+                label: "npm",
                 href: "https://www.npmjs.com/package/@thegoodwork/use-repeatable",
               },
             ],
           },
-          // {
-          //   title: "Community",
-          //   items: [
-          //     {
-          //       label: "Stack Overflow",
-          //       href: "https://stackoverflow.com/questions/tagged/docusaurus",
-          //     },
-          //     {
-          //       label: "Discord",
-          //       href: "https://discordapp.com/invite/docusaurus",
-          //     },
-          //     {
-          //       label: "Twitter",
-          //       href: "https://twitter.com/docusaurus",
-          //     },
-          //   ],
-          // },
           {
             title: "More",
             items: [
