@@ -53,7 +53,7 @@ interface RepeatableListProps<T> {
 interface SortableCardProps<T> {
     id: string;
     Card: React.FC<CardProps<T>>;
-    cardProps: Omit<CardProps<T>, "dragHandleListeners">;
+    cardProps: Omit<CardProps<T>, "dragHandleListeners" | "DragHandle">;
 }
 interface CardProps<T> {
     /**
@@ -114,7 +114,7 @@ interface CardProps<T> {
      * @param children - Children to be rendered on the button
      * @param className - Define your own class name
      */
-    DragHandle?: React.FC<{
+    DragHandle: React.FC<{
         children?: React.ReactNode;
         className?: string;
     }>;
@@ -126,7 +126,7 @@ interface CardProps<T> {
      * @param newItem - The new item to be added into `index`
      * @param className - Define your own class name
      */
-    AddButton?: React.FC<{
+    AddButton: React.FC<{
         children?: React.ReactNode;
         onClick?: () => void;
         index?: number;
@@ -140,7 +140,7 @@ interface CardProps<T> {
      * @param onClick - Additional `onClick` function
      * @param className - Define your own class name
      */
-    RemoveButton?: React.FC<{
+    RemoveButton: React.FC<{
         children?: React.ReactNode;
         onClick?: () => void;
         index?: number;
@@ -153,7 +153,7 @@ interface CardProps<T> {
      * @param direction - Indicate the move direction
      * @param className - Define your own class name
      */
-    MoveButton?: React.FC<{
+    MoveButton: React.FC<{
         children?: React.ReactNode;
         onClick?: () => void;
         direction: "up" | "down" | "top" | "bottom";
@@ -197,7 +197,13 @@ interface LayoutProps<T> {
         id: string;
     })[];
     /**
-     * Renders a list of `Card` component
+     * Renders a list of `Card` component, use this component like this: `{Cards}`
+     * @example
+     * const MyLayout = ({ Cards, ...}: LayoutProps<Item>) => (
+     *  <div>
+     *    {Cards}
+     *    ...
+     *  </div>
      */
     Cards: React.ReactElement | React.ReactElement[];
     /**
@@ -208,7 +214,7 @@ interface LayoutProps<T> {
      * @param newItem - The new item to be added into `index`
      * @param className - Define your own class name
      */
-    AddButton?: React.FC<{
+    AddButton: React.FC<{
         children?: React.ReactNode;
         onClick?: () => void;
         index?: number;
@@ -221,7 +227,7 @@ interface LayoutProps<T> {
      * @param onClick - Additional `onClick` function
      * @param className - Define your own class name
      */
-    ClearButton?: React.FC<{
+    ClearButton: React.FC<{
         children?: React.ReactNode;
         onClick?: () => void;
         className?: string;

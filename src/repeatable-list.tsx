@@ -68,8 +68,15 @@ function RepeatableList<T>({
     moveItem,
     updateItem,
     removeAll,
-    AddButton: ({ index, onClick }) => (
-      <div onClick={onClick}>Hello {index}</div>
+    AddButton: ({ onClick, children, index, newItem, className }) => (
+      <AddButton
+        onClick={onClick}
+        children={children}
+        addItem={addItem}
+        index={index || items.length - 1}
+        newItem={newItem}
+        className={className}
+      />
     ),
     ClearButton: ({ children, onClick, className }) => (
       <div>
