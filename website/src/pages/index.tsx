@@ -6,36 +6,9 @@ import Layout from "@theme/Layout";
 import styles from "./index.module.css";
 import { featuresData } from "../components/featuresData.js";
 import "animate.css";
-import { useState } from "react";
+import { RepeatableList } from "@thegoodwork/use-repeatable";
 
-import {
-  CopyBlock,
-  CodeBlock,
-  atomOneLight,
-  a11yLight,
-  a11yDark,
-} from "react-code-blocks";
-import { docusaurusVersion } from "@generated/site-metadata";
-
-// function HomepageHeader() {
-//   const { siteConfig } = useDocusaurusContext();
-//   return (
-//     <header className={clsx("hero hero--primary", styles.heroBanner)}>
-//       <div className="container">
-//         <h1 className="hero__title">{siteConfig.title}</h1>
-//         <p className="hero__subtitle">{siteConfig.tagline}</p>
-//         <div className={styles.buttons}>
-//           <Link
-//             className="button button--secondary button--lg"
-//             to="/docs/intro"
-//           >
-//             Docusaurus Tutorial - 5min ⏱️
-//           </Link>
-//         </div>
-//       </div>
-//     </header>
-//   );
-// }
+import { CopyBlock, CodeBlock, a11yLight, a11yDark } from "react-code-blocks";
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
@@ -124,6 +97,22 @@ npm run start`}
 
               <section className={styles.demo}>
                 <div className={styles.demoLayout}>
+                  <RepeatableList
+                    initialState={[]}
+                    newItem={{ name: "Apple" }}
+                    Card={({ DragHandle }) => (
+                      <div>
+                        <DragHandle>=</DragHandle>this is a Card
+                      </div>
+                    )}
+                    Layout={({ Cards, AddButton }) => (
+                      <div id="demo-list" className={styles.demoList}>
+                        {Cards}
+                        <hr />
+                        <AddButton>Test</AddButton>
+                      </div>
+                    )}
+                  />
                   <div className={styles.trialElements}>
                     <img
                       src="./img/fireball.svg"

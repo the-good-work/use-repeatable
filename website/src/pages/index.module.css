@@ -334,6 +334,12 @@ h6 {
   position: relative;
 }
 
+.demoList {
+  position: absolute;
+  top: 38%;
+  z-index: 3;
+}
+
 .trialElements {
   width: 100%;
 }
@@ -510,6 +516,7 @@ h6 {
   top: 8%;
   display: block;
   min-width: 100%;
+  position: relative;
 }
 
 [data-theme="dark"] .demoWindowDarkMode {
