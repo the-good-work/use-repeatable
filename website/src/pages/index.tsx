@@ -223,8 +223,11 @@ export default function Home(): JSX.Element {
                       }
 
                       return (
-                        <div id="demo-list" className={styles.demoList}>
-                          {Cards}
+                        <>
+                          <div id="demo-list" className={styles.demoList}>
+                            {Cards}
+                          </div>
+
                           <button
                             className={styles.addButton}
                             disabled={disable}
@@ -234,7 +237,7 @@ export default function Home(): JSX.Element {
                           >
                             Recruit More Monsters!
                           </button>
-                        </div>
+                        </>
                       );
                     }}
                   />
@@ -524,7 +527,6 @@ return <RepeatableList
           >
             <div className={styles.featuresLayout}>
               <div className={styles.featuresContainer}>
-                <h3>Features</h3>
                 <h3>Features</h3>
                 <img src="/img/jelly.svg" className={styles.jelly} />
                 <img

@@ -348,6 +348,7 @@ p {
   position: absolute;
   right: 0;
   left: 0;
+  bottom: 15%;
   overflow: scroll;
 }
 
@@ -389,6 +390,10 @@ p {
   border: none;
   padding: 10px;
   width: 450px;
+  height: 55px;
+  z-index: 20;
+  position: absolute;
+  bottom: 0;
 }
 
 .trialElements {
