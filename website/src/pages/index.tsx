@@ -80,6 +80,10 @@ export default function Home(): JSX.Element {
   //   newItem: monster,
   //   initialState: initialMonster,
   // });
+  // const { items, removeItem, addItem, moveItem } = useRepeatable({
+  //   newItem: monster,
+  //   initialState: initialMonster,
+  // });
   return (
     <Layout
       title={`useRepeater ${siteConfig.title}`}
@@ -96,8 +100,10 @@ export default function Home(): JSX.Element {
                     <span className={styles.coloredh1}>repeat</span> them all
                   </h1>
                   <h2>
-                    A plug-and-play React library to create repeatable fields
-                    effortlessly.
+                    <h2>
+                      A plug-and-play React library to create repeatable fields
+                      effortlessly.
+                    </h2>
                   </h2>
                 </div>
 
@@ -135,8 +141,7 @@ export default function Home(): JSX.Element {
                   className={styles.npmCodeBlock}
                   theme={a11yLight}
                   showLineNumbers={true}
-                  text={`npm install @thegoodwork/use-repeatable
-npm run start`}
+                  text={`npm install @thegoodwork/use-repeatable npm run start`}
                   language={`bash`}
                   codeBlock
                 />
@@ -156,8 +161,7 @@ npm run start`}
                   className={styles.npmCodeBlock}
                   theme={a11yDark}
                   showLineNumbers={true}
-                  text={`npm install @thegoodwork/use-repeatable
-npm run start`}
+                  text={`npm install @thegoodwork/use-repeatable npm run start`}
                   language={`bash`}
                   codeBlock
                 />
@@ -273,6 +277,8 @@ npm run start`}
                     <div className={styles.demoHeading}>
                       <h3>Castle Staff List</h3>
                       <p>Non-scary Demo</p>
+                      <h3>Castle Staff List</h3>
+                      <p>Non-scary Demo</p>
                     </div>
                     <div className={styles.demoWindow}>
                       <img src="./img/demo-area.svg" alt="demo area" />
@@ -313,6 +319,7 @@ npm run start`}
 
                 <div className={styles.codeBlockBase}>
                   <h3>Using The Hook</h3>
+                  <h3>Using The Hook</h3>
 
                   <div className={styles.codeBlock}>
                     <CodeBlock
@@ -337,7 +344,7 @@ npm run start`}
                         background: "white",
                       }}
                       text={`import {useRepeatable} from '@thegoodwork/use-repeatable'
-
+                    
 type Fruit = { color: string; name: string }; 
                 
 // default new item is required 
@@ -522,6 +529,7 @@ return <RepeatableList
             <div className={styles.featuresLayout}>
               <div className={styles.featuresContainer}>
                 <h3>Features</h3>
+                <h3>Features</h3>
                 <img src="/img/jelly.svg" className={styles.jelly} />
                 <img
                   src="/img/darkmode/jelly-dm.svg"
@@ -550,6 +558,7 @@ return <RepeatableList
           >
             <div className={styles.learnMoreLayout}>
               <div className={styles.learnMoreText}>
+                <h1>Adventure Awaits!</h1>
                 <h1>Adventure Awaits!</h1>
                 <p>
                   There is so much more to learn about useRepeatable, read our
