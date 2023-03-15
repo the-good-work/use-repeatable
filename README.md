@@ -4,11 +4,6 @@
 
 You can also assign a callback function for when changes happen to the array of objects.
 
-## Todo
-
-- [ ] Simple hook usage example
-- [ ] D&D example
-
 ## Example Usage
 
 ```tsx

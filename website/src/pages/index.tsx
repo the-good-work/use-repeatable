@@ -168,66 +168,60 @@ export default function Home(): JSX.Element {
               </div>
 
               <section className={styles.demo}>
-                <div className={styles.repeatableContainer}>
-                  <RepeatableList
-                    onChange={(items) => {
-                      setMonsters(items);
-                    }}
-                    initialState={[]}
-                    newItem={randomizer(monsterData)}
-                    Card={({
-                      DragHandle,
-                      item,
-                      items,
-                      index,
-                      removeItem,
-                      addItem,
-                      moveItem,
-                    }) => (
-                      <div>
-                        <div className={styles.cardButtons}>
-                          <div>
-                            <DragHandle>
-                              <img
-                                src="./img/drag-handle.svg"
-                                alt="drag handle"
-                                className={styles.dragHandle}
-                              />
-                            </DragHandle>
-                          </div>
-                          <div>
-                            <MonsterCard monsterData={item} />
-                          </div>
-
-                          <button
-                            onClick={() => removeItem(index)}
-                            className={styles.removeButton}
-                          >
+                <RepeatableList
+                  onChange={(items) => {
+                    setMonsters(items);
+                  }}
+                  initialState={[]}
+                  newItem={randomizer(monsterData)}
+                  Card={({
+                    DragHandle,
+                    item,
+                    items,
+                    index,
+                    removeItem,
+                    addItem,
+                    moveItem,
+                  }) => (
+                    <div className={styles.monsterItem}>
+                      <div className={styles.cardButtons}>
+                        <div>
+                          <DragHandle>
                             <img
-                              src="./img/remove-button.svg"
-                              alt="Remove Monster"
+                              src="./img/drag-handle.svg"
+                              alt="drag handle"
+                              className={styles.dragHandle}
                             />
-                          </button>
+                          </DragHandle>
+                        </div>
+                        <div>
+                          <MonsterCard monsterData={item} />
                         </div>
 
-                        {/* {monsterData.map((monsterData) => {
-                            return ();
-                          })} */}
+                        <button
+                          onClick={() => removeItem(index)}
+                          className={styles.removeButton}
+                        >
+                          <img
+                            src="./img/remove-button.svg"
+                            alt="Remove Monster"
+                          />
+                        </button>
                       </div>
-                    )}
-                    Layout={({ Cards, items, addItem }) => {
-                      if (items.length >= 5) {
-                        setDisable(true);
-                      } else {
-                        setDisable(false);
-                      }
+                    </div>
+                  )}
+                  Layout={({ Cards, items, addItem }) => {
+                    if (items.length >= 5) {
+                      setDisable(true);
+                    } else {
+                      setDisable(false);
+                    }
 
                       return (
-                        <>
-                          <div id="demo-list" className={styles.demoList}>
-                            {Cards}
+                        <div id="demo-list" className={styles.demoList}>
+                          <div>
+                          {Cards}
                           </div>
-
                           <button
                             className={styles.addButton}
                             disabled={disable}
@@ -237,7 +231,7 @@ export default function Home(): JSX.Element {
                           >
                             Recruit More Monsters!
                           </button>
-                        </>
+                        </div>
                       );
                     }}
                   />
@@ -443,12 +437,12 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
                       }}
                       text={`import {useRepeatable} from 'use-repeatable'
 
-type Fruit = { color: string; name: string }; 
+                      type Fruit = { color: string; name: string }; 
                     
-// default new item is required 
-const fruit: Fruit = { color: "red", name: "apple" }; 
+                      // default new item is required 
+                      const fruit: Fruit = { color: "red", name: "apple" }; 
                     
-// optionally initialise with collection of objects
+                      // optionally initialise with collection of objects
 const initialFruits = [ 
     { color: "red", name: "apple" }, 
     { color: "orange", name: "orange" }, 
@@ -593,15 +587,17 @@ function MonsterCard({ monsterData }: { monsterData: Monster }) {
   return (
     <div className={styles.monsterCard}>
       <div className={styles.monsterCardBackground}>
-        <div className={styles.monsterImage}>
-          <img src={monsterData.image} alt={monsterData.name} />
-        </div>
+        <img
+          className={styles.monsterImage}
+          src={monsterData.image}
+          alt={monsterData.name}
+        />
+
         <div className={styles.monsterInfo}>
           <div className={styles.monsterIndex}>
             <h6>Monster Information</h6>
             <h5>{monsterData.number}</h5>
           </div>
-          {/* <hr className={styles.horizontalLine}/> */}
 
           <div className={styles.monsterName}>
             <h5>{monsterData.name}</h5>

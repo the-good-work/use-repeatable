@@ -355,11 +355,31 @@ p {
 .demoList {
   position: absolute;
   top: 38%;
+  left: 50%;
+  transform: translate(-50%, 0);
   z-index: 3;
   margin: auto;
   display: flex;
   flex-direction: column;
   row-gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.demoList > div {
+  height: 350px;
+  overflow: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.demoList > div::-webkit-scrollbar {
+  display: none;
+}
+
+.monsterItem {
+  padding-bottom: 15px;
 }
 
 .cardButtons {
@@ -1093,8 +1113,7 @@ h3 {
 }
 
 .monsterImage {
-  height: 165px;
-  display: flex;
+  width: 120px;
 }
 
 .monsterInfo {
