@@ -168,127 +168,124 @@ export default function Home(): JSX.Element {
               </div>
 
               <section className={styles.demo}>
-                <div className={styles.demoLayout}>
-                  <div className={styles.repeatableContainer}>
-                    <RepeatableList
-                      onChange={(items) => {
-                        setMonsters(items);
-                      }}
-                      initialState={[]}
-                      newItem={randomizer(monsterData)}
-                      Card={({
-                        DragHandle,
-                        item,
-                        items,
-                        index,
-                        removeItem,
-                        addItem,
-                        moveItem,
-                      }) => (
-                        <div>
-                          <div className={styles.cardButtons}>
-                            <div>
-                              <DragHandle>
-                                <img
-                                  src="./img/drag-handle.svg"
-                                  alt="drag handle"
-                                  className={styles.dragHandle}
-                                />
-                              </DragHandle>
-                            </div>
-                            <div>
-                              <MonsterCard monsterData={item} />
-                            </div>
-
-                            <button
-                              onClick={() => removeItem(index)}
-                              className={styles.removeButton}
-                            >
+                <div className={styles.repeatableContainer}>
+                  <RepeatableList
+                    onChange={(items) => {
+                      setMonsters(items);
+                    }}
+                    initialState={[]}
+                    newItem={randomizer(monsterData)}
+                    Card={({
+                      DragHandle,
+                      item,
+                      items,
+                      index,
+                      removeItem,
+                      addItem,
+                      moveItem,
+                    }) => (
+                      <div>
+                        <div className={styles.cardButtons}>
+                          <div>
+                            <DragHandle>
                               <img
-                                src="./img/remove-button.svg"
-                                alt="Remove Monster"
+                                src="./img/drag-handle.svg"
+                                alt="drag handle"
+                                className={styles.dragHandle}
                               />
-                            </button>
+                            </DragHandle>
+                          </div>
+                          <div>
+                            <MonsterCard monsterData={item} />
                           </div>
 
-                          {/* {monsterData.map((monsterData) => {
+                          <button
+                            onClick={() => removeItem(index)}
+                            className={styles.removeButton}
+                          >
+                            <img
+                              src="./img/remove-button.svg"
+                              alt="Remove Monster"
+                            />
+                          </button>
+                        </div>
+
+                        {/* {monsterData.map((monsterData) => {
                             return ();
                           })} */}
+                      </div>
+                    )}
+                    Layout={({ Cards, items, addItem }) => {
+                      if (items.length >= 5) {
+                        setDisable(true);
+                      } else {
+                        setDisable(false);
+                      }
+
+                      return (
+                        <div id="demo-list" className={styles.demoList}>
+                          {Cards}
+                          <button
+                            className={styles.addButton}
+                            disabled={disable}
+                            onClick={() => {
+                              addItem();
+                            }}
+                          >
+                            Recruit More Monsters!
+                          </button>
                         </div>
-                      )}
-                      Layout={({ Cards, items, addItem }) => {
-                        if (items.length >= 5) {
-                          setDisable(true);
-                        } else {
-                          setDisable(false);
-                        }
+                      );
+                    }}
+                  />
+                </div>
 
-                        return (
-                          <div id="demo-list" className={styles.demoList}>
-                            {Cards}
-                            <button
-                              className={styles.addButton}
-                              disabled={disable}
-                              onClick={() => {
-                                addItem();
-                              }}
-                            >
-                              Recruit More Monsters!
-                            </button>
-                          </div>
-                        );
-                      }}
-                    />
-                  </div>
+                <div className={styles.trialElements}>
+                  <img
+                    src="./img/fireball.svg"
+                    alt="Fireball"
+                    className={styles.fireball}
+                  />
+                  <img
+                    src="./img/darkmode/fireball-dm.svg"
+                    alt="Fireball"
+                    className={styles.fireballDarkMode}
+                  />
+                  <img
+                    src="./img/sword.svg"
+                    alt="Sword"
+                    className={styles.sword}
+                  />
+                  <img
+                    src="./img/darkmode/sword-dm.svg"
+                    alt="Sword"
+                    className={styles.swordDarkMode}
+                  />
+                  <img
+                    src="./img/shield.svg"
+                    alt="Shield"
+                    className={styles.shield}
+                  />
+                  <img
+                    src="./img/darkmode/shield-dm.svg"
+                    alt="Shield"
+                    className={styles.shieldDarkMode}
+                  />
+                </div>
 
-                  <div className={styles.trialElements}>
-                    <img
-                      src="./img/fireball.svg"
-                      alt="Fireball"
-                      className={styles.fireball}
-                    />
-                    <img
-                      src="./img/darkmode/fireball-dm.svg"
-                      alt="Fireball"
-                      className={styles.fireballDarkMode}
-                    />
-                    <img
-                      src="./img/sword.svg"
-                      alt="Sword"
-                      className={styles.sword}
-                    />
-                    <img
-                      src="./img/darkmode/sword-dm.svg"
-                      alt="Sword"
-                      className={styles.swordDarkMode}
-                    />
-                    <img
-                      src="./img/shield.svg"
-                      alt="Shield"
-                      className={styles.shield}
-                    />
-                    <img
-                      src="./img/darkmode/shield-dm.svg"
-                      alt="Shield"
-                      className={styles.shieldDarkMode}
-                    />
+                <div className={styles.demoArea}>
+                  <div className={styles.demoHeading}>
+                    <h3>Castle Staff List</h3>
+                    <p>Non-scary Demo</p>
                   </div>
-                  <div className={styles.demoArea}>
-                    <div className={styles.demoHeading}>
-                      <h3>Castle Staff List</h3>
-                      <p>Non-scary Demo</p>
-                      <h3>Castle Staff List</h3>
-                      <p>Non-scary Demo</p>
-                    </div>
-                    <div className={styles.demoWindow}>
-                      <img src="./img/demo-area.svg" alt="demo area" />
-                    </div>
-                    <div className={styles.demoWindowDarkMode}>
-                      <img
-                        src="./img/darkmode/demo-area-dm.svg"
-                        alt="demo area"
-                      />
-                    </div>
+                  <div className={styles.demoWindow}>
+                    <img src="./img/demo-area.svg" alt="demo area" />
+                  </div>
+                  <div className={styles.demoWindowDarkMode}>
+                    <img
+                      src="./img/darkmode/demo-area-dm.svg"
+                      alt="demo area"
+                    />
                   </div>
                 </div>
               </section>
@@ -318,7 +315,6 @@ export default function Home(): JSX.Element {
                 />
 
                 <div className={styles.codeBlockBase}>
-                  <h3>Using The Hook</h3>
                   <h3>Using The Hook</h3>
 
                   <div className={styles.codeBlock}>
@@ -558,7 +554,6 @@ return <RepeatableList
           >
             <div className={styles.learnMoreLayout}>
               <div className={styles.learnMoreText}>
-                <h1>Adventure Awaits!</h1>
                 <h1>Adventure Awaits!</h1>
                 <p>
                   There is so much more to learn about useRepeatable, read our
