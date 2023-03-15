@@ -354,20 +354,19 @@ p {
 
 .demoList {
   position: absolute;
-  top: 38%;
+  top: 35%;
   left: 50%;
   transform: translate(-50%, 0);
   z-index: 3;
   margin: auto;
   display: flex;
   flex-direction: column;
-  row-gap: 20px;
   align-items: center;
   justify-content: center;
 }
 
 .demoList > div {
-  height: 350px;
+  height: 460px;
   overflow: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -388,13 +387,19 @@ p {
 }
 
 .dragHandle {
-  width: 25px;
-  height: 25px;
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
 }
 
 .removeButton {
-  width: 35px;
-  height: 35px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 10px;
+  right: 0;
   background: none;
   border: none;
   outline: none;
@@ -431,13 +436,17 @@ p {
 .fireballDarkMode {
   position: absolute;
   left: -20%;
-  top: -2%;
+  top: 0%;
   width: 40%;
   display: none;
 }
 
 [data-theme="dark"] .fireballDarkMode {
   display: block;
+}
+
+[data-theme="dark"] .fireball {
+  display: none;
 }
 
 .sword {
@@ -498,6 +507,9 @@ p {
   display: block;
 }
 
+[data-theme="dark"] .shield {
+  display: none;
+}
 .demoArea {
   margin: 5em 0 7em 0;
   width: 650px;
@@ -518,7 +530,7 @@ p {
 }
 
 .demoHeading {
-  margin: 10.6em 0 0 0;
+  margin: 9.8em 0 0 0;
   position: absolute;
   z-index: 1;
   left: 0;
@@ -1092,13 +1104,12 @@ h3 {
   width: 20%;
 }
 
-.monsterCard {
+/* .monsterCard {
   width: 450px;
   height: 220px;
-  background: white;
   border-radius: 10px;
   display: flex;
-}
+} */
 
 .monsterCardBackground {
   display: flex;
