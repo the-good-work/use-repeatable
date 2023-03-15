@@ -217,25 +217,22 @@ export default function Home(): JSX.Element {
                       setDisable(false);
                     }
 
-                      return (
-                        <div id="demo-list" className={styles.demoList}>
-                          <div>
-                          {Cards}
-                          </div>
-                          <button
-                            className={styles.addButton}
-                            disabled={disable}
-                            onClick={() => {
-                              addItem();
-                            }}
-                          >
-                            Recruit More Monsters!
-                          </button>
-                        </div>
-                      );
-                    }}
-                  />
-                </div>
+                    return (
+                      <div id="demo-list" className={styles.demoList}>
+                        <div>{Cards}</div>
+                        <button
+                          className={styles.addButton}
+                          disabled={disable}
+                          onClick={() => {
+                            addItem();
+                          }}
+                        >
+                          Recruit More Monsters!
+                        </button>
+                      </div>
+                    );
+                  }}
+                />
 
                 <div className={styles.trialElements}>
                   <img
