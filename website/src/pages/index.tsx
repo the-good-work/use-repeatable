@@ -199,15 +199,17 @@ export default function Home(): JSX.Element {
                           <MonsterCard monsterData={item} />
                         </div>
 
-                        <button
-                          onClick={() => removeItem(index)}
-                          className={styles.removeButton}
-                        >
-                          <img
-                            src="./img/remove-button.svg"
-                            alt="Remove Monster"
-                          />
-                        </button>
+                        <div>
+                          <button
+                            onClick={() => removeItem(index)}
+                            className={styles.removeButton}
+                          >
+                            <img
+                              src="./img/remove-button.svg"
+                              alt="Remove Monster"
+                            />
+                          </button>
+                        </div>
                       </div>
                     </div>
                   )}
@@ -506,33 +508,31 @@ function FeatureCard({ data }) {
 function MonsterCard({ monsterData }: { monsterData: Monster }) {
   return (
     <div className={styles.monsterCard}>
-      <div className={styles.monsterCardBackground}>
-        <img
-          className={styles.monsterImage}
-          src={monsterData.image}
-          alt={monsterData.name}
-        />
+      <img
+        className={styles.monsterImage}
+        src={monsterData.image}
+        alt={monsterData.name}
+      />
 
-        <div className={styles.monsterInfo}>
-          <div className={styles.monsterIndex}>
-            <h6>Monster Information</h6>
-            <h5>{monsterData.number}</h5>
-          </div>
+      <div className={styles.monsterInfo}>
+        <div className={styles.monsterIndex}>
+          <h6>Monster Information</h6>
+          <h5>{monsterData.number}</h5>
+        </div>
 
-          <div className={styles.monsterName}>
-            <h5>{monsterData.name}</h5>
-            <h6>Name</h6>
-          </div>
+        <div className={styles.monsterName}>
+          <h6>Name</h6>
+          <h5>{monsterData.name}</h5>
+        </div>
 
-          <div className={styles.monsterPower}>
-            <h5>{monsterData.power}</h5>
-            <h6>Power</h6>
-          </div>
+        <div className={styles.monsterPower}>
+          <h6>Power</h6>
+          <h5>{monsterData.power}</h5>
+        </div>
 
-          <div className={styles.monsterType}>
-            <h5>{monsterData.type}</h5>
-            <h6>Type</h6>
-          </div>
+        <div className={styles.monsterType}>
+          <h6>Type</h6>
+          <h5>{monsterData.type}</h5>
         </div>
       </div>
     </div>

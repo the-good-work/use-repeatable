@@ -23,7 +23,7 @@ const monsterData = [
   {
     name: "Batty Boo",
     power: "Echolocation",
-    type: "Office Gossiper",
+    type: "Office Gossip",
     number: "258",
     image: "/img/mon-batty.svg",
   },
