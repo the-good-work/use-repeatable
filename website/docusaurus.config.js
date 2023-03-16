@@ -86,9 +86,9 @@ const config = {
 
         logo: {
           src: "img/logo/gw-by-gw.png",
+          srcDark: "img/logo/gw-by-gw-white.png",
           width: "350px",
           style: { position: "right" },
-          // srcDark: "img/logo/gw-by-gw-white.png",
         },
 
         links: [
