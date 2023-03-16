@@ -120,7 +120,7 @@ export default function Home(): JSX.Element {
                   }}
                   className={styles.npmCodeBlock}
                   theme={a11yLight}
-                  showLineNumbers={true}
+                  showLineNumbers={false}
                   text={`npm install @thegoodwork/use-repeatable npm run start`}
                   language={`bash`}
                   codeBlock
@@ -140,7 +140,7 @@ export default function Home(): JSX.Element {
                   }}
                   className={styles.npmCodeBlock}
                   theme={a11yDark}
-                  showLineNumbers={true}
+                  showLineNumbers={false}
                   text={`npm install @thegoodwork/use-repeatable npm run start`}
                   language={`bash`}
                   codeBlock
