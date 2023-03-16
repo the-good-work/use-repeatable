@@ -26,6 +26,7 @@ h1 {
   font-weight: 700;
   font-size: 65px;
   line-height: 1em;
+  color: #09262c;
 }
 
 [data-theme="dark"] h1 {
@@ -50,7 +51,7 @@ h2 {
   font-weight: 700;
   font-size: 42px !important;
   line-height: 1em;
-  color: black !important;
+  color: #09262c !important;
 }
 
 h3 {
@@ -59,7 +60,7 @@ h3 {
   font-weight: 700;
   font-size: 32px !important;
   line-height: 1em;
-  color: black !important;
+  color: #0a262c !important;
 }
 
 h4 {
