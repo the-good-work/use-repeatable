@@ -391,7 +391,10 @@ export default function Home(): JSX.Element {
                     />
                   </div>
 
-                  <div className={styles.codeBlockDarkMode}>
+                  <div
+                    className={styles.codeBlockDarkMode}
+                    style={{ fontFamily: "IBM Plex Mono" }}
+                  >
                     <CodeBlock
                       language={"tsx"}
                       codeBlock

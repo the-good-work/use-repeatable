@@ -83,10 +83,12 @@ const config = {
       },
 
       footer: {
-        style: "dark",
+        style: "light",
 
         logo: {
-          src: "img/logo/gw-by-gw-white.png",
+          src: "img/logo/gw-by-gw.png",
+          width: "300px",
+          style: { position: "right" },
           // srcDark: "img/logo/gw-by-gw-white.png",
         },
 
