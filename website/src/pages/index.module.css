@@ -480,6 +480,11 @@ p {
   color: rgba(191, 191, 191, 0.5);
   background-color: rgba(76, 76, 76, 0.5);
 }
+.addButton:disabled:hover {
+  color: rgba(191, 191, 191, 0.5);
+  background-color: rgba(76, 76, 76, 0.5);
+  cursor: not-allowed;
+}
 
 .addButton:hover {
   cursor: pointer;
