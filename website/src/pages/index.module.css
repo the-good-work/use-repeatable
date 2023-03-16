@@ -54,7 +54,7 @@ h2 {
   color: #09262c !important;
 }
 
-h3 code {
+h3 {
   font-family: hobeaux, sans-serif;
   margin: 0;
   font-weight: 700;
@@ -63,12 +63,7 @@ h3 code {
   color: #0a262c !important;
 }
 
-[data-theme="dark"] h3 code {
-  font-family: hobeaux, sans-serif;
-  margin: 0;
-  font-weight: 700;
-  font-size: 32px !important;
-  line-height: 1em;
+[data-theme="dark"] h3 {
   color: white !important;
 }
 
