@@ -45,11 +45,12 @@ h1 {
 }
 
 h2 {
-  font-family: Rubik, sans-serif;
+  font-family: hobeaux, sans-serif;
   margin: 0;
-  font-weight: 400;
-  font-size: 21px;
-  line-height: 1.5em;
+  font-weight: 700;
+  font-size: 42px !important;
+  line-height: 1em;
+  color: black !important;
 }
 
 h3 {
@@ -61,7 +62,15 @@ h3 {
   color: black !important;
 }
 
-.splashText h2 {
+h4 {
+  font-family: Rubik, sans-serif;
+  margin: 0;
+  font-weight: 400;
+  font-size: 21px;
+  line-height: 1.5em;
+}
+
+.splashText h4 {
   padding-top: 1em;
 }
 

@@ -79,12 +79,10 @@ export default function Home(): JSX.Element {
                     One <span className={styles.coloredh1}>hook</span> to{" "}
                     <span className={styles.coloredh1}>repeat</span> them all
                   </h1>
-                  <h2>
-                    <h2>
-                      A plug-and-play React library to create repeatable fields
-                      effortlessly.
-                    </h2>
-                  </h2>
+                  <h4>
+                    A plug-and-play React library to create repeatable fields
+                    effortlessly.
+                  </h4>
                 </div>
 
                 <div className={styles.mascot}>
