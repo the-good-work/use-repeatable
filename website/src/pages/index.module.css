@@ -446,6 +446,10 @@ p {
   right: 5px;
 }
 
+.removeButton:hover {
+  cursor: pointer;
+}
+
 .addButton {
   position: absolute;
   background: #09262c;
@@ -475,6 +479,10 @@ p {
 .addButton:disabled {
   color: rgba(191, 191, 191, 0.5);
   background-color: rgba(76, 76, 76, 0.5);
+}
+
+.addButton:hover {
+  cursor: pointer;
 }
 
 .trialElements {
