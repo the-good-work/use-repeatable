@@ -193,7 +193,19 @@ export default function Home(): JSX.Element {
 
                     return (
                       <div id="demo-list" className={styles.demoList}>
-                        <div className="cardsContainer">{Cards}</div>
+                        <div className={styles.cardsContainer}>
+                          {items.length > 0 ? (
+                            Cards
+                          ) : (
+                            <div className={styles.cardsEmptyState}>
+                              <h3>No monsters recruited!</h3>
+                              <p>
+                                Click on the button below to recruit some
+                                monsters!
+                              </p>
+                            </div>
+                          )}
+                        </div>
                         <button
                           className={styles.addButton}
                           disabled={disable}

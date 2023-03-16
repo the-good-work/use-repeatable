@@ -326,6 +326,20 @@ p {
 
 /* /////////////////////////// Demo Section /////////////////////////// */
 
+.cardsEmptyState {
+  padding: 100px 40px;
+}
+
+.cardsEmptyState p {
+  color: white;
+  text-align: center;
+}
+.cardsEmptyState h3 {
+  color: white;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
 .demo {
   margin: auto;
   position: relative;
