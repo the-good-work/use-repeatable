@@ -154,7 +154,7 @@ export default function Home(): JSX.Element {
                   }}
                   initialState={[]}
                   newItem={randomizer(monsterData)}
-                  Card={({ DragHandle, item, index, removeItem }) => (
+                  Card={({ item, index, removeItem, DragHandle }) => (
                     <div className={styles.monsterItem}>
                       <div className={styles.cardButtons}>
                         <div>
@@ -344,7 +344,7 @@ export default function Home(): JSX.Element {
                         boxShadow: "none",
                       }}
                       text={useRepeatableCodeblock}
-                      language={`typescript`}
+                      language={`tsx`}
                       codeBlock
                     />
                   </div>
@@ -381,7 +381,7 @@ export default function Home(): JSX.Element {
 
                   <div className={styles.codeBlockDarkMode}>
                     <CodeBlock
-                      language={`typescript`}
+                      language={"tsx"}
                       codeBlock
                       theme={a11yDark}
                       showLineNumbers={true}

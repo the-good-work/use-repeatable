@@ -18,7 +18,29 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
 	initialState: initialFruits, 
 }); 
 
-... 
+  return (
+    <div className="repeatableList">
+      {items.map((item, index) => {
+        return (
+          <MonsterCard
+						key={item.id}
+            moveItem={moveItem}
+            item={item}
+            index={index}
+            removeItem={removeItem}
+          />
+        );
+      })}
+      <button
+        className="addButton"
+        onClick={() => {
+          addItem();
+        }}
+      >
+        Recruit More Monsters!
+      </button>
+    </div>
+  );
 }
 `;
 

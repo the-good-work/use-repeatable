@@ -95,7 +95,6 @@ function RepeatableList<T>({
       items,
       verticalListSortingStrategy,
       Card: Card,
-
       removeItem,
       moveItem,
       addItem,
@@ -112,7 +111,6 @@ function Cards({
   items,
   verticalListSortingStrategy,
   Card,
-
   removeItem,
   moveItem,
   addItem,
