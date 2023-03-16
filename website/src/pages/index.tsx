@@ -278,9 +278,18 @@ export default function Home(): JSX.Element {
                   <div className={styles.demoWindow}>
                     <img src="./img/demo-area.svg" alt="demo area" />
                   </div>
+                  <div className={styles.demoWindowMobile}>
+                    <img src="./img/demo-area-mobile.svg" alt="demo area" />
+                  </div>
                   <div className={styles.demoWindowDarkMode}>
                     <img
                       src="./img/darkmode/demo-area-dm.svg"
+                      alt="demo area"
+                    />
+                  </div>
+                  <div className={styles.demoWindowDarkModeMobile}>
+                    <img
+                      src="./img/darkmode/demo-area-mobile-dm.svg"
                       alt="demo area"
                     />
                   </div>

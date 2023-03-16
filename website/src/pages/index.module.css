@@ -378,6 +378,13 @@ p {
   display: none;
 }
 
+@media screen and (max-width: 660px) {
+  .demoList {
+    top: 30%;
+    margin-top: 15px;
+  }
+}
+
 .monsterItem {
   padding-bottom: 15px;
 }
@@ -422,6 +429,12 @@ p {
   bottom: 0;
 }
 
+@media screen and (max-width: 660px) {
+  .addButton {
+    width: 300px;
+  }
+}
+
 .trialElements {
   width: 100%;
 }
@@ -440,6 +453,7 @@ p {
   top: 0%;
   width: 40%;
   display: none;
+  z-index: 2;
 }
 
 [data-theme="dark"] .fireballDarkMode {
@@ -473,6 +487,7 @@ p {
   transform: rotate(0deg);
   transition: transform ease 0.1s;
   display: none;
+  z-index: 2;
 }
 
 [data-theme="dark"] .sword {
@@ -502,6 +517,7 @@ p {
   top: 60%;
   width: 33%;
   display: none;
+  z-index: 2;
 }
 
 [data-theme="dark"] .shieldDarkMode {
@@ -606,18 +622,70 @@ p {
   z-index: 0;
 }
 
-[data-theme="dark"] .demoWindowDarkMode {
-  top: 8%;
-  display: block;
-  min-width: 100%;
+.demoWindowMobile {
+  display: none;
+}
+
+.demoWindowDarkModeMobile {
+  display: none;
+}
+
+@media screen and (max-width: 660px) {
+  .demoWindowMobile {
+    top: 8%;
+    display: block;
+    min-width: 100%;
+    position: relative;
+    z-index: 0;
+  }
+
+  .demoWindow {
+    display: none;
+  }
+
+  .demoWindowDarkModeMobile {
+    display: none;
+  }
 }
 
 .demoWindowDarkMode {
   display: none;
 }
 
+[data-theme="dark"] .demoWindowDarkMode {
+  top: 8%;
+  display: block;
+  min-width: 100%;
+}
+
 [data-theme="dark"] .demoWindow {
   display: none;
+}
+
+[data-theme="dark"] .demoWindowDarkModeMobile {
+  display: none;
+}
+
+@media screen and (max-width: 660px) {
+  [data-theme="dark"] .demoWindowDarkModeMobile {
+    top: 8%;
+    display: block;
+    min-width: 100%;
+    position: relative;
+    z-index: 0;
+  }
+
+  [data-theme="dark"] .demoWindowDarkMode {
+    display: none;
+  }
+
+  [data-theme="dark"] .demoWindow {
+    display: none;
+  }
+
+  [data-theme="dark"] .demoWindowMobile {
+    display: none;
+  }
 }
 
 /* /////////////////////////// Usage Section /////////////////////////// */
@@ -1118,6 +1186,12 @@ h3 {
   margin: auto;
   padding: 12px;
   column-gap: 10px;
+}
+
+@media screen and (max-width: 660px) {
+  .monsterCard {
+    width: 300px;
+  }
 }
 
 .monsterImage {
