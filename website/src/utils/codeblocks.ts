@@ -1,29 +1,33 @@
 export const useRepeatableCodeblock = `
-import {useRepeatable} from '@thegoodwork/use-repeatable'
-                    
-type Fruit = { color: string; name: string }; 
-								
-// default new item is required 
-const fruit: Fruit = { color: "red", name: "apple" }; 
-								
+import { RepeatableList } from "@thegoodwork/use-repeatable";
+import React, { useState } from "react";
+import { monsterList, randomMonster } from "utils";
+import { MonsterCard } from "components";
+import type { Monster } from "types";
+
+// default new item is required
+const monster: Monster = randomMonster(monsterList);
+
 // optionally initialise with collection of objects
-const initialFruits = [ 
-	{ color: "red", name: "apple" }, 
-	{ color: "orange", name: "orange" }, 
-];
-								
+const initialMonsters = [monsterList[0], monsterList[1]];
+
 function App() {
-const { items, removeItem, addItem, moveItem } = useRepeatable({
-	newItem: fruit,
-	initialState: initialFruits, 
-}); 
+  const [monsters, setMonsters] = useState<(Monster & { id: string })[]>([]);
+
+  const { items, removeItem, addItem, moveItem } = useRepeatable({
+    newItem: monster,
+    initialState: initialMonsters,
+    onChange: (items: (Monster & { id: string })[]) => {
+      setMonsters(items);
+    },
+  });
 
   return (
     <div className="repeatableList">
       {items.map((item, index) => {
         return (
           <MonsterCard
-						key={item.id}
+            key={item.id}
             moveItem={moveItem}
             item={item}
             index={index}
@@ -47,100 +51,45 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
 export const repeatableListCodeblock = `
 import { RepeatableList } from "@thegoodwork/use-repeatable";
 import React, { useState } from "react";
-import { monsterList } from "utils/monsterList";
+import { monsterList, randomMonster } from "utils";
+import { MonsterCard } from "components";
+import type { Monster } from "types";
 
-type Monster = {
-	name: string;
-	power: string;
-	type: string;
-	number: string;
-	image: string;
-};
+function App() {
+  const monster: Monster = randomMonster(monsterList);
+  const [monsters, setMonsters] = useState<(Monster & { id: string })[]>([]);
 
-function randomizer(monsters: Monster[]) {
-	const randomIndex = Math.floor(Math.random() * monsters.length);
-
-	if (randomIndex === monsters.length) {
-		return monsters[randomIndex - 1];
-	}
-	return monsters[randomIndex];
-}
-
-export default function App() {
-	const [monsters, setMonsters] = useState<(Monster & { id: string })[]>([]);
-
-	return (
-			<RepeatableList
-				onChange={(items) => {
-					setMonsters(items);
-				}}
-				initialState={[]}
-				newItem={randomizer(monsterList)}
-				Card={({ DragHandle, item, index, removeItem }) => (
-					<div className={"monsterItem"}>
-						<div>
-							<DragHandle>
-								<img
-									src="./img/drag-handle.svg"
-									alt="drag handle"
-									className={"dragHandleImage"}
-								/>
-							</DragHandle>
-						</div>
-						<div className={"monsterCard"}>
-							<img
-								className={"monsterImage"}
-								src={item.image}
-								alt={item.name}
-							/>
-
-							<div className={"monsterInfo"}>
-								<div className={"monsterIndex"}>
-									<h6>Monster Information</h6>
-									<h5>{item.number}</h5>
-								</div>
-
-								<div className={"monsterName"}>
-									<h5>{item.name}</h5>
-									<h6>Name</h6>
-								</div>
-
-								<div className={"monsterPower"}>
-									<h5>{item.power}</h5>
-									<h6>Power</h6>
-								</div>
-
-								<div className={"monsterType"}>
-									<h5>{item.type}</h5>
-									<h6>Type</h6>
-								</div>
-							</div>
-						</div>
-
-						<button
-							onClick={() => removeItem(index)}
-							className={"removeButton"}
-						>
-							<img src="./img/remove-button.svg" alt="Remove monster" />
-						</button>
-					</div>
-				)}
-				Layout={({ Cards, addItem }) => {
-					return (
-						<div className={"repeatableList"}>
-							<div>{Cards}</div>
-							<button
-								className={"addButton"}
-								onClick={() => {
-									addItem();
-								}}
-							>
-								Recruit More Monsters!
-							</button>
-						</div>
-					);
-				}}
-			/>
-	);
+  return (
+    <RepeatableList
+      onChange={(items) => {
+        setMonsters(items);
+      }}
+      initialState={[]}
+      newItem={monster}
+      Card={({ DragHandle, item, index, removeItem }) => (
+        <MonsterCard
+          DragHandle={DragHandle}
+          item={item}
+          index={index}
+          removeItem={removeItem}
+        />
+      )}
+      Layout={({ Cards, addItem }) => {
+        return (
+          <div className="repeatableList">
+            <div>{Cards}</div>
+            <button
+              className="addButton"
+              onClick={() => {
+                addItem();
+              }}
+            >
+              Recruit More Monsters!
+            </button>
+          </div>
+        );
+      }}
+    />
+  );
 }
 `;
