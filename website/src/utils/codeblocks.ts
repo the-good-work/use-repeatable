@@ -70,77 +70,77 @@ export default function App() {
 	const [monsters, setMonsters] = useState<(Monster & { id: string })[]>([]);
 
 	return (
-        <RepeatableList
-            onChange={(items) => {
-                setMonsters(items);
-            }}
-            initialState={[]}
-            newItem={randomizer(monsterList)}
-            Card={({ DragHandle, item, index, removeItem }) => (
-                <div className={"monsterItem"}>
-                    <div>
-                        <DragHandle>
-                            <img
-                                src="./img/drag-handle.svg"
-                                alt="drag handle"
-                                className={"dragHandleImage"}
-                            />
-                        </DragHandle>
-                    </div>
-                    <div className={"monsterCard"}>
-                        <img
-                            className={"monsterImage"}
-                            src={item.image}
-                            alt={item.name}
-                        />
+			<RepeatableList
+				onChange={(items) => {
+					setMonsters(items);
+				}}
+				initialState={[]}
+				newItem={randomizer(monsterList)}
+				Card={({ DragHandle, item, index, removeItem }) => (
+					<div className={"monsterItem"}>
+						<div>
+							<DragHandle>
+								<img
+									src="./img/drag-handle.svg"
+									alt="drag handle"
+									className={"dragHandleImage"}
+								/>
+							</DragHandle>
+						</div>
+						<div className={"monsterCard"}>
+							<img
+								className={"monsterImage"}
+								src={item.image}
+								alt={item.name}
+							/>
 
-                        <div className={"monsterInfo"}>
-                            <div className={"monsterIndex"}>
-                                <h6>Monster Information</h6>
-                                <h5>{item.number}</h5>
-                            </div>
+							<div className={"monsterInfo"}>
+								<div className={"monsterIndex"}>
+									<h6>Monster Information</h6>
+									<h5>{item.number}</h5>
+								</div>
 
-                            <div className={"monsterName"}>
-                                <h5>{item.name}</h5>
-                                <h6>Name</h6>
-                            </div>
+								<div className={"monsterName"}>
+									<h5>{item.name}</h5>
+									<h6>Name</h6>
+								</div>
 
-                            <div className={"monsterPower"}>
-                                <h5>{item.power}</h5>
-                                <h6>Power</h6>
-                            </div>
+								<div className={"monsterPower"}>
+									<h5>{item.power}</h5>
+									<h6>Power</h6>
+								</div>
 
-                            <div className={"monsterType"}>
-                                <h5>{item.type}</h5>
-                                <h6>Type</h6>
-                            </div>
-                        </div>
-                    </div>
+								<div className={"monsterType"}>
+									<h5>{item.type}</h5>
+									<h6>Type</h6>
+								</div>
+							</div>
+						</div>
 
-                    <button
-                        onClick={() => removeItem(index)}
-                        className={"removeButton"}
-                    >
-                        <img src="./img/remove-button.svg" alt="Remove monster" />
-                    </button>
-                </div>
-            )}
-            Layout={({ Cards, addItem }) => {
-                return (
-                    <div className={"repeatableList"}>
-                        <div>{Cards}</div>
-                        <button
-                            className={"addButton"}
-                            onClick={() => {
-                                addItem();
-                            }}
-                        >
-                            Recruit More Monsters!
-                        </button>
-                    </div>
-                );
-            }}
-        />
+						<button
+							onClick={() => removeItem(index)}
+							className={"removeButton"}
+						>
+							<img src="./img/remove-button.svg" alt="Remove monster" />
+						</button>
+					</div>
+				)}
+				Layout={({ Cards, addItem }) => {
+					return (
+						<div className={"repeatableList"}>
+							<div>{Cards}</div>
+							<button
+								className={"addButton"}
+								onClick={() => {
+									addItem();
+								}}
+							>
+								Recruit More Monsters!
+							</button>
+						</div>
+					);
+				}}
+			/>
 	);
 }
 `;

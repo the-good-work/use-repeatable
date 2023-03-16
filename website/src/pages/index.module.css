@@ -330,7 +330,6 @@ p {
   margin: auto;
   position: relative;
   width: 100%;
-  background: green;
 }
 
 .demoLayout {
@@ -359,9 +358,12 @@ p {
   /* transform: translate(-50%, 0); */
   z-index: 3;
   display: flex;
-  width: 450px;
-  background: blue;
+  width: 100%;
+  max-width: 450px;
   justify-content: center;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .demoList > div {
@@ -421,10 +423,13 @@ p {
   border-radius: 10px;
   border: none;
   padding: 10px;
-  width: 450px;
+  width: 100%;
+  max-width: 450px;
   height: 55px;
   z-index: 20;
   right: 0;
+  left: 0;
+  margin: auto;
   top: 440px;
 }
 
@@ -531,12 +536,12 @@ p {
   width: 650px;
 }
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
   .demoArea {
     margin: 0 0 10em 0;
     width: 100%;
   }
-}
+} */
 
 @media screen and (max-width: 768px) {
   .demoArea {
@@ -555,7 +560,7 @@ p {
 
 @media screen and (max-width: 1024px) {
   .demoHeading {
-    margin: 11em 0 0 0;
+    margin: 10em 0 0 0;
   }
 }
 

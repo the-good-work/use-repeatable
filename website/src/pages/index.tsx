@@ -384,6 +384,7 @@ export default function Home(): JSX.Element {
                       language={"tsx"}
                       codeBlock
                       theme={a11yDark}
+                      wrapLongLines={true}
                       showLineNumbers={true}
                       codeContainerStyle={{
                         border: 0,
