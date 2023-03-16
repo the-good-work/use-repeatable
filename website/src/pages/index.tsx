@@ -13,12 +13,10 @@ import {
   useRepeatableCodeblock,
 } from "../utils/codeblocks";
 import { randomMonster } from "../utils/randomMonster";
-import type { Monster } from "../types/monster";
 import { MonsterCard } from "../components/MonsterCard";
 import { FeatureCard } from "../components/FeatureCard";
 
 export default function Home(): JSX.Element {
-  const [monsters, setMonsters] = useState<(Monster & { id: string })[]>([]);
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const { siteConfig } = useDocusaurusContext();
