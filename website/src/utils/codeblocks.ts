@@ -51,8 +51,7 @@ function App() {
 }
 `;
 
-export const repeatableListCodeblock = `
-import { RepeatableList } from "@thegoodwork/use-repeatable";
+export const repeatableListCodeblock = `import { RepeatableList } from "@thegoodwork/use-repeatable";
 import React, { useState } from "react";
 import { monsterList, randomMonster } from "utils";
 import { MonsterCard } from "components";

@@ -330,6 +330,7 @@ p {
   margin: auto;
   position: relative;
   width: 100%;
+  background: green;
 }
 
 .demoLayout {
@@ -354,20 +355,17 @@ p {
 
 .demoList {
   position: absolute;
-  top: 35%;
-  left: 50%;
-  transform: translate(-50%, 0);
+  top: 33%;
+  /* transform: translate(-50%, 0); */
   z-index: 3;
-  margin: auto;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   width: 450px;
+  background: blue;
+  justify-content: center;
 }
 
 .demoList > div {
-  height: 460px;
+  height: 430px;
   overflow: hidden;
   overflow-y: scroll;
   -ms-overflow-style: none;
@@ -381,12 +379,12 @@ p {
 @media screen and (max-width: 660px) {
   .demoList {
     top: 30%;
-    margin-top: 15px;
   }
 }
 
 .monsterItem {
   padding-bottom: 15px;
+  justify-content: center;
 }
 
 .cardButtons {
@@ -408,12 +406,13 @@ p {
   background: none;
   outline: none;
   border: none;
-  width: 35px;
+  width: 32px;
   top: 10px;
-  right: 10px;
+  right: 5px;
 }
 
 .addButton {
+  position: absolute;
   background: #09262c;
   color: white;
   font-family: Rubik, sans-serif;
@@ -425,8 +424,8 @@ p {
   width: 450px;
   height: 55px;
   z-index: 20;
-  position: absolute;
-  bottom: 0;
+  right: 0;
+  top: 440px;
 }
 
 @media screen and (max-width: 660px) {

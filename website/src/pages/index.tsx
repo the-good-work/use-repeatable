@@ -193,7 +193,7 @@ export default function Home(): JSX.Element {
 
                     return (
                       <div id="demo-list" className={styles.demoList}>
-                        <div>{Cards}</div>
+                        <div className="cardsContainer">{Cards}</div>
                         <button
                           className={styles.addButton}
                           disabled={disable}
