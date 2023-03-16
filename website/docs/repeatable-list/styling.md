@@ -1,10 +1,12 @@
 ---
-sidebar_position: 4
+sidebar_position: 6
 ---
 
 # Styling The Component
 
 Other than defining your own styles through crafting your own component(s), you can also find `className`s attached to the repeatable list components that you can modify by using css class selectors.
+
+---
 
 - `Cards`
 

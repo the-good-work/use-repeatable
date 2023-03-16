@@ -6,6 +6,8 @@ sidebar_position: 3
 
 A modular react component with built-in actions and functions that returns a repeatable list of items
 
+---
+
 ### Example
 
 ```tsx
@@ -54,23 +56,36 @@ function App() {
 }
 ```
 
+---
+
 ### Notes
 
 Like `useRepeatable`, a string `id` will be generated on every new item's creation.
 
+---
+
 ### Props
+
+Props that can be passed into the `RepeatableList` component
+<br/>
 
 ### `initialState`
 
 Define the initial state of the repeatable list
 
+---
+
 ### `newItem`
 
 Define the value of a newly added item in the repeatable list
 
+---
+
 ### `onChange`
 
 Called with updated items whenever list is updated
+
+---
 
 ### Functional Component Props
 

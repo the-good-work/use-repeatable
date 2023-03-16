@@ -6,6 +6,8 @@ sidebar_position: 4
 
 The layout of an individual card. It returns a customisable JSX component. Use this to arrange the components within the each repeatable item.
 
+---
+
 ### Example
 
 ```tsx
@@ -21,6 +23,8 @@ The layout of an individual card. It returns a customisable JSX component. Use t
   ...
 />
 ```
+
+---
 
 ### Useable Parameters:
 

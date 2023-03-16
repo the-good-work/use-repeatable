@@ -6,6 +6,8 @@ sidebar_position: 2
 
 A hook with built-in actions that can mutate a list of repeatable items
 
+---
+
 ### Example
 
 ```tsx
@@ -58,67 +60,125 @@ function App() {
 }
 ```
 
+---
+
 ### Notes
 
 A string `id` will be generated on every new item's creation.
 
+---
+
 ### Parameters
 
 Parameters used to initialise `useRepeatable`
+<br/>
 
-#### initialState
+### `initialState`
+
+Usage:
 
 `initialState: []`
+
 Define the initial state of the repeatable list
 
-#### newItem
+---
 
-`newItem: monster`
+### `newItem`
+
+Usage:
+
+```tsx
+newItem: {
+    name: "Potamus",
+    power: "Sword Crusher",
+    type: "Heavyweight",
+    number: "001",
+    image: "/img/mon-potamus.svg",
+  }
+```
+
 Define the value of a newly added item in the repeatable list
 
-#### onChange
+---
+
+### `onChange`
+
+Usage:
 
 `onChange: handleChange`
+
 Optional parameter. Function called upon an update
 
+---
+
 ### Props
+
+Accessible props from the hook
+
+<br/>
 
 ### `items`
 
 An array of repeatable items
 
-### `addItem()`
+---
+
+### `addItem`
+
+Usage:
+
+`addItem()`
 
 Add item into the list at position index
 
-### `removeItem(index: number)`
+---
+
+### `removeItem`
+
+Usage:
+
+`removeItem(index: number)`
 
 Remove an item from the list at position index. <br/>
 Require parameters:
 
-- index - The index number of the item to be removed
+- `index` - The index number of the item to be removed
 
-### `moveItem(from: number, to: number)`
+---
+
+### `moveItem`
+
+Usage:
+
+`moveItem(from: number, to: number)`
 
 Move an item from position `from` to position `to`
 
 Required parameters:
 
-- from — The index number of the item to be moved
-- to — The index number which the moved item will go to
+- `from` — The index number of the item to be moved
+- `to` — The index number which the moved item will go to
 
-### `updateItem(index: number, item: (any & { id: string }))`
+---
+
+### `updateItem`
+
+Usage:
+
+`updateItem(index: number, item: (any & { id: string }))`
 
 Update an item from position index
 
 Require parameters:
 
-- index — The index number of the item to be updated
-- item — The new value of the updated item
+- `index` — The index number of the item to be updated
+- `item` — The new value of the updated item
 
 :::tip
 Do not call `updateItem` with `removeItem` using the same index
 :::
+
+---
 
 ### `removeAll()`
 

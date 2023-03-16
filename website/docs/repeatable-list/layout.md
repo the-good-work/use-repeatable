@@ -6,6 +6,8 @@ sidebar_position: 5
 
 The overall layout of the repeatable list. It returns a customisable JSX component. Use this to arrange the components within the `RepeatableList`
 
+---
+
 ### Example
 
 ```tsx
@@ -28,6 +30,8 @@ The overall layout of the repeatable list. It returns a customisable JSX compone
   ...
 />
 ```
+
+---
 
 ### Useable Parameters:
 
