@@ -1,4 +1,4 @@
-const monsterData = [
+export const monsterList = [
   {
     name: "Potamus",
     power: "Sword Crusher",
@@ -35,5 +35,3 @@ const monsterData = [
     image: "/img/mon-unknown.svg",
   },
 ];
-
-export { monsterData };

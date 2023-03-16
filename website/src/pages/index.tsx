@@ -2,8 +2,8 @@ import React from "react";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import styles from "./index.module.css";
-import { featuresData } from "../components/featuresData.js";
-import { monsterData } from "../utils/monsterData.js";
+import { featuresData } from "../utils/featuresData.js";
+import { monsterList } from "../utils/monsterList.js";
 import "animate.css";
 import { RepeatableList } from "@thegoodwork/use-repeatable";
 import { CopyBlock, CodeBlock, a11yLight, a11yDark } from "react-code-blocks";
@@ -12,58 +12,17 @@ import {
   repeatableListCodeblock,
   useRepeatableCodeblock,
 } from "../utils/codeblocks";
-
-type Monster = {
-  name: string;
-  power: string;
-  type: string;
-  number: string;
-  image: string;
-};
-
-// para monsters = user created array of monsters
-// m = individual monster in the monsters array
-// the sequencer function looks for monsters that are NOT present in the user created array
-// and put this list of monsters in an array called filteredMonsters
-// it then returns the 1st monster that is in the filteredMonsters list
-
-function randomizer(monsters: Monster[]) {
-  const randomIndex = Math.floor(Math.random() * monsters.length);
-
-  if (randomIndex === monsters.length) {
-    return monsters[randomIndex - 1];
-  }
-  // floor of (0/1 * 4(no. of monsters index)-1)
-
-  return monsters[randomIndex];
-
-  //   const filteredMonsters = monsterData.filter((m) => {
-  //     return monsters.indexOf(m) === -1;
-  //   });
-  //   return filteredMonsters[0];
-}
+import { randomMonster } from "../utils/randomMonster";
+import type { Monster } from "../types/monster";
+import { MonsterCard } from "../components/MonsterCard";
+import { FeatureCard } from "../components/FeatureCard";
 
 export default function Home(): JSX.Element {
   const [monsters, setMonsters] = useState<(Monster & { id: string })[]>([]);
-  // when things are added into the repeater, it will generate a new id for the item added
-  const [disable, setDisable] = useState(false);
-
-  // newItem={sequencer()}
-
-  // const arrOfMonsters = monsters;
-  // const uniqueMon = arrOfMonsters.filter((item, index) => {
-  //   return arrOfMonsters.indexOf(item) === index;
-  // });
+  const [buttonDisabled, setButtonDisabled] = useState(false);
 
   const { siteConfig } = useDocusaurusContext();
-  // const { items, removeItem, addItem, moveItem } = useRepeatable({
-  //   newItem: monster,
-  //   initialState: initialMonster,
-  // });
-  // const { items, removeItem, addItem, moveItem } = useRepeatable({
-  //   newItem: monster,
-  //   initialState: initialMonster,
-  // });
+
   return (
     <Layout
       title={`useRepeater ${siteConfig.title}`}
@@ -147,11 +106,8 @@ export default function Home(): JSX.Element {
 
               <section className={styles.demo}>
                 <RepeatableList
-                  onChange={(items) => {
-                    setMonsters(items);
-                  }}
                   initialState={[]}
-                  newItem={randomizer(monsterData)}
+                  newItem={randomMonster(monsterList)}
                   Card={({ item, index, removeItem, DragHandle }) => (
                     <div className={styles.monsterItem}>
                       <div className={styles.cardButtons}>
@@ -165,7 +121,7 @@ export default function Home(): JSX.Element {
                           </DragHandle>
                         </div>
                         <div>
-                          <MonsterCard monsterData={item} />
+                          <MonsterCard monster={item} />
                         </div>
 
                         <div>
@@ -184,9 +140,9 @@ export default function Home(): JSX.Element {
                   )}
                   Layout={({ Cards, items, addItem }) => {
                     if (items.length >= 5) {
-                      setDisable(true);
+                      setButtonDisabled(true);
                     } else {
-                      setDisable(false);
+                      setButtonDisabled(false);
                     }
 
                     return (
@@ -206,7 +162,7 @@ export default function Home(): JSX.Element {
                         </div>
                         <button
                           className={styles.addButton}
-                          disabled={disable}
+                          disabled={buttonDisabled}
                           onClick={() => {
                             addItem();
                           }}
@@ -484,86 +440,5 @@ export default function Home(): JSX.Element {
         </section>
       </main>
     </Layout>
-  );
-}
-
-function FeatureCard({ data }) {
-  return (
-    <div className={styles.featureCardBackground}>
-      <div className={styles.featureCardContent}>
-        <h5>{data.header}</h5>
-        <p>{data.info}</p>
-      </div>
-    </div>
-  );
-}
-// when theres object involve, use { monsterData }: { monsterData: Monster },
-// { monsterData } has the type of { monsterData: Monster }, which in turns have its own specificied type within the object;  Monster
-function MonsterCard({ monsterData }: { monsterData: Monster }) {
-  return (
-    <div className={styles.monsterCard}>
-      <img
-        className={styles.monsterImage}
-        src={monsterData.image}
-        alt={monsterData.name}
-      />
-
-      <div className={styles.monsterInfo}>
-        <div className={styles.monsterIndex}>
-          <h6>Monster Information</h6>
-          <h5>{monsterData.number}</h5>
-        </div>
-
-        <div className={styles.monsterName}>
-          <h6>Name</h6>
-          <h5>{monsterData.name}</h5>
-        </div>
-
-        <div className={styles.monsterPower}>
-          <h6>Power</h6>
-          <h5>{monsterData.power}</h5>
-        </div>
-
-        <div className={styles.monsterType}>
-          <h6>Type</h6>
-          <h5>{monsterData.type}</h5>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-// className={clsx("col col--10", styles.section)
-
-///////////////////////////////////////// no duplicates /////////////////
-// how to use array.find() / array.filter() to check if the monster already exists (if remove button is used)
-// indexOf()
-
-// if index of monster is greater than -1, it means the monster is present.
-
-// if a specific MonsterCard is present, then when the <AddButton/> is clicked again, it should skip that index and add the next index in line
-
-// const MonstersPresent = MonstersAvailable.filter(MonstersAvailable => index > -1)
-
-// Disabler
-// How to: Disable recuit monster button if <MonsterCard/>.length >= 5
-// if <MonsterCard/>.length = 5, <AddButton/> disabled = true
-// if (<MonsterCard/>.length = 5)? <AddButton/> disabled : <AddButton/> enabled
-//  measure length of clicks? if <AddButton/> clicked = 5, disable button
-
-// function disabler(items) {
-//   items.length >= 5 ? disable : null;
-//   // if (items.length >= 5) {
-//   //   return (disableButton = true);
-//   // } else {
-//   //   return (disableButton = false);
-//   // }
-// }
-
-function Button({ AddButton }) {
-  return (
-    <>
-      <button>Recruit More Monsters!</button>
-    </>
   );
 }

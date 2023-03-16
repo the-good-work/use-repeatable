@@ -86,6 +86,8 @@ const config = {
 
         logo: {
           src: "img/logo/gw-by-gw.png",
+          href: "https://goodwork.sg/",
+          target: "_blank",
           srcDark: "img/logo/gw-by-gw-white.png",
           width: "350px",
           style: { position: "right" },
