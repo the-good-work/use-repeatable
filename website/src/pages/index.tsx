@@ -35,7 +35,6 @@ function randomizer(monsters: Monster[]) {
   }
   // floor of (0/1 * 4(no. of monsters index)-1)
 
-  console.log(monsters[randomIndex], randomIndex);
   return monsters[randomIndex];
 
   //   const filteredMonsters = monsterData.filter((m) => {
@@ -55,26 +54,6 @@ export default function Home(): JSX.Element {
   // const uniqueMon = arrOfMonsters.filter((item, index) => {
   //   return arrOfMonsters.indexOf(item) === index;
   // });
-
-  const monster: Monster = {
-    name: "Potamus",
-    power: "Sword Crusher",
-    type: "Heavyweight",
-    number: "001",
-    image: "/img/mon-potamus.svg",
-  };
-  //default new item: default 1st monster, empty state of sort
-  // add randomizer, utility function to initialize, on the Recruit button, or standard sequence
-
-  const initialMonster = [
-    {
-      name: "Potamus",
-      power: "Sword Crusher",
-      type: "Heavyweight",
-      number: "001",
-      image: "/img/mon-potamus.svg",
-    },
-  ];
 
   const { siteConfig } = useDocusaurusContext();
   // const { items, removeItem, addItem, moveItem } = useRepeatable({
@@ -175,15 +154,7 @@ export default function Home(): JSX.Element {
                   }}
                   initialState={[]}
                   newItem={randomizer(monsterData)}
-                  Card={({
-                    DragHandle,
-                    item,
-                    items,
-                    index,
-                    removeItem,
-                    addItem,
-                    moveItem,
-                  }) => (
+                  Card={({ DragHandle, item, index, removeItem }) => (
                     <div className={styles.monsterItem}>
                       <div className={styles.cardButtons}>
                         <div>
