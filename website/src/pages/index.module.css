@@ -336,7 +336,13 @@ p {
 /* /////////////////////////// Demo Section /////////////////////////// */
 
 .cardsEmptyState {
-  padding: 100px 40px;
+  margin-top: 100px;
+  width: 400px;
+  border: 2px solid darkorange;
+  padding: 40px;
+  border-radius: 10px;
+  max-height: 190px;
+  align-items: center;
 }
 
 .cardsEmptyState p {
@@ -407,6 +413,10 @@ p {
   }
 }
 
+.cardsEmptyState h3 {
+  color: white !important;
+}
+
 .monsterItem {
   padding-bottom: 15px;
   justify-content: center;
@@ -460,6 +470,11 @@ p {
   .addButton {
     width: 300px;
   }
+}
+
+.addButton:disabled {
+  color: rgba(191, 191, 191, 0.5);
+  background-color: rgba(76, 76, 76, 0.5);
 }
 
 .trialElements {
