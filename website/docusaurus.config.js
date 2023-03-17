@@ -66,7 +66,7 @@ const config = {
             label: "npm",
             href: "https://www.npmjs.com/package/@thegoodwork/use-repeatable",
           },
-          { to: "/example", label: "Examples", position: "left" },
+          { to: "/docs/getting-started", label: "Docs", position: "left" },
           {
             href: "https://github.com/the-good-work/use-repeatable",
             label: "GitHub",
@@ -82,7 +82,17 @@ const config = {
       },
 
       footer: {
-        style: "dark",
+        style: "light",
+
+        logo: {
+          src: "img/logo/gw-by-gw.png",
+          href: "https://goodwork.sg/",
+          target: "_blank",
+          srcDark: "img/logo/gw-by-gw-white.png",
+          width: "350px",
+          style: { position: "right" },
+        },
+
         links: [
           {
             title: "Docs",

@@ -1,12 +1,4 @@
-# useRepeatable
-
-`useRepeatable` is a React hook that helps to make "repeater fields" simple. Given an array of a particular type of objects, it exposes simple methods to add, remove or reorder objects, while exposing the objects on a React state variable.
-
-You can also assign a callback function for when changes happen to the array of objects.
-
-## Example Usage
-
-```tsx
+export const useRepeatableCodeblock = `
 import { RepeatableList } from "@thegoodwork/use-repeatable";
 import React, { useState } from "react";
 import { monsterList, randomMonster } from "utils";
@@ -54,15 +46,9 @@ function App() {
     </div>
   );
 }
-```
+`;
 
-# RepeatableList
-
-Alternatively, you may use the component `RepeatableList` to integrate your repeatable list seamlessly within your React code. The `RepeatableList` provides functional components `Card` and `Layout` as props that allows you to compose your repeatable list.
-
-### Example Usage
-
-```tsx
+export const repeatableListCodeblock = `
 import { RepeatableList } from "@thegoodwork/use-repeatable";
 import React, { useState } from "react";
 import { monsterList, randomMonster } from "utils";
@@ -106,4 +92,4 @@ function App() {
     />
   );
 }
-```
+`;

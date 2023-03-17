@@ -1,17 +1,26 @@
 import React from "react";
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
 import styles from "./index.module.css";
-import { featuresData } from "../components/featuresData.js";
+import { featuresData } from "../utils/featuresData.js";
+import { monsterList } from "../utils/monsterList.js";
 import "animate.css";
 import { RepeatableList } from "@thegoodwork/use-repeatable";
-
 import { CopyBlock, CodeBlock, a11yLight, a11yDark } from "react-code-blocks";
+import { useState } from "react";
+import {
+  repeatableListCodeblock,
+  useRepeatableCodeblock,
+} from "../utils/codeblocks";
+import { randomMonster } from "../utils/randomMonster";
+import { MonsterCard } from "../components/MonsterCard";
+import { FeatureCard } from "../components/FeatureCard";
 
 export default function Home(): JSX.Element {
+  const [buttonDisabled, setButtonDisabled] = useState(false);
+
   const { siteConfig } = useDocusaurusContext();
+
   return (
     <Layout
       title={`useRepeater ${siteConfig.title}`}
@@ -27,10 +36,10 @@ export default function Home(): JSX.Element {
                     One <span className={styles.coloredh1}>hook</span> to{" "}
                     <span className={styles.coloredh1}>repeat</span> them all
                   </h1>
-                  <h3>
+                  <h4>
                     A plug-and-play React library to create repeatable fields
                     effortlessly.
-                  </h3>
+                  </h4>
                 </div>
 
                 <div className={styles.mascot}>
@@ -66,9 +75,8 @@ export default function Home(): JSX.Element {
                   }}
                   className={styles.npmCodeBlock}
                   theme={a11yLight}
-                  showLineNumbers={true}
-                  text={`npm install @thegoodwork/use-repeatable
-npm run start`}
+                  showLineNumbers={false}
+                  text={`npm install @thegoodwork/use-repeatable npm run start`}
                   language={`bash`}
                   codeBlock
                 />
@@ -87,78 +95,138 @@ npm run start`}
                   }}
                   className={styles.npmCodeBlock}
                   theme={a11yDark}
-                  showLineNumbers={true}
-                  text={`npm install @thegoodwork/use-repeatable
-npm run start`}
+                  showLineNumbers={false}
+                  text={`npm install @thegoodwork/use-repeatable npm run start`}
                   language={`bash`}
                   codeBlock
                 />
               </div>
 
               <section className={styles.demo}>
-                <div className={styles.demoLayout}>
-                  <RepeatableList
-                    initialState={[]}
-                    newItem={{ name: "Apple" }}
-                    Card={({ DragHandle }) => (
-                      <div>
-                        <DragHandle>=</DragHandle>this is a Card
+                <RepeatableList
+                  initialState={[]}
+                  newItem={randomMonster(monsterList)}
+                  Card={({ item, index, removeItem, DragHandle }) => (
+                    <div className={styles.monsterItem}>
+                      <div className={styles.cardButtons}>
+                        <div>
+                          <DragHandle>
+                            <img
+                              src="./img/drag-handle.svg"
+                              alt="drag handle"
+                              className={styles.dragHandle}
+                            />
+                          </DragHandle>
+                        </div>
+                        <div>
+                          <MonsterCard monster={item} />
+                        </div>
+
+                        <div>
+                          <button
+                            onClick={() => removeItem(index)}
+                            className={styles.removeButton}
+                          >
+                            <img
+                              src="./img/remove-button.svg"
+                              alt="Remove Monster"
+                            />
+                          </button>
+                        </div>
                       </div>
-                    )}
-                    Layout={({ Cards, AddButton }) => (
+                    </div>
+                  )}
+                  Layout={({ Cards, items, addItem }) => {
+                    if (items.length >= 5) {
+                      setButtonDisabled(true);
+                    } else {
+                      setButtonDisabled(false);
+                    }
+
+                    return (
                       <div id="demo-list" className={styles.demoList}>
-                        {Cards}
-                        <hr />
-                        <AddButton>Test</AddButton>
+                        <div className={styles.cardsContainer}>
+                          {items.length > 0 ? (
+                            Cards
+                          ) : (
+                            <div className={styles.cardsEmptyState}>
+                              <h3>No monsters recruited!</h3>
+                              <p>
+                                Click on the button below to recruit some
+                                monsters!
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                        <button
+                          className={styles.addButton}
+                          disabled={buttonDisabled}
+                          onClick={() => {
+                            addItem();
+                          }}
+                        >
+                          Recruit More Monsters!
+                        </button>
                       </div>
-                    )}
+                    );
+                  }}
+                />
+
+                <div className={styles.trialElements}>
+                  <img
+                    src="./img/fireball.svg"
+                    alt="Fireball"
+                    className={styles.fireball}
                   />
-                  <div className={styles.trialElements}>
+                  <img
+                    src="./img/darkmode/fireball-dm.svg"
+                    alt="Fireball"
+                    className={styles.fireballDarkMode}
+                  />
+                  <img
+                    src="./img/sword.svg"
+                    alt="Sword"
+                    className={styles.sword}
+                  />
+                  <img
+                    src="./img/darkmode/sword-dm.svg"
+                    alt="Sword"
+                    className={styles.swordDarkMode}
+                  />
+                  <img
+                    src="./img/shield.svg"
+                    alt="Shield"
+                    className={styles.shield}
+                  />
+                  <img
+                    src="./img/darkmode/shield-dm.svg"
+                    alt="Shield"
+                    className={styles.shieldDarkMode}
+                  />
+                </div>
+
+                <div className={styles.demoArea}>
+                  <div className={styles.demoHeading}>
+                    <h3>Castle Staff List</h3>
+                    <p>Non-scary Demo</p>
+                  </div>
+                  <div className={styles.demoWindow}>
+                    <img src="./img/demo-area.svg" alt="demo area" />
+                  </div>
+                  <div className={styles.demoWindowMobile}>
+                    <img src="./img/demo-area-mobile.svg" alt="demo area" />
+                  </div>
+                  <div className={styles.demoWindowDarkMode}>
                     <img
-                      src="./img/fireball.svg"
-                      alt="Fireball"
-                      className={styles.fireball}
-                    />
-                    <img
-                      src="./img/darkmode/fireball-dm.svg"
-                      alt="Fireball"
-                      className={styles.fireballDarkMode}
-                    />
-                    <img
-                      src="./img/sword.svg"
-                      alt="Sword"
-                      className={styles.sword}
-                    />
-                    <img
-                      src="./img/darkmode/sword-dm.svg"
-                      alt="Sword"
-                      className={styles.swordDarkMode}
-                    />
-                    <img
-                      src="./img/shield.svg"
-                      alt="Shield"
-                      className={styles.shield}
-                    />
-                    <img
-                      src="./img/darkmode/shield-dm.svg"
-                      alt="Shield"
-                      className={styles.shieldDarkMode}
+                      src="./img/darkmode/demo-area-dm.svg"
+                      alt="demo area"
                     />
                   </div>
-                  <div className={styles.demoArea}>
-                    <div className={styles.demoHeading}>
-                      <h4>Trial of The Repeater</h4>
-                      <p>Test It Out!</p>
-                    </div>
-                    <div className={styles.demoWindow}>
-                      <img src="./img/demo-area.svg" alt="demo area" />
-                    </div>
-                    <div className={styles.demoWindowDarkMode}>
-                      <img
-                        src="./img/darkmode/demo-area-dm.svg"
-                        alt="demo area"
-                      />
-                    </div>
+                  <div className={styles.demoWindowDarkModeMobile}>
+                    <img
+                      src="./img/darkmode/demo-area-mobile-dm.svg"
+                      alt="demo area"
+                    />
                   </div>
                 </div>
               </section>
@@ -188,7 +256,7 @@ npm run start`}
                 />
 
                 <div className={styles.codeBlockBase}>
-                  <h4>Using The Hook</h4>
+                  <h3>Using The Hook</h3>
 
                   <div className={styles.codeBlock}>
                     <CodeBlock
@@ -212,27 +280,7 @@ npm run start`}
                         boxShadow: "none",
                         background: "white",
                       }}
-                      text={`import {useRepeatable} from 'use-repeatable'
-
-type Fruit = { color: string; name: string }; 
-                
-// default new item is required 
-const fruit: Fruit = { color: "red", name: "apple" }; 
-                
-// optionally initialise with collection of objects
-const initialFruits = [ 
-      { color: "red", name: "apple" }, 
-      { color: "orange", name: "orange" }, 
-  ];
-                
-function App() {
-const { items, removeItem, addItem, moveItem } = useRepeatable({
-      newItem: fruit,
-      initialState: initialFruits, 
-    }); 
-
-... 
-}`}
+                      text={useRepeatableCodeblock}
                       language={`bash`}
                       codeBlock
                     />
@@ -245,7 +293,7 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
                       showLineNumbers={true}
                       codeContainerStyle={{
                         border: 0,
-                        padding: "30px",
+                        padding: "10px",
                         background: "none",
                       }}
                       customStyle={{
@@ -259,28 +307,8 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
                         margin: 0,
                         boxShadow: "none",
                       }}
-                      text={`import {useRepeatable} from 'use-repeatable'
-
-type Fruit = { color: string; name: string }; 
-                
-// default new item is required 
-const fruit: Fruit = { color: "red", name: "apple" }; 
-                
-// optionally initialise with collection of objects
-const initialFruits = [ 
-      { color: "red", name: "apple" }, 
-      { color: "orange", name: "orange" }, 
-  ];
-                
-function App() {
-const { items, removeItem, addItem, moveItem } = useRepeatable({
-      newItem: fruit,
-      initialState: initialFruits, 
-    }); 
-
-... 
-}`}
-                      language={`bash`}
+                      text={useRepeatableCodeblock}
+                      language={`tsx`}
                       codeBlock
                     />
                   </div>
@@ -289,7 +317,7 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
 
               <div className={styles.codeBlockContainer}>
                 <div className={styles.codeBlockBase}>
-                  <h4>Using The Component</h4>
+                  <h3>Using The Component</h3>
 
                   <div className={styles.codeBlock}>
                     <CodeBlock
@@ -311,38 +339,23 @@ const { items, removeItem, addItem, moveItem } = useRepeatable({
                         padding: "0",
                         borderWidth: 0,
                       }}
-                      text={`import {useRepeatable} from 'use-repeatable'
-
-type Fruit = { color: string; name: string }; 
-                    
-// default new item is required 
-const fruit: Fruit = { color: "red", name: "apple" }; 
-                    
-// optionally initialise with collection of objects
-const initialFruits = [ 
-    { color: "red", name: "apple" }, 
-    { color: "orange", name: "orange" }, 
-];
-                    
-function App() {
-return <RepeatableList 
-    onChange={() => null}
-    newItem={fruit}
-    initialState={initialFruits}
-    ... />
-  }`}
+                      text={repeatableListCodeblock}
                     />
                   </div>
 
-                  <div className={styles.codeBlockDarkMode}>
+                  <div
+                    className={styles.codeBlockDarkMode}
+                    style={{ fontFamily: "IBM Plex Mono" }}
+                  >
                     <CodeBlock
-                      language={`bash`}
+                      language={"tsx"}
                       codeBlock
                       theme={a11yDark}
+                      wrapLongLines={true}
                       showLineNumbers={true}
                       codeContainerStyle={{
                         border: 0,
-                        padding: "30px",
+                        padding: "10px",
                         background: "none",
                       }}
                       customStyle={{
@@ -354,26 +367,7 @@ return <RepeatableList
                         padding: "0",
                         borderWidth: 0,
                       }}
-                      text={`import {useRepeatable} from 'use-repeatable'
-
-type Fruit = { color: string; name: string }; 
-                    
-// default new item is required 
-const fruit: Fruit = { color: "red", name: "apple" }; 
-                    
-// optionally initialise with collection of objects
-const initialFruits = [ 
-    { color: "red", name: "apple" }, 
-    { color: "orange", name: "orange" }, 
-];
-                    
-function App() {
-return <RepeatableList 
-    onChange={() => null}
-    newItem={fruit}
-    initialState={initialFruits}
-    ... />
-  }`}
+                      text={repeatableListCodeblock}
                     />
                   </div>
                 </div>
@@ -397,7 +391,7 @@ return <RepeatableList
           >
             <div className={styles.featuresLayout}>
               <div className={styles.featuresContainer}>
-                <h4>Features</h4>
+                <h3>Features</h3>
                 <img src="/img/jelly.svg" className={styles.jelly} />
                 <img
                   src="/img/darkmode/jelly-dm.svg"
@@ -426,7 +420,7 @@ return <RepeatableList
           >
             <div className={styles.learnMoreLayout}>
               <div className={styles.learnMoreText}>
-                <h2>Adventure Awaits!</h2>
+                <h1>Adventure Awaits!</h1>
                 <p>
                   There is so much more to learn about useRepeatable, read our
                   documentation or visit our repository to discover more!
@@ -446,16 +440,3 @@ return <RepeatableList
     </Layout>
   );
 }
-
-function FeatureCard({ data }) {
-  return (
-    <div className={styles.featureCardBackground}>
-      <div className={styles.featureCardContent}>
-        <h5>{data.header}</h5>
-        <p>{data.info}</p>
-      </div>
-    </div>
-  );
-}
-
-// className={clsx("col col--10", styles.section)

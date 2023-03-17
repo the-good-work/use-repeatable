@@ -26,6 +26,7 @@ h1 {
   font-weight: 700;
   font-size: 65px;
   line-height: 1em;
+  color: #09262c;
 }
 
 [data-theme="dark"] h1 {
@@ -44,7 +45,29 @@ h1 {
   }
 }
 
+h2 {
+  font-family: hobeaux, sans-serif;
+  margin: 0;
+  font-weight: 700;
+  font-size: 42px !important;
+  line-height: 1em;
+  color: #09262c !important;
+}
+
 h3 {
+  font-family: hobeaux, sans-serif;
+  margin: 0;
+  font-weight: 700;
+  font-size: 32px !important;
+  line-height: 1em;
+  color: #0a262c !important;
+}
+
+[data-theme="dark"] h3 {
+  color: white !important;
+}
+
+h4 {
   font-family: Rubik, sans-serif;
   margin: 0;
   font-weight: 400;
@@ -52,7 +75,7 @@ h3 {
   line-height: 1.5em;
 }
 
-.splashText h3 {
+.splashText h4 {
   padding-top: 1em;
 }
 
@@ -69,13 +92,13 @@ p {
   color: #ea000d;
 }
 
-h6 {
+/* h6 {
   font-family: "input-mono-narrow", monospace;
   margin: 0;
   font-size: 16px;
   font-weight: 400;
   text-align: center;
-}
+} */
 
 .textColumn {
   width: 100%;
@@ -326,18 +349,159 @@ h6 {
 
 /* /////////////////////////// Demo Section /////////////////////////// */
 
+.cardsEmptyState {
+  margin-top: 100px;
+  width: 400px;
+  border: 2px solid darkorange;
+  padding: 40px;
+  border-radius: 10px;
+  max-height: 190px;
+  align-items: center;
+}
+
+.cardsEmptyState p {
+  color: white;
+  text-align: center;
+}
+.cardsEmptyState h3 {
+  color: white;
+  text-align: center;
+  padding-bottom: 20px;
+}
+
 .demo {
   margin: auto;
+  position: relative;
+  width: 100%;
 }
 
 .demoLayout {
   position: relative;
+  width: 100%;
+  margin: auto;
+}
+
+.repeatableContainer {
+  width: 600px;
+  height: 100%;
+  max-height: 600px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: 15%;
+  overflow: scroll;
 }
 
 .demoList {
   position: absolute;
-  top: 38%;
+  top: 33%;
+  /* transform: translate(-50%, 0); */
   z-index: 3;
+  display: flex;
+  width: 100%;
+  max-width: 450px;
+  justify-content: center;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+.demoList > div {
+  height: 430px;
+  overflow: hidden;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.demoList > div::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 660px) {
+  .demoList {
+    top: 30%;
+  }
+}
+
+.cardsEmptyState h3 {
+  color: white !important;
+}
+
+.monsterItem {
+  padding-bottom: 15px;
+  justify-content: center;
+}
+
+.cardButtons {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.dragHandle {
+  width: 25px;
+  left: 10px;
+  top: 10px;
+  padding-right: 5px;
+  position: absolute;
+}
+
+.removeButton {
+  position: absolute;
+  background: none;
+  outline: none;
+  border: none;
+  width: 32px;
+  top: 10px;
+  right: 5px;
+}
+
+.removeButton:hover {
+  cursor: pointer;
+}
+
+.addButton {
+  position: absolute;
+  background: #09262c;
+  color: white;
+  font-family: Rubik, sans-serif;
+  font-weight: bold;
+  font-size: 21px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  max-width: 450px;
+  height: 55px;
+  z-index: 20;
+  right: 0;
+  left: 0;
+  margin: auto;
+  top: 440px;
+}
+
+@media screen and (max-width: 660px) {
+  .addButton {
+    width: 300px;
+  }
+}
+
+.addButton:disabled {
+  color: rgba(191, 191, 191, 0.5);
+  background-color: rgba(76, 76, 76, 0.5);
+}
+.addButton:disabled:hover {
+  color: rgba(191, 191, 191, 0.5);
+  background-color: rgba(76, 76, 76, 0.5);
+  cursor: not-allowed;
+}
+
+.addButton:hover {
+  cursor: pointer;
 }
 
 .trialElements {
@@ -347,20 +511,26 @@ h6 {
 .fireball {
   position: absolute;
   left: -20%;
-  top: -2%;
+  top: 0%;
   width: 40%;
+  z-index: 2;
 }
 
 .fireballDarkMode {
   position: absolute;
   left: -20%;
-  top: -2%;
+  top: 0%;
   width: 40%;
   display: none;
+  z-index: 2;
 }
 
 [data-theme="dark"] .fireballDarkMode {
   display: block;
+}
+
+[data-theme="dark"] .fireball {
+  display: none;
 }
 
 .sword {
@@ -370,6 +540,7 @@ h6 {
   width: 43%;
   transform: rotate(0deg);
   transition: transform ease 0.1s;
+  z-index: 2;
 }
 
 .sword:hover {
@@ -385,6 +556,7 @@ h6 {
   transform: rotate(0deg);
   transition: transform ease 0.1s;
   display: none;
+  z-index: 2;
 }
 
 [data-theme="dark"] .sword {
@@ -405,6 +577,7 @@ h6 {
   left: -35%;
   top: 60%;
   width: 33%;
+  z-index: 2;
 }
 
 .shieldDarkMode {
@@ -413,23 +586,27 @@ h6 {
   top: 60%;
   width: 33%;
   display: none;
+  z-index: 2;
 }
 
 [data-theme="dark"] .shieldDarkMode {
   display: block;
 }
 
+[data-theme="dark"] .shield {
+  display: none;
+}
 .demoArea {
   margin: 5em 0 7em 0;
   width: 650px;
 }
 
-@media screen and (max-width: 1024px) {
+/* @media screen and (max-width: 1024px) {
   .demoArea {
     margin: 0 0 10em 0;
     width: 100%;
   }
-}
+} */
 
 @media screen and (max-width: 768px) {
   .demoArea {
@@ -439,16 +616,20 @@ h6 {
 }
 
 .demoHeading {
-  margin: 10.6em 0 0 0;
+  margin: 9.8em 0 0 0;
   position: absolute;
   z-index: 1;
   left: 0;
   right: 0;
 }
 
+.demoHeading h3 {
+  color: white !important;
+}
+
 @media screen and (max-width: 1024px) {
   .demoHeading {
-    margin: 11em 0 0 0;
+    margin: 10em 0 0 0;
   }
 }
 
@@ -460,7 +641,7 @@ h6 {
 }
 
 @media screen and (max-width: 768px) {
-  .demoHeading h4 {
+  .demoHeading h3 {
     font-size: 30px;
   }
 }
@@ -473,7 +654,7 @@ h6 {
 }
 
 @media screen and (max-width: 480px) {
-  .demoHeading h4 {
+  .demoHeading h3 {
     font-size: 24px;
   }
 }
@@ -485,7 +666,7 @@ h6 {
 }
 
 @media screen and (max-width: 320px) {
-  .demoHeading h4 {
+  .demoHeading h3 {
     font-size: 20px;
   }
 }
@@ -496,15 +677,9 @@ h6 {
   }
 }
 
-.demoArea h4 {
+.demoArea h3 {
   text-align: center;
 }
-
-/* @media screen and (max-width: 600px) {
-  .demoArea h4 {
-    font-size: 1.4em;
-  }
-} */
 
 .demoArea p {
   text-align: center;
@@ -517,6 +692,37 @@ h6 {
   display: block;
   min-width: 100%;
   position: relative;
+  z-index: 0;
+}
+
+.demoWindowMobile {
+  display: none;
+}
+
+.demoWindowDarkModeMobile {
+  display: none;
+}
+
+@media screen and (max-width: 660px) {
+  .demoWindowMobile {
+    top: 8%;
+    display: block;
+    min-width: 100%;
+    position: relative;
+    z-index: 0;
+  }
+
+  .demoWindow {
+    display: none;
+  }
+
+  .demoWindowDarkModeMobile {
+    display: none;
+  }
+}
+
+.demoWindowDarkMode {
+  display: none;
 }
 
 [data-theme="dark"] .demoWindowDarkMode {
@@ -525,12 +731,34 @@ h6 {
   min-width: 100%;
 }
 
-.demoWindowDarkMode {
+[data-theme="dark"] .demoWindow {
   display: none;
 }
 
-[data-theme="dark"] .demoWindow {
+[data-theme="dark"] .demoWindowDarkModeMobile {
   display: none;
+}
+
+@media screen and (max-width: 660px) {
+  [data-theme="dark"] .demoWindowDarkModeMobile {
+    top: 8%;
+    display: block;
+    min-width: 100%;
+    position: relative;
+    z-index: 0;
+  }
+
+  [data-theme="dark"] .demoWindowDarkMode {
+    display: none;
+  }
+
+  [data-theme="dark"] .demoWindow {
+    display: none;
+  }
+
+  [data-theme="dark"] .demoWindowMobile {
+    display: none;
+  }
 }
 
 /* /////////////////////////// Usage Section /////////////////////////// */
@@ -592,7 +820,7 @@ h6 {
   display: block;
 }
 
-h4 {
+h3 {
   font-family: hobeaux, sans-serif;
   margin: 0;
   font-weight: 700;
@@ -623,6 +851,10 @@ h4 {
     margin: auto;
     width: 90%;
   }
+}
+
+.codeBlockBase h3 {
+  color: white !important;
 }
 
 .codeBlock {
@@ -768,6 +1000,10 @@ h4 {
   width: 100%;
   padding: 0 1em;
   position: relative;
+}
+
+.featuresContainer h3 {
+  color: white !important;
 }
 
 .gridContainer {
@@ -928,15 +1164,6 @@ h4 {
   display: block;
 }
 
-h2 {
-  font-family: hobeaux, sans-serif;
-  margin: 0;
-  font-weight: 700;
-  font-size: 55px;
-  line-height: 1em;
-  color: white;
-}
-
 .learnMoreLayout {
   display: flex;
   max-width: 900px;
@@ -944,6 +1171,10 @@ h2 {
   margin: auto;
   padding: 4em 0;
   column-gap: 30px;
+}
+
+.learnMoreLayout h1 {
+  color: white;
 }
 
 @media screen and (max-width: 1024px) {
@@ -1019,6 +1250,68 @@ h2 {
 
 /* 480px, 600px, 768px, 1024px, 1200px */
 
+footer > div {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 4fr 1fr;
+}
+
 .navbar-logo {
   width: 20%;
+}
+
+.monsterCard {
+  display: flex;
+  height: 100%;
+  max-height: 190px;
+  width: 320px;
+
+  justify-content: center;
+  width: 400px;
+  background: #e5e5e5;
+  border-radius: 10px;
+  margin: auto;
+  padding: 12px;
+  column-gap: 10px;
+}
+
+@media screen and (max-width: 660px) {
+  .monsterCard {
+    width: 300px;
+  }
+}
+
+.monsterImage {
+  height: 100%;
+  width: 100%;
+}
+
+.monsterInfo {
+  display: flex;
+  flex-direction: column;
+  row-gap: 8px;
+  height: 100%;
+  width: 100%;
+}
+
+.monsterInfo h5 {
+  font-size: 18px;
+  color: #09262c;
+  line-height: none;
+  margin: 0;
+}
+
+.monsterInfo h6 {
+  font-size: 9px;
+  color: #636a6b;
+  line-height: none;
+  margin: 0;
+}
+
+.horiLine {
+  clear: both;
+  display: block;
+  width: 96%;
+  background-color: #ffff00;
+  height: 1px;
 }
