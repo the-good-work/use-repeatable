@@ -4,7 +4,7 @@ import _ from "lodash";
 import { UpdateRepeatableAction, RepeatableReturnProps } from "./types";
 
 const resetIndex = (a: any) => {
-  return { ...a, id: nanoid() };
+  return { ...a, id: a.id === undefined ? nanoid() : a.id };
 };
 
 /**
